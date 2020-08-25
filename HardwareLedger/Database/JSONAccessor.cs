@@ -32,6 +32,14 @@ namespace HardwareLedger
             kp = new Dictionary<Type, Type>();
             kp.Add(typeof(Reserve), typeof(JSONObject.Reserve));
             kp.Add(typeof(ItemType), typeof(JSONObject.ItemType));
+
+            data = new Dictionary<Type, List<IJSONData>>();
+
+            foreach (var value in kp.Values)
+            {
+                //var ijson  = value.GetInterface(nameof(IJSONData));
+                //data.Add(value, ReadJSON<ijson>());
+            }
         }
 
         public void Update<T>(IEnumerable<T> data) where T : IPgmDataRow
@@ -41,6 +49,11 @@ namespace HardwareLedger
 
 
         }
+
+        //public List<T> ReadJSON<T>() where T : IJSONData
+        //{
+
+        //}
 
         public List<T> GetData<T>() where T : IPgmDataRow
         {

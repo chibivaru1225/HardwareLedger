@@ -15,19 +15,7 @@ namespace HardwareLedger
 
         public string Name { get; set; }
 
-        public ItemStateType State { get; set; }
-
-        public string StateCode
-        {
-            get
-            {
-                return State.DBValue;
-            }
-            set
-            {
-                State = ItemStateType.GetTypeForDBValue(value);
-            }
-        }
+        public int StateCode { get; set; }
 
         public DateTime InsertTime { get; set; }
 

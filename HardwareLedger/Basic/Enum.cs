@@ -88,6 +88,17 @@ namespace HardwareLedger
             }
 
             /// <summary>
+            /// 指定された区分を内包しているかどうか
+            /// 区分が｢A | B｣の重ね合わせの状態のとき、｢A｣または｢B｣を指定するとtrueになり、｢C｣を指定するとfalseになる
+            /// </summary>
+            /// <param name="kbn"></param>
+            /// <returns></returns>
+            public bool Enclose(ApplyKbns kbn)
+            {
+                return (kbn & this.kbn) == kbn;
+            }
+
+            /// <summary>
             /// 静的型変換
             /// Class -> Enum
             /// </summary>

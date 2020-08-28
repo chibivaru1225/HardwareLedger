@@ -71,7 +71,7 @@ namespace HardwareLedger
 
             if (cbxItemType.SelectedValue is int itc && cbxItemState.SelectedValue is int sc)
             {
-                var rs = JSONAccessor.Instance.Reserves;
+                var rs = DBAccessor.Instance.Reserves;
 
                 var res = new Reserve();
 
@@ -82,7 +82,8 @@ namespace HardwareLedger
                 res.ItemTypeCode = itc;
                 res.StateCode = sc;
 
-                rs.Add(res);
+                DBAccessor.Instance.Update<Reserve, DBObject.Reserve>(res);
+                DBAccessor.Instance.Reserves = DBAccessor.Instance.Get<Reserve, DBObject.Reserve>();
 
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 Clear();
@@ -105,14 +106,14 @@ namespace HardwareLedger
         {
             var list1 = new List<ItemType>();
             list1.Add(new ItemType() { ItemTypeCode = 0 });
-            list1.AddRange(JSONAccessor.Instance.ItemTypes);
+            list1.AddRange(DBAccessor.Instance.ItemTypes);
 
             cbxItemType.DataSource = list1;
 
 
             var list2 = new List<ItemState>();
             list2.Add(new ItemState() { StateCode = 0 });
-            list2.AddRange(JSONAccessor.Instance.ItemStates.Where(x => x.ApplyKbn.Enclose(ApplyKbns.Reserve)));
+            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbn.Enclose(ApplyKbns.Reserve)));
 
             cbxItemState.DataSource = list2;
         }

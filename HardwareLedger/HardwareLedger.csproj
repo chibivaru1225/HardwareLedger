@@ -57,16 +57,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Basic\Enum.cs" />
-    <Compile Include="Database\IPgmDataRow.cs" />
+    <Compile Include="Database\PgmRow.cs" />
     <Compile Include="Database\ItemState.cs" />
     <Compile Include="Database\ItemType.cs" />
-    <Compile Include="Database\JSONAccessor.cs" />
-    <Compile Include="Database\JSONObject\IJSONData.cs" />
-    <Compile Include="Database\JSONObject\ItemState.cs" />
-    <Compile Include="Database\JSONObject\ItemType.cs" />
-    <Compile Include="Database\JSONObject\Malfunction.cs" />
-    <Compile Include="Database\JSONObject\Reserve.cs" />
-    <Compile Include="Database\JSONObject\ReserveHistory.cs" />
+    <Compile Include="Database\DBAccessor.cs" />
+    <Compile Include="Database\DBObject\DBData.cs" />
+    <Compile Include="Database\DBObject\ItemState.cs" />
+    <Compile Include="Database\DBObject\ItemType.cs" />
+    <Compile Include="Database\DBObject\Malfunction.cs" />
+    <Compile Include="Database\DBObject\Reserve.cs" />
+    <Compile Include="Database\DBObject\ReserveHistory.cs" />
     <Compile Include="Database\Reserve.cs" />
     <Compile Include="FormMenu.cs">
       <SubType>Form</SubType>

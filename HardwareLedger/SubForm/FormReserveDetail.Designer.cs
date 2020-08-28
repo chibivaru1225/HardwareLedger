@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReserveDetail));
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbxType = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cbxState = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cbxType
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(61, 12);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(180, 23);
-            this.comboBox1.TabIndex = 0;
+            this.cbxType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxType.FormattingEnabled = true;
+            this.cbxType.Location = new System.Drawing.Point(61, 12);
+            this.cbxType.Name = "cbxType";
+            this.cbxType.Size = new System.Drawing.Size(180, 23);
+            this.cbxType.TabIndex = 0;
             // 
             // label1
             // 
@@ -55,12 +55,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "種別";
             // 
-            // textBox1
+            // txtName
             // 
-            this.textBox1.Location = new System.Drawing.Point(61, 41);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(180, 22);
-            this.textBox1.TabIndex = 2;
+            this.txtName.Location = new System.Drawing.Point(61, 41);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(180, 22);
+            this.txtName.TabIndex = 1;
             // 
             // label2
             // 
@@ -71,14 +71,14 @@
             this.label2.TabIndex = 3;
             this.label2.Text = "名前";
             // 
-            // comboBox2
+            // cbxState
             // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(61, 69);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(180, 23);
-            this.comboBox2.TabIndex = 4;
+            this.cbxState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxState.FormattingEnabled = true;
+            this.cbxState.Location = new System.Drawing.Point(61, 69);
+            this.cbxState.Name = "cbxState";
+            this.cbxState.Size = new System.Drawing.Size(180, 23);
+            this.cbxState.TabIndex = 2;
             // 
             // label3
             // 
@@ -95,15 +95,15 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(501, 299);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.cbxState);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cbxType);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormReserveDetail";
@@ -115,11 +115,11 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbxType;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cbxState;
         private System.Windows.Forms.Label label3;
     }
 }

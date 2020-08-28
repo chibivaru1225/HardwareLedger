@@ -13,6 +13,8 @@ namespace HardwareLedger
 {
     public partial class FormReserveList : Form
     {
+        private BindingList<ReserveListRow> bindinglist;
+
         private static FormReserveList instance;
 
         public static FormReserveList Instance
@@ -33,11 +35,26 @@ namespace HardwareLedger
             dgvReserveList.AutoGenerateColumns = false;
             dgvReserveList.AllowUserToAddRows = false;
 
+            bindinglist = new BindingList<ReserveListRow>();
+
             InitDataGridView();
             SetDataGridView();
 
+            dgvReserveList.CellDoubleClick += dgvReserveList_CellDoubleClick;
+
             this.FormClosing += FormReserveList_FormClosing;
             this.Activated += FormReserveList_Activated;
+
+            dgvReserveList.DataSource = bindinglist;
+        }
+
+        private void dgvReserveList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                FormReserveDetail.Instance.ReserveDetail = bindinglist[e.RowIndex];
+                FormReserveDetail.Instance.Show();
+            }
         }
 
         private void FormReserveList_Activated(object sender, EventArgs e)
@@ -66,12 +83,12 @@ namespace HardwareLedger
 
         private void SetDataGridView()
         {
-            var list = new List<ReserveListRow>();
+            bindinglist.Clear();
 
-            foreach (var row in JSONAccessor.Instance.Reserves)
-                list.Add(row);
+            foreach (var row in DBAccessor.Instance.Reserves)
+                bindinglist.Add(row);
 
-            dgvReserveList.DataSource = list;
+            dgvReserveList.DataSource = bindinglist;
         }
 
         private class ReserveListRow
@@ -102,8 +119,8 @@ namespace HardwareLedger
 
                 row.ReserveCode = res.ReserveCode;
                 row.Name = res.Name;
-                row.State = JSONAccessor.Instance.ItemStates.Where(x => x.StateCode == res.StateCode).FirstOrDefault();
-                row.Type = JSONAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
+                row.State = DBAccessor.Instance.ItemStates.Where(x => x.StateCode == res.StateCode).FirstOrDefault();
+                row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
                 row.InsertTime = res.InsertTime;
                 row.UpdateTime = res.UpdateTime;
 
@@ -116,8 +133,8 @@ namespace HardwareLedger
 
                 res.ReserveCode = row.ReserveCode;
                 res.Name = row.Name;
-                res.StateCode = row.State.StateCode;
-                res.ItemTypeCode = row.Type.ItemTypeCode;
+                res.StateCode = row.State?.StateCode ?? 0;
+                res.ItemTypeCode = row.Type?.ItemTypeCode ?? 0;
                 res.InsertTime = row.InsertTime;
                 res.UpdateTime = row.UpdateTime;
 

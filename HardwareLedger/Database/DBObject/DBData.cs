@@ -48,8 +48,6 @@ namespace HardwareLedger.DBObject
             }
         }
 
-        public virtual string GetKeyColumnName() => String.Empty;
-
-        public abstract DBData ConvertDBData<T>(T pgmrow) where T : PgmRow;
+        public abstract string GetKeyColumnName();
     }
 }

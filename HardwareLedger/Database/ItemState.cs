@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HardwareLedger.DBObject;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -8,107 +9,54 @@ using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public class ItemState : PgmRow
+    public class ItemState : DBObject.ItemState, IPgmRow
     {
-        public int StateCode { get; set; }
-
-        public ApplyKbn ApplyKbn { get; set; }
-
-        public int ApplyKbnStr 
+        public ApplyKbn ApplyKbnValue 
         { 
             get
             {
-                return ApplyKbn.DBValue;
+                return new ApplyKbn(this.ApplyKbn);
             }
             set
             {
-                ApplyKbn = ApplyKbn.GetKbnForDBValue(value);
+                this.ApplyKbn = value.DBValue;
             }
         }
 
-        public string StateName { get; set; }
-
-        public int StateColorCode { get; set; }
-
-        public Color StateColor
+        public Color StateColorValue
         {
             get
             {
-                return Color.FromArgb(StateColorCode);
+                return Color.FromArgb(StateColor);
             }
             set
             {
-                StateColorCode = value.ToArgb();
+                StateColor = value.ToArgb();
             }
         }
 
-        public static Dictionary<string, string> DBContrastDictionary
+        public IPgmRow DownCastToIPgmRow(DBData data)
         {
-            get
-            {
-                var dic = new Dictionary<string, string>();
+            foreach (var column in data.Properties())
+                this[column] = data[column];
 
-                dic.Add(nameof(DBObject.ItemState.StateCode), nameof(ItemState.StateCode));
-                dic.Add(nameof(DBObject.ItemState.ApplyKbn), nameof(ItemState.ApplyKbnStr));
-                dic.Add(nameof(DBObject.ItemState.StateName), nameof(ItemState.StateName));
-                dic.Add(nameof(DBObject.ItemState.StateColor), nameof(ItemState.StateColorCode));
-
-                return dic;
-            }
+            return this;
         }
 
-        public static implicit operator DBObject.ItemState(ItemState res)
+        public bool PossibleDownCast<T>() where T : DBData, new()
         {
-            var row = new DBObject.ItemState();
-
-            foreach (var kv in DBContrastDictionary)
-                row[kv.Key] = res[kv.Value];
-
-            return row;
+            var tt = new T();
+            return tt is DBObject.ItemState;
         }
 
-        public static implicit operator ItemState(DBObject.ItemState row)
+        public DBData UpCastToDBData()
         {
-            var res = new ItemState();
+            var dbdata = new DBObject.ItemState();
 
-            foreach (var kv in DBContrastDictionary)
-                res[kv.Value] = row[kv.Key];
+            foreach (var column in dbdata.Properties())
+                dbdata[column] = this[column];
 
-            return res;
-        }
-
-        public override D Convert<D>()
-        {
-            if (Convertible<D>() == false)
-                return default;
-
-            var dd = new D();
-
-            if (dd is DBObject.ItemState)
-                return dd.ConvertDBData(this) as D;
-            else
-                return null;
-        }
-
-        public override PgmRow Convert<D>(D data)
-        {
-            if (Convertible<D>() == false)
-                return default;
-
-            var dd = new D();
-            var row = new ItemState();
-
-            foreach(var con in DBContrastDictionary)
-            {
-                row[con.Value] = data[con.Key];
-            }
-
-            return row;
-        }
-
-        public override bool Convertible<D>()
-        {
-            return new D().GetType() == typeof(DBObject.ItemState);
+            return dbdata;
         }
     }
 }

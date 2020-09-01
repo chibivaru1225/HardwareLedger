@@ -82,8 +82,8 @@ namespace HardwareLedger
                 res.ItemTypeCode = itc;
                 res.StateCode = sc;
 
-                DBAccessor.Instance.Update<Reserve, DBObject.Reserve>(res);
-                DBAccessor.Instance.Reserves = DBAccessor.Instance.Get<Reserve, DBObject.Reserve>();
+                DBAccessor.Instance.UpsertJson<Reserve, DBObject.Reserve>(res);
+                DBAccessor.Instance.Reserves = DBAccessor.Instance.ReadJson<Reserve, DBObject.Reserve>();
 
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 Clear();
@@ -113,7 +113,7 @@ namespace HardwareLedger
 
             var list2 = new List<ItemState>();
             list2.Add(new ItemState() { StateCode = 0 });
-            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbn.Enclose(ApplyKbns.Reserve)));
+            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Reserve)));
 
             cbxItemState.DataSource = list2;
         }

@@ -1,20 +1,26 @@
 ﻿using HardwareLedger.DBObject;
 using LiteDB;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
     public class DBAccessor
     {
+        public String Directory { get; private set; }
+
         private static DBAccessor instance;
 
         public static DBAccessor Instance
@@ -36,58 +42,265 @@ namespace HardwareLedger
 
         public List<ItemState> ItemStates { get; set; }
 
+        public List<Malfunction> Malfunctions { get; set; }
+
+        public List<Relation> Relations { get; set; }
+
         private DBAccessor()
         {
+            var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
+            Directory = documents + @"\HardwareLedger\Database\";
+
+            SafeCreateDirectory(Directory);
             DB = new LiteDatabase(nameof(HardwareLedger) + @".db");
 
-            Reserves = Get<Reserve, DBObject.Reserve>();
-            ItemTypes = Get<ItemType, DBObject.ItemType>();
-            ItemStates = Get<ItemState, DBObject.ItemState>();
+            //Reserves = Get<Reserve, DBObject.Reserve>();
+            //ItemTypes = Get<ItemType, DBObject.ItemType>();
+            //ItemStates = Get<ItemState, DBObject.ItemState>();
+            //Malfunctions = Get<Malfunction, DBObject.Malfunction>();
+            //Relations = Get<Relation, DBObject.Relation>();
 
-            //Update<Reserve, DBObject.Reserve>(new Reserve { ReserveCode = 100 });
+            Reserves = ReadJson<Reserve, DBObject.Reserve>();
+            ItemTypes = ReadJson<ItemType, DBObject.ItemType>();
+            ItemStates = ReadJson<ItemState, DBObject.ItemState>();
+            Malfunctions = ReadJson<Malfunction, DBObject.Malfunction>();
+            Relations = ReadJson<Relation, DBObject.Relation>();
 
-            //SetDummyData();
-
-            //Update<ItemState, DBObject.ItemState>(new ItemState { StateCode = 4, ApplyKbn = ApplyKbns.Reserve, StateColor = Color.Black, StateName = "テストD" });
+            SetDummyData();
         }
 
-        public void Update<T, D>(params T[] rows) where T : PgmRow where D : DBData, new()
+        private void Update(params Reserve[] rows)
         {
-            var dbd = DB.GetCollection<D>(typeof(D).Name);
+            Upsert<Reserve, DBObject.Reserve>(rows);
+        }
+
+        private void Update(params ItemType[] rows)
+        {
+            Upsert<ItemType, DBObject.ItemType>(rows);
+        }
+
+        private void Update(params ItemState[] rows)
+        {
+            Upsert<ItemState, DBObject.ItemState>(rows);
+        }
+
+        public List<T> UpsertJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            var filepath = Directory + typeof(D).Name + @".json";
+
             var dd = new D();
+            var basedata = ReadJson<D>();
             var kcn = dd.GetKeyColumnName();
 
             foreach (var row in rows)
             {
-                if (row.Convertible<D>())
+                if (row is D)
                 {
-                    var drow = row.Convert<D>();
+                    var drow = row.UpCastToDBData() as D;
                     var dkcn = drow[kcn];
-
-                    var dbdr = dbd.Find(x => x[kcn] == dkcn).FirstOrDefault();
-
+                    var dbdr = basedata.Where(x => x[kcn] == dkcn).FirstOrDefault();
 
                     if (dbdr == null)
-                        dbd.Insert(drow);
+                        basedata.Add(drow);
                     else
                         dbdr.Copy(drow);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+            }
 
-                    dbd.Update(drow);
+            using (StreamWriter sw = new StreamWriter(filepath, false, Encoding.UTF8))
+            {
+                sw.Write(JsonConvert.SerializeObject(basedata));
+            }
+
+            return ConvertList<T, D>(basedata);
+        }
+
+        private void Upsert<T, D>(params T[] rows) where T : IPgmRow where D : DBData, new()
+        {
+            var dd = new D();
+            var dbdata = DB.GetCollection<D>(typeof(D).Name);
+            var kcn = dd.GetKeyColumnName();
+
+            if (DB.BeginTrans())
+            {
+                foreach (var row in rows)
+                {
+                    if (row is D)
+                    {
+                        var drow = row.UpCastToDBData() as D;
+                        var dkcn = drow[kcn];
+                        var dbdr = dbdata.Find(x => x[kcn] == dkcn).FirstOrDefault();
+
+                        if (dbdr == null)
+                            dbdata.Insert(drow);
+                        else
+                            dbdr.Copy(drow);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+
+                if (DB.Commit() == false)
+                {
+                    throw new InvalidOperationException();
                 }
             }
         }
 
-        public List<T> Get<T, D>() where T : PgmRow, new() where D : DBData, new()
+        //public void Update<T, D>(params T[] rows) where T : PgmRow where D : DBData, new()
+        //{
+        //    var dbd = DB.GetCollection<D>(typeof(D).Name);
+        //    var dd = new D();
+        //    var kcn = dd.GetKeyColumnName();
+
+        //    foreach (var row in rows)
+        //    {
+        //        if (row.Convertible<D>())
+        //        {
+        //            var drow = row.Convert<D>();
+        //            var dkcn = drow[kcn];
+
+        //            var dbdr = dbd.Find(x => x[kcn] == dkcn).FirstOrDefault();
+
+        //            if (dbdr == null)
+        //                dbd.Insert(drow);
+        //            else
+        //                dbdr.Copy(drow);
+        //        }
+        //    }
+        //}
+
+
+        private List<Reserve> GetReserves()
+        {
+            Reserves = Get<Reserve, DBObject.Reserve>();
+            return Reserves;
+        }
+
+        private List<ItemType> GetItemTypes()
+        {
+            ItemTypes = Get<ItemType, DBObject.ItemType>();
+            return ItemTypes;
+        }
+
+        private List<ItemState> GetItemStates()
+        {
+            ItemStates = Get<ItemState, DBObject.ItemState>();
+            return ItemStates;
+        }
+
+        //public List<T> Get<T, D>() where T : PgmRow, new() where D : DBData, new()
+        //{
+        //    var list = new List<T>();
+        //    var tt = new T();
+
+        //    var dres = DB.GetCollection<D>(typeof(D).Name);
+
+        //    foreach (var row in dres.Query().ToEnumerable())
+        //    {
+        //        if (tt.Convertible<D>())
+        //            list.Add((T)tt.Convert(row));
+        //    }
+
+        //    return list;
+        //}
+
+        public List<T> ReadJson<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            var filepath = Directory + typeof(D).Name + @".json";
+            var list = new List<T>();
+
+            if (File.Exists(filepath) == false)
+                return list;
+
+            using (StreamReader sr = new StreamReader(filepath))
+            {
+                var json = sr.ReadToEnd();
+
+                var dres = JsonConvert.DeserializeObject<List<D>>(json);
+
+                foreach (var row in dres)
+                {
+                    var drow = new T();
+
+                    if (drow.PossibleDownCast<D>())
+                    {
+                        drow.DownCastToIPgmRow(row);
+                        list.Add(drow);
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException();
+                    }
+                }
+            }
+
+            return list;
+        }
+
+        private List<D> ReadJson<D>() where D : DBData, new()
+        {
+            var filepath = Directory + typeof(D).Name + @".json";
+
+            if (File.Exists(filepath) == false)
+                return new List<D>();
+
+            using (StreamReader sr = new StreamReader(filepath))
+            {
+                var json = sr.ReadToEnd();
+
+                return JsonConvert.DeserializeObject<List<D>>(json);
+            }
+        }
+
+        private List<T> ConvertList<T, D>(List<D> list) where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            var lst = new List<T>();
+
+            foreach (var row in list)
+            {
+                var drow = new T();
+
+                if (drow.PossibleDownCast<D>())
+                {
+                    drow.DownCastToIPgmRow(row);
+                    lst.Add(drow);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+
+            return lst;
+        }
+
+        private List<T> Get<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
         {
             var list = new List<T>();
-            var tt = new T();
 
             var dres = DB.GetCollection<D>(typeof(D).Name);
 
             foreach (var row in dres.Query().ToEnumerable())
             {
-                if (tt.Convertible<D>())
-                    list.Add((T)tt.Convert(row));
+                var drow = new T();
+
+                if (drow.PossibleDownCast<D>())
+                {
+                    drow.DownCastToIPgmRow(row);
+                    list.Add(drow);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
             }
 
             return list;
@@ -132,39 +345,53 @@ namespace HardwareLedger
                         ItemTypeName = "プリンタ"
                     },
                 });
+
+                UpsertJson<ItemType, DBObject.ItemType>(ItemTypes.ToArray());
             }
 
-            ItemStates.AddRange(new List<ItemState>
+            if (ItemStates.Count() == 0)
+            {
+                ItemStates.AddRange(new List<ItemState>
                 {
                     new ItemState
                     {
                         StateCode = 1,
                         StateName = "テストA",
-                        ApplyKbn = ApplyKbns.Reserve,
-                        StateColor = Color.White,
+                        ApplyKbnValue = ApplyKbns.Reserve,
+                        StateColorValue = Color.White,
                     },
                     new ItemState
                     {
                         StateCode = 2,
                         StateName = "テストB",
-                        ApplyKbn = ApplyKbns.Malfunction,
-                        StateColor = Color.LightBlue,
+                        ApplyKbnValue = ApplyKbns.Malfunction,
+                        StateColorValue = Color.LightBlue,
                     },
                     new ItemState
                     {
                         StateCode = 3,
                         StateName = "テストC",
-                        ApplyKbn = ApplyKbns.Reserve | ApplyKbns.Malfunction,
-                        StateColor = Color.LightGreen,
+                        ApplyKbnValue = ApplyKbns.Reserve | ApplyKbns.Malfunction,
+                        StateColorValue = Color.LightGreen,
                     },
                     new ItemState
                     {
                         StateCode = 4,
                         StateName = "テストD",
-                        ApplyKbn = ApplyKbns.NONE,
-                        StateColor = Color.Red,
+                        ApplyKbnValue = ApplyKbns.NONE,
+                        StateColorValue = Color.Red,
+                    },
+                    new ItemState
+                    {
+                        StateCode = 5,
+                        StateName = "テストE",
+                        ApplyKbnValue = ApplyKbns.MalfunctionState,
+                        StateColorValue = Color.Red,
                     },
                 });
+
+                UpsertJson<ItemState, DBObject.ItemState>(ItemStates.ToArray());
+            }
 
 
             //Reserves.AddRange(new List<Reserve>
@@ -197,6 +424,16 @@ namespace HardwareLedger
             //        UpdateTime = DateTime.Now,
             //    },
             //});
+        }
+
+        private static DirectoryInfo SafeCreateDirectory(string path)
+        {
+            if (System.IO.Directory.Exists(path))
+            {
+                return null;
+            }
+
+            return System.IO.Directory.CreateDirectory(path);
         }
     }
 }

@@ -9,89 +9,34 @@ using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public class Reserve : PgmRow
+    public class Reserve : DBObject.Reserve, IPgmRow
     {
-        public int ReserveCode { get; set; }
+        public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
-        public int ItemTypeCode { get; set; }
+        public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
-        public string Name { get; set; }
-
-        public int StateCode { get; set; }
-
-        public DateTime InsertTime { get; set; }
-
-        public DateTime UpdateTime { get; set; }
-
-        public static Dictionary<string, string> DBContrastDictionary
+        public IPgmRow DownCastToIPgmRow(DBData data)
         {
-            get
-            {
-                var dic = new Dictionary<string, string>();
+            foreach (var column in data.Properties())
+                this[column] = data[column];
 
-                dic.Add(nameof(DBObject.Reserve.Name), nameof(Reserve.Name));
-                dic.Add(nameof(DBObject.Reserve.StateCode), nameof(Reserve.StateCode));
-                dic.Add(nameof(DBObject.Reserve.InsertTime), nameof(Reserve.InsertTime));
-                dic.Add(nameof(DBObject.Reserve.UpdateTime), nameof(Reserve.UpdateTime));
-                dic.Add(nameof(DBObject.Reserve.ReserveCode), nameof(Reserve.ReserveCode));
-                dic.Add(nameof(DBObject.Reserve.ItemTypeCode), nameof(Reserve.ItemTypeCode));
-
-                return dic;
-            }
+            return this;
         }
 
-        public static implicit operator DBObject.Reserve(Reserve res)
+        public bool PossibleDownCast<T>() where T : DBData, new()
         {
-            var row = new DBObject.Reserve();
-
-            foreach (var kv in DBContrastDictionary)
-                row[kv.Key] = res[kv.Value];
-
-            return row;
+            var tt = new T();
+            return tt is DBObject.Reserve;
         }
 
-        public static implicit operator Reserve(DBObject.Reserve row)
+        public DBData UpCastToDBData()
         {
-            var res = new Reserve();
+            var dbdata = new DBObject.Reserve();
 
-            foreach (var kv in DBContrastDictionary)
-                res[kv.Value] = row[kv.Key];
+            foreach(var column in dbdata.Properties())
+                dbdata[column] = this[column];
 
-            return res;
-        }
-
-        public override bool Convertible<D>()
-        {
-            return new D().GetType() == typeof(DBObject.Reserve);
-        }
-
-        public override D Convert<D>()
-        {
-            if (Convertible<D>() == false)
-                return default;
-
-            var dd = new D();
-
-            if (dd is DBObject.Reserve)
-                return dd.ConvertDBData(this) as D;
-            else
-                return null;
-        }
-
-        public override PgmRow Convert<D>(D data)
-        {
-            if (Convertible<D>() == false)
-                return default;
-
-            var dd = new D();
-            var row = new Reserve();
-
-            foreach (var con in DBContrastDictionary)
-            {
-                row[con.Value] = data[con.Key];
-            }
-
-            return row;
+            return dbdata;
         }
     }
 }

@@ -34,6 +34,7 @@
             this.btnReserveRegister = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.btnCollectScheduleAdd = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnCollectScheduleAdd);
             this.groupBox2.Controls.Add(this.button4);
             this.groupBox2.Location = new System.Drawing.Point(9, 96);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
@@ -83,12 +85,21 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(7, 22);
+            this.button4.Location = new System.Drawing.Point(163, 22);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(150, 50);
             this.button4.TabIndex = 2;
             this.button4.Text = "故障機\r\n回収予定一覧";
             this.button4.UseVisualStyleBackColor = true;
+            // 
+            // btnCollectScheduleAdd
+            // 
+            this.btnCollectScheduleAdd.Location = new System.Drawing.Point(7, 22);
+            this.btnCollectScheduleAdd.Name = "btnCollectScheduleAdd";
+            this.btnCollectScheduleAdd.Size = new System.Drawing.Size(150, 50);
+            this.btnCollectScheduleAdd.TabIndex = 3;
+            this.btnCollectScheduleAdd.Text = "故障機\r\n回収予定登録";
+            this.btnCollectScheduleAdd.UseVisualStyleBackColor = true;
             // 
             // FormMenu
             // 
@@ -118,6 +129,7 @@
         private System.Windows.Forms.Button btnReserveList;
         private System.Windows.Forms.Button btnReserveRegister;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnCollectScheduleAdd;
     }
 }
 

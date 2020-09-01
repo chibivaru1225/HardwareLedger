@@ -45,7 +45,7 @@
             this.cbxItemType.FormattingEnabled = true;
             this.cbxItemType.Location = new System.Drawing.Point(55, 12);
             this.cbxItemType.Name = "cbxItemType";
-            this.cbxItemType.Size = new System.Drawing.Size(154, 23);
+            this.cbxItemType.Size = new System.Drawing.Size(184, 23);
             this.cbxItemType.TabIndex = 0;
             // 
             // label1
@@ -61,7 +61,7 @@
             // 
             this.txtItemName.Location = new System.Drawing.Point(55, 41);
             this.txtItemName.Name = "txtItemName";
-            this.txtItemName.Size = new System.Drawing.Size(154, 22);
+            this.txtItemName.Size = new System.Drawing.Size(184, 22);
             this.txtItemName.TabIndex = 2;
             // 
             // label2
@@ -88,14 +88,14 @@
             this.cbxItemState.FormattingEnabled = true;
             this.cbxItemState.Location = new System.Drawing.Point(55, 69);
             this.cbxItemState.Name = "cbxItemState";
-            this.cbxItemState.Size = new System.Drawing.Size(154, 23);
+            this.cbxItemState.Size = new System.Drawing.Size(184, 23);
             this.cbxItemState.TabIndex = 5;
             // 
             // btnRegist
             // 
             this.btnRegist.Location = new System.Drawing.Point(15, 98);
             this.btnRegist.Name = "btnRegist";
-            this.btnRegist.Size = new System.Drawing.Size(94, 72);
+            this.btnRegist.Size = new System.Drawing.Size(109, 72);
             this.btnRegist.TabIndex = 6;
             this.btnRegist.Text = "登録";
             this.btnRegist.UseVisualStyleBackColor = true;
@@ -103,9 +103,9 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(115, 98);
+            this.btnCancel.Location = new System.Drawing.Point(130, 98);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(94, 72);
+            this.btnCancel.Size = new System.Drawing.Size(109, 72);
             this.btnCancel.TabIndex = 7;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -116,7 +116,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(221, 182);
+            this.ClientSize = new System.Drawing.Size(251, 182);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnRegist);
             this.Controls.Add(this.cbxItemState);

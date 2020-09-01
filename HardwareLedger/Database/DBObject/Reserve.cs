@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -9,38 +11,31 @@ using System.Threading.Tasks;
 
 namespace HardwareLedger.DBObject
 {
-    [JsonObject("Reserve")]
+    [Table("Reserve")]
     public class Reserve : DBData
     {
-        [JsonProperty("ReserveCode")]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
+        [JsonProperty]
         public int ReserveCode { get; set; }
 
-        [JsonProperty("ItemTypeCode")]
+        [Required]
         public int ItemTypeCode { get; set; }
 
-        [JsonProperty("Name")]
+        [Required]
         public string Name { get; set; }
 
-        [JsonProperty("StateCode")]
+        [Required]
         public int StateCode { get; set; }
 
-        [JsonProperty("InsertTime")]
+        [Required]
         public DateTime InsertTime { get; set; }
 
-        [JsonProperty("UpdateTime")]
+        [Required]
         public DateTime UpdateTime { get; set; }
 
         public override string GetKeyColumnName() => nameof(ReserveCode);
-
-        public override DBData ConvertDBData<T>(T pgmrow)
-        {
-            if (pgmrow is HardwareLedger.Reserve reserve)
-            {
-                return reserve;
-            }
-
-            return null;
-        }
 
         public override IEnumerable<string> Properties()
         {

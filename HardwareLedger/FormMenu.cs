@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HardwareLedger.SubForm;
+using System;
 using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
@@ -20,10 +21,18 @@ namespace HardwareLedger
             //var kbnb3 = new ApplyKbn(2);
             //var kbnb4 = new ApplyKbn(3);
 
-            //var ac = JSONAccessor.Instance;
+            //var db = new SQLite();
+            //db.SetDummyData();
 
             btnReserveRegister.Click += btnReserveRegister_Click;
             btnReserveList.Click += btnReserveList_Click;
+
+            btnCollectScheduleAdd.Click += btnCollectScheduleAdd_Click;
+        }
+
+        private void btnCollectScheduleAdd_Click(object sender, EventArgs e)
+        {
+            FormCollectScheduleRegister.Instance.Show();
         }
 
         private void btnReserveList_Click(object sender, EventArgs e)

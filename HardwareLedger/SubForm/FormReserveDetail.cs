@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HardwareLedger.SubForm;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,6 +44,25 @@ namespace HardwareLedger
             cbxState.DisplayMember = nameof(ItemState.StateName);
 
             SetComboBoxes();
+
+            this.btnCollectRegist.Click += BtnCollectRegist_Click;
+            this.btnUpdate.Click += BtnUpdate_Click;
+            this.btnCancel.Click += BtnCancel_Click;
+        }
+
+        private void BtnUpdate_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            this.Visible = false;
+        }
+
+        private void BtnCollectRegist_Click(object sender, EventArgs e)
+        {
+            FormCollectScheduleRegister.Instance.Reserve = ReserveDetail;
+            FormCollectScheduleRegister.Instance.Show();
         }
 
         private void FormReserveDetail_VisibleChanged(object sender, EventArgs e)
@@ -52,6 +72,8 @@ namespace HardwareLedger
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
                 cbxState.SelectedValue = ReserveDetail.StateCode;
                 txtName.Text = ReserveDetail.Name;
+                txtInsertTime.Text = ReserveDetail.InsertTimeStr;
+                txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
             }
         }
 
@@ -75,7 +97,7 @@ namespace HardwareLedger
 
             var list2 = new List<ItemState>();
             list2.Add(new ItemState() { StateCode = 0 });
-            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbn.Enclose(ApplyKbns.Reserve)));
+            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Reserve)));
 
             cbxState.DataSource = list2;
         }

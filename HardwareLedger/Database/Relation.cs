@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace HardwareLedger
 {
-    public class ItemType : DBObject.ItemType, IPgmRow
+    public class Relation : DBObject.Relation, IPgmRow
     {
+        public Reserve Reserve { get; set; }
+
+        public Malfunction Malfunction { get; set; }
+
         public IPgmRow DownCastToIPgmRow(DBData data)
         {
             foreach (var column in data.Properties())
@@ -20,12 +24,12 @@ namespace HardwareLedger
         public bool PossibleDownCast<T>() where T : DBData, new()
         {
             var tt = new T();
-            return tt is DBObject.ItemType;
+            return tt is DBObject.Relation;
         }
 
         public DBData UpCastToDBData()
         {
-            var dbdata = new DBObject.ItemType();
+            var dbdata = new DBObject.Relation();
 
             foreach (var column in dbdata.Properties())
                 dbdata[column] = this[column];

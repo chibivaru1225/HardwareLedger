@@ -16,6 +16,7 @@ namespace HardwareLedger
             NONE = 0,
             Reserve = 1,
             Malfunction = 2,
+            MalfunctionState = 4,
         }
 
         public class ApplyKbn
@@ -75,6 +76,7 @@ namespace HardwareLedger
                 {
                     case ApplyKbns.Reserve: return "予備機";
                     case ApplyKbns.Malfunction: return "故障機";
+                    case ApplyKbns.MalfunctionState: return "故障機状況";
                     default: return String.Empty;
                 }
             }

@@ -34,35 +34,64 @@ namespace HardwareLedger
             InitializeComponent();
 
             this.FormClosing += FormReserveDetail_FormClosing;
+            this.Activated += FormReserveDetail_Activated;
             this.VisibleChanged += FormReserveDetail_VisibleChanged;
 
 
             cbxType.ValueMember = nameof(ItemType.ItemTypeCode);
             cbxType.DisplayMember = nameof(ItemType.ItemTypeName);
 
-            cbxState.ValueMember = nameof(ItemState.StateCode);
+            cbxState.ValueMember = nameof(ItemState.ItemStateCode);
             cbxState.DisplayMember = nameof(ItemState.StateName);
 
             SetComboBoxes();
 
-            this.btnCollectRegist.Click += BtnCollectRegist_Click;
-            this.btnUpdate.Click += BtnUpdate_Click;
-            this.btnCancel.Click += BtnCancel_Click;
+            this.btnCollectRegist.Click += btnCollectRegist_Click;
+            this.btnUpdate.Click += btnUpdate_Click;
+            this.btnCancel.Click += btnCancel_Click;
         }
 
-        private void BtnUpdate_Click(object sender, EventArgs e)
+        private void FormReserveDetail_Activated(object sender, EventArgs e)
+        {
+            if (ReserveDetail != null)
+            {
+                cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
+                cbxState.SelectedValue = ReserveDetail.ItemStateCode;
+                txtName.Text = ReserveDetail.Name;
+                txtInsertTime.Text = ReserveDetail.InsertTimeStr;
+                txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
+
+                var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
+
+                txtCollectSchedule.Text = cs == null ? "なし" : "あり";
+                btnCSCheck.Enabled = cs != null;
+            }
+            else
+            {
+                Clear();
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
         {
         }
 
-        private void BtnCancel_Click(object sender, EventArgs e)
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Visible = false;
         }
 
-        private void BtnCollectRegist_Click(object sender, EventArgs e)
+        private void btnCollectRegist_Click(object sender, EventArgs e)
         {
             FormCollectScheduleRegister.Instance.Reserve = ReserveDetail;
-            FormCollectScheduleRegister.Instance.Show();
+            FormCollectScheduleRegister.Instance.Relation = (from a in DBAccessor.Instance.Relations
+                                                             where a.ReserveCode == ReserveDetail.ReserveCode
+                                                             select a).FirstOrDefault();
+
+            var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
+
+            if (cs == null || MessageBox.Show(this, "回収予定が登録済ですが、変更しますか？", "ハードウェア管理", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                FormCollectScheduleRegister.Instance.Show();
         }
 
         private void FormReserveDetail_VisibleChanged(object sender, EventArgs e)
@@ -70,10 +99,19 @@ namespace HardwareLedger
             if (ReserveDetail != null)
             {
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
-                cbxState.SelectedValue = ReserveDetail.StateCode;
+                cbxState.SelectedValue = ReserveDetail.ItemStateCode;
                 txtName.Text = ReserveDetail.Name;
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
                 txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
+
+                var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
+
+                txtCollectSchedule.Text = cs == null ? "なし" : "あり";
+                btnCSCheck.Enabled = cs != null;
+            }
+            else
+            {
+                Clear();
             }
         }
 
@@ -96,10 +134,21 @@ namespace HardwareLedger
 
 
             var list2 = new List<ItemState>();
-            list2.Add(new ItemState() { StateCode = 0 });
+            list2.Add(new ItemState() { ItemStateCode = 0 });
             list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Reserve)));
 
             cbxState.DataSource = list2;
+        }
+
+        private void Clear()
+        {
+            cbxType.SelectedValue = 0;
+            cbxState.SelectedValue = 0;
+            txtName.Text = String.Empty;
+            txtInsertTime.Text = String.Empty;
+            txtUpdateTime.Text = String.Empty;
+            txtCollectSchedule.Text = "なし" ;
+            btnCSCheck.Enabled = false;
         }
     }
 }

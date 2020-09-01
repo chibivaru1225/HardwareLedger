@@ -14,7 +14,7 @@ namespace HardwareLedger.DBObject
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required]
-        public int StateCode { get; set; }
+        public int ItemStateCode { get; set; }
 
         [Required]
         public int ApplyKbn { get; set; }
@@ -25,11 +25,11 @@ namespace HardwareLedger.DBObject
         [Required]
         public int StateColor { get; set; }
 
-        public override string GetKeyColumnName() => nameof(StateCode);
+        public override string GetKeyColumnName() => nameof(ItemStateCode);
 
         public override IEnumerable<string> Properties()
         {
-            yield return nameof(StateCode);
+            yield return nameof(ItemStateCode);
             yield return nameof(ApplyKbn);
             yield return nameof(StateName);
             yield return nameof(StateColor);

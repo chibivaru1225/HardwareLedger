@@ -29,7 +29,7 @@ namespace HardwareLedger
             cbxItemType.ValueMember = nameof(ItemType.ItemTypeCode);
             cbxItemType.DisplayMember = nameof(ItemType.ItemTypeName);
 
-            cbxItemState.ValueMember = nameof(ItemState.StateCode);
+            cbxItemState.ValueMember = nameof(ItemState.ItemStateCode);
             cbxItemState.DisplayMember = nameof(ItemState.StateName);
 
             SetComboBoxes();
@@ -80,10 +80,9 @@ namespace HardwareLedger
                 res.InsertTime = DateTime.Now;
                 res.UpdateTime = DateTime.Now;
                 res.ItemTypeCode = itc;
-                res.StateCode = sc;
-
-                DBAccessor.Instance.UpsertJson<Reserve, DBObject.Reserve>(res);
-                DBAccessor.Instance.Reserves = DBAccessor.Instance.ReadJson<Reserve, DBObject.Reserve>();
+                res.ItemStateCode = sc;
+                
+                DBAccessor.Instance.Reserves = DBAccessor.Instance.UpsertJson<Reserve, DBObject.Reserve>(res);
 
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 Clear();
@@ -112,7 +111,7 @@ namespace HardwareLedger
 
 
             var list2 = new List<ItemState>();
-            list2.Add(new ItemState() { StateCode = 0 });
+            list2.Add(new ItemState() { ItemStateCode = 0 });
             list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Reserve)));
 
             cbxItemState.DataSource = list2;

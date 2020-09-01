@@ -42,6 +42,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtUpdateTime = new System.Windows.Forms.TextBox();
             this.btnCollectRegist = new System.Windows.Forms.Button();
+            this.txtCollectSchedule = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnCSCheck = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // cbxType
@@ -99,18 +102,18 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(144, 154);
+            this.btnCancel.Location = new System.Drawing.Point(144, 182);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(126, 72);
+            this.btnCancel.Size = new System.Drawing.Size(126, 51);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 154);
+            this.btnUpdate.Location = new System.Drawing.Point(12, 182);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(126, 72);
+            this.btnUpdate.Size = new System.Drawing.Size(126, 51);
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -118,7 +121,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 101);
+            this.label4.Location = new System.Drawing.Point(12, 129);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 15);
             this.label4.TabIndex = 11;
@@ -126,7 +129,7 @@
             // 
             // txtInsertTime
             // 
-            this.txtInsertTime.Location = new System.Drawing.Point(85, 98);
+            this.txtInsertTime.Location = new System.Drawing.Point(85, 126);
             this.txtInsertTime.Name = "txtInsertTime";
             this.txtInsertTime.ReadOnly = true;
             this.txtInsertTime.Size = new System.Drawing.Size(185, 22);
@@ -135,7 +138,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 129);
+            this.label5.Location = new System.Drawing.Point(12, 157);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
             this.label5.TabIndex = 13;
@@ -143,7 +146,7 @@
             // 
             // txtUpdateTime
             // 
-            this.txtUpdateTime.Location = new System.Drawing.Point(85, 126);
+            this.txtUpdateTime.Location = new System.Drawing.Point(85, 154);
             this.txtUpdateTime.Name = "txtUpdateTime";
             this.txtUpdateTime.ReadOnly = true;
             this.txtUpdateTime.Size = new System.Drawing.Size(185, 22);
@@ -155,8 +158,34 @@
             this.btnCollectRegist.Name = "btnCollectRegist";
             this.btnCollectRegist.Size = new System.Drawing.Size(126, 51);
             this.btnCollectRegist.TabIndex = 14;
-            this.btnCollectRegist.Text = "回収予定登録";
+            this.btnCollectRegist.Text = "回収予定\r\n登録/変更";
             this.btnCollectRegist.UseVisualStyleBackColor = true;
+            // 
+            // txtCollectSchedule
+            // 
+            this.txtCollectSchedule.Location = new System.Drawing.Point(85, 98);
+            this.txtCollectSchedule.Name = "txtCollectSchedule";
+            this.txtCollectSchedule.ReadOnly = true;
+            this.txtCollectSchedule.Size = new System.Drawing.Size(185, 22);
+            this.txtCollectSchedule.TabIndex = 15;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 101);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(67, 15);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "回収予定";
+            // 
+            // btnCSCheck
+            // 
+            this.btnCSCheck.Location = new System.Drawing.Point(276, 98);
+            this.btnCSCheck.Name = "btnCSCheck";
+            this.btnCSCheck.Size = new System.Drawing.Size(126, 50);
+            this.btnCSCheck.TabIndex = 17;
+            this.btnCSCheck.Text = "回収状況閲覧";
+            this.btnCSCheck.UseVisualStyleBackColor = true;
             // 
             // FormReserveDetail
             // 
@@ -164,7 +193,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(414, 238);
+            this.ClientSize = new System.Drawing.Size(414, 245);
+            this.Controls.Add(this.btnCSCheck);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtCollectSchedule);
             this.Controls.Add(this.btnCollectRegist);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtUpdateTime);
@@ -206,5 +238,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtUpdateTime;
         private System.Windows.Forms.Button btnCollectRegist;
+        private System.Windows.Forms.TextBox txtCollectSchedule;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnCSCheck;
     }
 }

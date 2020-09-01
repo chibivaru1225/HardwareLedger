@@ -34,6 +34,7 @@
             this.chReserveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chCollectSchedule = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveInsertTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveUpdateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReserveList)).BeginInit();
@@ -49,6 +50,7 @@
             this.chReserveType,
             this.chReserveName,
             this.chReserveState,
+            this.chCollectSchedule,
             this.chReserveInsertTime,
             this.chReserveUpdateTime});
             this.dgvReserveList.Location = new System.Drawing.Point(9, 9);
@@ -56,7 +58,7 @@
             this.dgvReserveList.Name = "dgvReserveList";
             this.dgvReserveList.ReadOnly = true;
             this.dgvReserveList.RowTemplate.Height = 21;
-            this.dgvReserveList.Size = new System.Drawing.Size(906, 421);
+            this.dgvReserveList.Size = new System.Drawing.Size(986, 421);
             this.dgvReserveList.TabIndex = 0;
             // 
             // chReserveCode
@@ -85,25 +87,31 @@
             this.chReserveState.Name = "chReserveState";
             this.chReserveState.ReadOnly = true;
             // 
+            // chCollectSchedule
+            // 
+            this.chCollectSchedule.HeaderText = "回収予定";
+            this.chCollectSchedule.Name = "chCollectSchedule";
+            this.chCollectSchedule.ReadOnly = true;
+            // 
             // chReserveInsertTime
             // 
             this.chReserveInsertTime.HeaderText = "登録日時";
             this.chReserveInsertTime.Name = "chReserveInsertTime";
             this.chReserveInsertTime.ReadOnly = true;
-            this.chReserveInsertTime.Width = 160;
+            this.chReserveInsertTime.Width = 150;
             // 
             // chReserveUpdateTime
             // 
             this.chReserveUpdateTime.HeaderText = "更新日時";
             this.chReserveUpdateTime.Name = "chReserveUpdateTime";
             this.chReserveUpdateTime.ReadOnly = true;
-            this.chReserveUpdateTime.Width = 160;
+            this.chReserveUpdateTime.Width = 150;
             // 
             // FormReserveList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 439);
+            this.ClientSize = new System.Drawing.Size(1004, 439);
             this.Controls.Add(this.dgvReserveList);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -125,6 +133,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveType;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveName;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chCollectSchedule;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveInsertTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveUpdateTime;
     }

@@ -23,7 +23,7 @@ namespace HardwareLedger.DBObject
         public String Name { get; set; }
 
         [Required]
-        public int StateCode { get; set; }
+        public int ItemStateCode { get; set; }
 
         [Required]
         public DateTime InsertTime { get; set; }
@@ -38,7 +38,7 @@ namespace HardwareLedger.DBObject
             yield return nameof(MalfunctionCode);
             yield return nameof(ItemTypeCode);
             yield return nameof(Name);
-            yield return nameof(StateCode);
+            yield return nameof(ItemStateCode);
             yield return nameof(InsertTime);
             yield return nameof(UpdateTime);
         }

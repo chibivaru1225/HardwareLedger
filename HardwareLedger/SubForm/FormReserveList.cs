@@ -77,6 +77,7 @@ namespace HardwareLedger
             chReserveName.DataPropertyName = nameof(ReserveListRow.Name);
             chReserveType.DataPropertyName = nameof(ReserveListRow.TypeStr);
             chReserveState.DataPropertyName = nameof(ReserveListRow.StateStr);
+            chCollectSchedule.DataPropertyName = nameof(ReserveListRow.CollectScheduleStr);
             chReserveInsertTime.DataPropertyName = nameof(ReserveListRow.InsertTimeStr);
             chReserveUpdateTime.DataPropertyName = nameof(ReserveListRow.UpdateTimeStr);
         }
@@ -105,6 +106,10 @@ namespace HardwareLedger
 
             public string StateStr => State?.StateName ?? String.Empty;
 
+            public CollectSchedule CollectSchedule { get; set; }
+
+            public string CollectScheduleStr => CollectSchedule == null ? "なし" : "あり";
+
             public DateTime InsertTime { get; set; }
 
             public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -119,8 +124,9 @@ namespace HardwareLedger
 
                 row.ReserveCode = res.ReserveCode;
                 row.Name = res.Name;
-                row.State = DBAccessor.Instance.ItemStates.Where(x => x.StateCode == res.StateCode).FirstOrDefault();
+                row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
                 row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
+                row.CollectSchedule = DBAccessor.Instance.GetCollectSchedule(res);
                 row.InsertTime = res.InsertTime;
                 row.UpdateTime = res.UpdateTime;
 
@@ -133,7 +139,7 @@ namespace HardwareLedger
 
                 res.ReserveCode = row.ReserveCode;
                 res.Name = row.Name;
-                res.StateCode = row.State?.StateCode ?? 0;
+                res.ItemStateCode = row.State?.ItemStateCode ?? 0;
                 res.ItemTypeCode = row.Type?.ItemTypeCode ?? 0;
                 res.InsertTime = row.InsertTime;
                 res.UpdateTime = row.UpdateTime;

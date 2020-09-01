@@ -46,6 +46,8 @@ namespace HardwareLedger
 
         public List<Relation> Relations { get; set; }
 
+        public List<CollectSchedule> CollectSchedules { get; set; }
+
         private DBAccessor()
         {
             var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -66,23 +68,9 @@ namespace HardwareLedger
             ItemStates = ReadJson<ItemState, DBObject.ItemState>();
             Malfunctions = ReadJson<Malfunction, DBObject.Malfunction>();
             Relations = ReadJson<Relation, DBObject.Relation>();
+            CollectSchedules = ReadJson<CollectSchedule, DBObject.CollectSchedule>();
 
             SetDummyData();
-        }
-
-        private void Update(params Reserve[] rows)
-        {
-            Upsert<Reserve, DBObject.Reserve>(rows);
-        }
-
-        private void Update(params ItemType[] rows)
-        {
-            Upsert<ItemType, DBObject.ItemType>(rows);
-        }
-
-        private void Update(params ItemState[] rows)
-        {
-            Upsert<ItemState, DBObject.ItemState>(rows);
         }
 
         public List<T> UpsertJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
@@ -99,7 +87,9 @@ namespace HardwareLedger
                 {
                     var drow = row.UpCastToDBData() as D;
                     var dkcn = drow[kcn];
-                    var dbdr = basedata.Where(x => x[kcn] == dkcn).FirstOrDefault();
+                    var dbdr = (from a in basedata
+                                where a[kcn].Equals(dkcn)
+                                select a).FirstOrDefault();
 
                     if (dbdr == null)
                         basedata.Add(drow);
@@ -176,25 +166,6 @@ namespace HardwareLedger
         //        }
         //    }
         //}
-
-
-        private List<Reserve> GetReserves()
-        {
-            Reserves = Get<Reserve, DBObject.Reserve>();
-            return Reserves;
-        }
-
-        private List<ItemType> GetItemTypes()
-        {
-            ItemTypes = Get<ItemType, DBObject.ItemType>();
-            return ItemTypes;
-        }
-
-        private List<ItemState> GetItemStates()
-        {
-            ItemStates = Get<ItemState, DBObject.ItemState>();
-            return ItemStates;
-        }
 
         //public List<T> Get<T, D>() where T : PgmRow, new() where D : DBData, new()
         //{
@@ -306,6 +277,39 @@ namespace HardwareLedger
             return list;
         }
 
+        public CollectSchedule GetCollectSchedule(Reserve reserve)
+        {
+            var r1 = (from a in Relations
+                      where a.ReserveCode == reserve.ReserveCode
+                      select a).FirstOrDefault();
+
+            if (r1 == null)
+                return null;
+
+            var r2 = (from b in CollectSchedules
+                      where b.RelationCode == r1.RelationCode
+                      select b).FirstOrDefault();
+
+            return r2;
+        }
+
+
+        public CollectSchedule GetCollectSchedule(Malfunction malfunction)
+        {
+            var r1 = (from a in Relations
+                      where a.MalfunctionCode == malfunction.MalfunctionCode
+                      select a).FirstOrDefault();
+
+            if (r1 == null)
+                return null;
+
+            var r2 = (from b in CollectSchedules
+                      where b.RelationCode == r1.RelationCode
+                      select b).FirstOrDefault();
+
+            return r2;
+        }
+
         //public List<D> Get<D>() where D : DBData
         //{
         //    //var list = new List<T>();
@@ -355,35 +359,35 @@ namespace HardwareLedger
                 {
                     new ItemState
                     {
-                        StateCode = 1,
+                        ItemStateCode = 1,
                         StateName = "テストA",
                         ApplyKbnValue = ApplyKbns.Reserve,
                         StateColorValue = Color.White,
                     },
                     new ItemState
                     {
-                        StateCode = 2,
+                        ItemStateCode = 2,
                         StateName = "テストB",
                         ApplyKbnValue = ApplyKbns.Malfunction,
                         StateColorValue = Color.LightBlue,
                     },
                     new ItemState
                     {
-                        StateCode = 3,
+                        ItemStateCode = 3,
                         StateName = "テストC",
                         ApplyKbnValue = ApplyKbns.Reserve | ApplyKbns.Malfunction,
                         StateColorValue = Color.LightGreen,
                     },
                     new ItemState
                     {
-                        StateCode = 4,
+                        ItemStateCode = 4,
                         StateName = "テストD",
                         ApplyKbnValue = ApplyKbns.NONE,
                         StateColorValue = Color.Red,
                     },
                     new ItemState
                     {
-                        StateCode = 5,
+                        ItemStateCode = 5,
                         StateName = "テストE",
                         ApplyKbnValue = ApplyKbns.MalfunctionState,
                         StateColorValue = Color.Red,

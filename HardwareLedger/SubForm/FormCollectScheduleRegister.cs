@@ -47,7 +47,7 @@ namespace HardwareLedger.SubForm
             cbxType.ValueMember = nameof(ItemType.ItemTypeCode);
             cbxType.DisplayMember = nameof(ItemType.ItemTypeName);
 
-            cbxState.ValueMember = nameof(ItemState.StateCode);
+            cbxState.ValueMember = nameof(ItemState.ItemStateCode);
             cbxState.DisplayMember = nameof(ItemState.StateName);
 
             SetComboBoxes();
@@ -59,58 +59,84 @@ namespace HardwareLedger.SubForm
             {
                 if (Relation == null)
                 {
-                    var rels = DBAccessor.Instance.ReadJson<Relation, DBObject.Relation>();
+                    var rels = DBAccessor.Instance.Relations;
 
                     var rel = new Relation();
                     rel.RelationCode = rels.Count() == 0 ? 1 : rels.Max(x => x.RelationCode) + 1;
+                    rel.ReserveCode = Reserve?.ReserveCode;
+                    rel.MalfunctionCode = Malfunction?.MalfunctionCode;
 
-                    if (Reserve != null)
-                        rel.ReserveCode = Reserve.ReserveCode;
-                    else
-                        rel.ReserveCode = null;
+                    DBAccessor.Instance.Relations = DBAccessor.Instance.UpsertJson<Relation, DBObject.Relation>(rel);
 
-                    if (Malfunction != null)
-                        rel.MalfunctionCode = Malfunction.MalfunctionCode;
-                    else
-                    {
-                        var mals = DBAccessor.Instance.ReadJson<Malfunction, DBObject.Malfunction>();
+                    Relation = rel;
 
-                        var mal = new Malfunction();
-                        mal.MalfunctionCode = mals.Count() == 0 ? 1 : mals.Max(x => x.MalfunctionCode) + 1;
-                        mal.ItemTypeCode = cbxtype;
-                        mal.StateCode = cbxstate;
-                        mal.Name = String.Empty;
-                        mal.InsertTime = DateTime.Now;
-                        mal.UpdateTime = DateTime.Now;
+                    var cms = new CollectSchedule();
+                    cms.CollectScheduleCode = DBAccessor.Instance.CollectSchedules.Count() == 0 ?
+                        1 : DBAccessor.Instance.CollectSchedules.Max(x => x.CollectScheduleCode) + 1;
+                    cms.RelationCode = rel.RelationCode;
+                    cms.ItemTypeCode = cbxtype;
+                    cms.ItemStateCode = cbxstate;
+                    cms.CollectScheduleTime = dtpScheduleTime.Value.Date;
+                    cms.InsertTime = DateTime.Now;
+                    cms.UpdateTime = DateTime.Now;
 
-                        DBAccessor.Instance.UpsertJson<Malfunction, DBObject.Malfunction>(mal);
-
-                        rel.MalfunctionCode = mal.MalfunctionCode;
-                    }
-
-                    DBAccessor.Instance.UpsertJson<Relation, DBObject.Relation>(rel);
+                    DBAccessor.Instance.CollectSchedules =
+                        DBAccessor.Instance.UpsertJson<CollectSchedule, DBObject.CollectSchedule>(cms);
 
                     MessageBox.Show(this, "登録しました", "ハードウェア管理");
                     Clear();
                 }
                 else
                 {
+                    var cs = (from a in DBAccessor.Instance.CollectSchedules
+                              where a.RelationCode == Relation.RelationCode
+                              select a).FirstOrDefault();
 
+                    cs.ItemTypeCode = cbxtype;
+                    cs.ItemStateCode = cbxstate;
+                    cs.CollectScheduleTime = dtpScheduleTime.Value.Date;
+                    cs.UpdateTime = DateTime.Now;
+
+                    DBAccessor.Instance.CollectSchedules =
+                        DBAccessor.Instance.UpsertJson<CollectSchedule, DBObject.CollectSchedule>(cs);
+
+                    MessageBox.Show(this, "登録しました", "ハードウェア管理");
+                    Clear();
                 }
             }
         }
 
         private void FormCollectScheduleRegister_VisibleChanged(object sender, EventArgs e)
         {
-            if (Reserve != null)
+            if (Relation == null)
             {
-                txtReserveCode.Text = Reserve.ReserveCode.ToString();
-                cbxState.SelectedValue = Reserve.StateCode;
+                if (Reserve != null)
+                {
+                    txtReserveCode.Text = Reserve.ReserveCode.ToString();
+                    cbxType.SelectedValue = Reserve.ItemTypeCode;
+                    cbxState.SelectedValue = Reserve.ItemStateCode;
+                }
+                if (Malfunction != null)
+                {
+                    txtMalfunctionCode.Text = Malfunction.MalfunctionCode.ToString();
+                    cbxType.SelectedValue = Malfunction.ItemTypeCode;
+                    cbxState.SelectedValue = Malfunction.ItemStateCode;
+                }
             }
-            if (Malfunction != null)
+            else
             {
-                txtMalfunctionCode.Text = Malfunction.MalfunctionCode.ToString();
-                cbxState.SelectedValue = Malfunction.StateCode;
+                txtReserveCode.Text = Relation.ReserveCode.ToString();
+                txtMalfunctionCode.Text = Relation.MalfunctionCode.ToString();
+
+                var cs = (from a in DBAccessor.Instance.CollectSchedules
+                          where a.RelationCode == Relation.RelationCode
+                          select a).FirstOrDefault();
+
+                if (cs != null)
+                {
+                    cbxType.SelectedValue = cs.ItemTypeCode;
+                    cbxState.SelectedValue = cs.ItemStateCode;
+                }
             }
 
             dtpScheduleTime.Value = DateTime.Today;
@@ -140,7 +166,7 @@ namespace HardwareLedger.SubForm
 
 
             var list2 = new List<ItemState>();
-            list2.Add(new ItemState() { StateCode = 0 });
+            list2.Add(new ItemState() { ItemStateCode = 0 });
             list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Malfunction)));
 
             cbxState.DataSource = list2;

@@ -33,10 +33,13 @@
             this.btnReserveList = new System.Windows.Forms.Button();
             this.btnReserveRegister = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.btnCollectScheduleAdd = new System.Windows.Forms.Button();
+            this.btnCollectScheduleList = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnStateMaster = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -73,7 +76,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnCollectScheduleAdd);
-            this.groupBox2.Controls.Add(this.button4);
+            this.groupBox2.Controls.Add(this.btnCollectScheduleList);
             this.groupBox2.Location = new System.Drawing.Point(9, 96);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.groupBox2.Name = "groupBox2";
@@ -82,15 +85,6 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "故障機";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(163, 22);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(150, 50);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "故障機\r\n回収予定一覧";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // btnCollectScheduleAdd
             // 
@@ -101,11 +95,42 @@
             this.btnCollectScheduleAdd.Text = "故障機\r\n回収予定登録";
             this.btnCollectScheduleAdd.UseVisualStyleBackColor = true;
             // 
+            // btnCollectScheduleList
+            // 
+            this.btnCollectScheduleList.Location = new System.Drawing.Point(163, 22);
+            this.btnCollectScheduleList.Name = "btnCollectScheduleList";
+            this.btnCollectScheduleList.Size = new System.Drawing.Size(150, 50);
+            this.btnCollectScheduleList.TabIndex = 2;
+            this.btnCollectScheduleList.Text = "故障機\r\n回収予定一覧";
+            this.btnCollectScheduleList.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.btnStateMaster);
+            this.groupBox3.Location = new System.Drawing.Point(9, 179);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox3.Size = new System.Drawing.Size(320, 79);
+            this.groupBox3.TabIndex = 2;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "マスタ";
+            // 
+            // btnStateMaster
+            // 
+            this.btnStateMaster.Location = new System.Drawing.Point(163, 22);
+            this.btnStateMaster.Name = "btnStateMaster";
+            this.btnStateMaster.Size = new System.Drawing.Size(150, 50);
+            this.btnStateMaster.TabIndex = 3;
+            this.btnStateMaster.Text = "状態マスタ";
+            this.btnStateMaster.UseVisualStyleBackColor = true;
+            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 184);
+            this.ClientSize = new System.Drawing.Size(338, 267);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
@@ -118,6 +143,7 @@
             this.Text = "ハードウェア管理";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -128,8 +154,10 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnReserveList;
         private System.Windows.Forms.Button btnReserveRegister;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnCollectScheduleList;
         private System.Windows.Forms.Button btnCollectScheduleAdd;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button btnStateMaster;
     }
 }
 

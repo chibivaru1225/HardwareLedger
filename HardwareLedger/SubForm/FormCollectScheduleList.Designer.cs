@@ -1,4 +1,4 @@
-﻿namespace HardwareLedger.SubForm
+﻿namespace HardwareLedger
 {
     partial class FormCollectScheduleList
     {
@@ -41,7 +41,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCollectScheduleList)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvCollectScheduleList
             // 
             this.dgvCollectScheduleList.AllowUserToAddRows = false;
             this.dgvCollectScheduleList.AllowUserToDeleteRows = false;
@@ -57,10 +57,11 @@
             this.chUpdateTime});
             this.dgvCollectScheduleList.Location = new System.Drawing.Point(9, 9);
             this.dgvCollectScheduleList.Margin = new System.Windows.Forms.Padding(0);
-            this.dgvCollectScheduleList.Name = "dataGridView1";
+            this.dgvCollectScheduleList.MultiSelect = false;
+            this.dgvCollectScheduleList.Name = "dgvCollectScheduleList";
             this.dgvCollectScheduleList.ReadOnly = true;
             this.dgvCollectScheduleList.RowTemplate.Height = 21;
-            this.dgvCollectScheduleList.Size = new System.Drawing.Size(956, 486);
+            this.dgvCollectScheduleList.Size = new System.Drawing.Size(1056, 486);
             this.dgvCollectScheduleList.TabIndex = 0;
             // 
             // chReserveCode
@@ -108,23 +109,25 @@
             this.chInsertTime.HeaderText = "登録日時";
             this.chInsertTime.Name = "chInsertTime";
             this.chInsertTime.ReadOnly = true;
+            this.chInsertTime.Width = 150;
             // 
             // chUpdateTime
             // 
             this.chUpdateTime.HeaderText = "更新日時";
             this.chUpdateTime.Name = "chUpdateTime";
             this.chUpdateTime.ReadOnly = true;
+            this.chUpdateTime.Width = 150;
             // 
             // FormCollectScheduleList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(974, 504);
+            this.ClientSize = new System.Drawing.Size(1074, 504);
             this.Controls.Add(this.dgvCollectScheduleList);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormCollectScheduleList";

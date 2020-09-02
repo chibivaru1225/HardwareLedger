@@ -17,6 +17,7 @@ namespace HardwareLedger
             Reserve = 1,
             Malfunction = 2,
             MalfunctionState = 4,
+            CollectionState = 8,
         }
 
         public class ApplyKbn
@@ -77,6 +78,7 @@ namespace HardwareLedger
                     case ApplyKbns.Reserve: return "予備機";
                     case ApplyKbns.Malfunction: return "故障機";
                     case ApplyKbns.MalfunctionState: return "故障機状況";
+                    case ApplyKbns.CollectionState: return "回収状況";
                     default: return String.Empty;
                 }
             }
@@ -123,6 +125,101 @@ namespace HardwareLedger
 
         #endregion
 
+        #region 適用サブ区分
+
+        [Flags]
+        public enum ApplySubKbns
+        {
+            NONE,
+            Single,
+            Multi,
+        }
+
+        public class ApplySubKbn
+        {
+            private ApplySubKbns skbn;
+
+            public ApplySubKbn(ApplySubKbns v)
+            {
+                this.skbn = v;
+            }
+
+            public ApplySubKbn(ApplyKbn v)
+            {
+                this.skbn = GetApplyKbnState(v);
+            }
+
+            public static ApplySubKbn GetApplyKbnState(ApplyKbn kbn)
+            {
+                int i = 0;
+
+                foreach (var akbn in System.Enum.GetValues(typeof(ApplyKbns)))
+                {
+                    if (akbn is ApplyKbns type && type != ApplyKbns.NONE)
+                    {
+                        if ((kbn & type) == type)
+                            i++;
+                    }
+                }
+
+                switch (i)
+                {
+                    case 0: return ApplySubKbns.NONE;
+                    case 1: return ApplySubKbns.Single;
+                    default: return ApplySubKbns.Multi;
+                }
+            }
+
+            public string ViewValue
+            {
+                get
+                {
+                    return ViewValueStr(this.skbn);
+                }
+            }
+
+            public static String ViewValueStr(ApplySubKbns kbn)
+            {
+                switch (kbn)
+                {
+                    case ApplySubKbns.NONE: return "なし";
+                    case ApplySubKbns.Single: return "単一";
+                    case ApplySubKbns.Multi: return "複数";
+                    default: return String.Empty;
+                }
+            }
+
+            public ApplySubKbns Value
+            {
+                get
+                {
+                    return this.skbn;
+                }
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Class -> Enum
+            /// </summary>
+            /// <param name="ApplySubKbn"></param>
+            public static implicit operator ApplySubKbns(ApplySubKbn ApplySubKbn)
+            {
+                return ApplySubKbn.skbn;
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Enum -> Class
+            /// </summary>
+            /// <param name="ApplySubKbns"></param>
+            public static implicit operator ApplySubKbn(ApplySubKbns ApplySubKbns)
+            {
+                return new ApplySubKbn(ApplySubKbns);
+            }
+        }
+
+        #endregion
+
         #region 状態区分
 
         public enum ItemStateTypes
@@ -133,6 +230,8 @@ namespace HardwareLedger
             Discard,
             Reuse,
             PhysicalDestruction,
+            YetCollect,
+            Collected,
             NONE,
         }
 
@@ -155,6 +254,8 @@ namespace HardwareLedger
                     case "4": this.type = ItemStateTypes.Discard; break;
                     case "5": this.type = ItemStateTypes.Reuse; break;
                     case "6": this.type = ItemStateTypes.PhysicalDestruction; break;
+                    case "7": this.type = ItemStateTypes.YetCollect; break;
+                    case "8": this.type = ItemStateTypes.Collected; break;
                     default: this.type = ItemStateTypes.NONE; break;
                 }
             }
@@ -169,6 +270,8 @@ namespace HardwareLedger
                     case "4": return ItemStateTypes.Discard;
                     case "5": return ItemStateTypes.Reuse;
                     case "6": return ItemStateTypes.PhysicalDestruction;
+                    case "7": return ItemStateTypes.YetCollect;
+                    case "8": return ItemStateTypes.Collected;
                     default: return ItemStateTypes.NONE;
                 }
             }
@@ -185,11 +288,30 @@ namespace HardwareLedger
                         case ItemStateTypes.Discard: return "4";
                         case ItemStateTypes.Reuse: return "5";
                         case ItemStateTypes.PhysicalDestruction: return "6";
+                        case ItemStateTypes.YetCollect: return "7";
+                        case ItemStateTypes.Collected: return "8";
                         default: return "0";
                     }
                 }
             }
 
+            public static ApplyKbn GetApplyKbn(ItemStateTypes type)
+            {
+                switch (type)
+                {
+                    case ItemStateTypes.Collected: return ApplyKbns.CollectionState | ApplyKbns.MalfunctionState;
+                    case ItemStateTypes.YetCollect: return ApplyKbns.CollectionState | ApplyKbns.MalfunctionState;
+                    default: return ApplyKbns.NONE;
+                }
+            }
+
+            public ApplyKbn ApplyKbn
+            {
+                get
+                {
+                    return GetApplyKbn(this.type);
+                }
+            }
 
             public string ViewValue
             {
@@ -203,6 +325,8 @@ namespace HardwareLedger
                         case ItemStateTypes.Discard: return "廃棄済";
                         case ItemStateTypes.Reuse: return "再利用";
                         case ItemStateTypes.PhysicalDestruction: return "物理破壊待";
+                        case ItemStateTypes.YetCollect: return "未回収";
+                        case ItemStateTypes.Collected: return "回収済";
                         default: return String.Empty;
                     }
                 }

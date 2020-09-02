@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
-namespace HardwareLedger.SubForm
+namespace HardwareLedger
 {
     public partial class FormCollectScheduleRegister : Form
     {
@@ -49,6 +49,8 @@ namespace HardwareLedger.SubForm
 
             cbxState.ValueMember = nameof(ItemState.ItemStateCode);
             cbxState.DisplayMember = nameof(ItemState.StateName);
+            //cbxState.ValueMember = nameof(ComboBoxItemType.Value);
+            //cbxState.DisplayMember = nameof(ComboBoxItemType.Display);
 
             SetComboBoxes();
         }
@@ -167,7 +169,21 @@ namespace HardwareLedger.SubForm
 
             var list2 = new List<ItemState>();
             list2.Add(new ItemState() { ItemStateCode = 0 });
-            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Malfunction)));
+            //list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Malfunction)));
+            list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.CollectionState)));
+
+            //var list2 = new List<ComboBoxItemType>();
+
+            //foreach (var t in System.Enum.GetValues(typeof(ItemStateTypes)))
+            //{
+            //    if (t is ItemStateTypes type && type != ItemStateTypes.NONE && ItemStateType.GetApplyKbn(type).Enclose(ApplyKbns.CollectionState))
+            //    {
+            //        var item = new ComboBoxItemType();
+            //        item.ItemState = type;
+
+            //        list2.Add(item);
+            //    }
+            //}
 
             cbxState.DataSource = list2;
         }
@@ -175,6 +191,15 @@ namespace HardwareLedger.SubForm
         private void Clear()
         {
 
+        }
+
+        private class ComboBoxItemType
+        {
+            public ItemStateType ItemState { get; set; }
+
+            public ItemStateTypes Value => ItemState.Value;
+
+            public string Display => ItemState.ViewValue;
         }
     }
 }

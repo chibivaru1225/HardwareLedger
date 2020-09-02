@@ -70,7 +70,7 @@ namespace HardwareLedger
             Relations = ReadJson<Relation, DBObject.Relation>();
             CollectSchedules = ReadJson<CollectSchedule, DBObject.CollectSchedule>();
 
-            SetDummyData();
+            //SetDummyData();
         }
 
         public List<T> UpsertJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
@@ -95,6 +95,41 @@ namespace HardwareLedger
                         basedata.Add(drow);
                     else
                         dbdr.Copy(drow);
+                }
+                else
+                {
+                    throw new InvalidOperationException();
+                }
+            }
+
+            using (StreamWriter sw = new StreamWriter(filepath, false, Encoding.UTF8))
+            {
+                sw.Write(JsonConvert.SerializeObject(basedata));
+            }
+
+            return ConvertList<T, D>(basedata);
+        }
+
+        public List<T> RemoveJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            var filepath = Directory + typeof(D).Name + @".json";
+
+            var dd = new D();
+            var basedata = ReadJson<D>();
+            var kcn = dd.GetKeyColumnName();
+
+            foreach (var row in rows)
+            {
+                if (row is D)
+                {
+                    var drow = row.UpCastToDBData() as D;
+                    var dkcn = drow[kcn];
+                    var dbdr = (from a in basedata
+                                where a[kcn].Equals(dkcn)
+                                select a).FirstOrDefault();
+
+                    if (dbdr != null)
+                        basedata.Remove(dbdr);
                 }
                 else
                 {
@@ -310,6 +345,15 @@ namespace HardwareLedger
             return r2;
         }
 
+        public Relation GetRelation(CollectSchedule schedule)
+        {
+            var r1 = (from a in Relations
+                      where a.RelationCode == schedule.RelationCode
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
         //public List<D> Get<D>() where D : DBData
         //{
         //    //var list = new List<T>();
@@ -390,6 +434,13 @@ namespace HardwareLedger
                         ItemStateCode = 5,
                         StateName = "テストE",
                         ApplyKbnValue = ApplyKbns.MalfunctionState,
+                        StateColorValue = Color.Red,
+                    },
+                    new ItemState
+                    {
+                        ItemStateCode = 6,
+                        StateName = "テストF",
+                        ApplyKbnValue = ApplyKbns.CollectionState,
                         StateColorValue = Color.Red,
                     },
                 });

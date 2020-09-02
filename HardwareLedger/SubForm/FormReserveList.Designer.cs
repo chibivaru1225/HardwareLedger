@@ -55,6 +55,7 @@
             this.chReserveUpdateTime});
             this.dgvReserveList.Location = new System.Drawing.Point(9, 9);
             this.dgvReserveList.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvReserveList.MultiSelect = false;
             this.dgvReserveList.Name = "dgvReserveList";
             this.dgvReserveList.ReadOnly = true;
             this.dgvReserveList.RowTemplate.Height = 21;

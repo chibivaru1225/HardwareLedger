@@ -1,5 +1,4 @@
-﻿using HardwareLedger.SubForm;
-using System;
+﻿using System;
 using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
@@ -28,6 +27,19 @@ namespace HardwareLedger
             btnReserveList.Click += btnReserveList_Click;
 
             btnCollectScheduleAdd.Click += btnCollectScheduleAdd_Click;
+            btnCollectScheduleList.Click += btnCollectScheduleList_Click;
+
+            btnStateMaster.Click += btnStateMaster_Click;
+        }
+
+        private void btnStateMaster_Click(object sender, EventArgs e)
+        {
+            FormStateMaster.Instance.Show();
+        }
+
+        private void btnCollectScheduleList_Click(object sender, EventArgs e)
+        {
+            FormCollectScheduleList.Instance.Show();
         }
 
         private void btnCollectScheduleAdd_Click(object sender, EventArgs e)

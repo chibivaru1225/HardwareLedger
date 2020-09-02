@@ -30,7 +30,7 @@ namespace HardwareLedger.DBObject
         public DateTime CollectScheduleTime { get; set; }
 
         [Required]
-        public DateTime CollectTime { get; set; }
+        public DateTime? CollectTime { get; set; }
 
         [Required]
         public DateTime InsertTime { get; set; }

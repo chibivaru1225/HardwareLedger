@@ -1,4 +1,4 @@
-﻿namespace HardwareLedger.SubForm
+﻿namespace HardwareLedger
 {
     partial class FormCollectScheduleRegister
     {

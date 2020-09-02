@@ -120,6 +120,12 @@
     <Compile Include="SubForm\FormReserveRegister.Designer.cs">
       <DependentUpon>FormReserveRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForm\FormStateMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForm\FormStateMaster.Designer.cs">
+      <DependentUpon>FormStateMaster.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormReserveRegister.resx">
       <DependentUpon>FormReserveRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForm\FormStateMaster.resx">
+      <DependentUpon>FormStateMaster.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

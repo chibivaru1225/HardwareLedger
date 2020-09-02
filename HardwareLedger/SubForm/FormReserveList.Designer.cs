@@ -90,7 +90,7 @@
             // 
             // chCollectSchedule
             // 
-            this.chCollectSchedule.HeaderText = "回収予定";
+            this.chCollectSchedule.HeaderText = "回収状況";
             this.chCollectSchedule.Name = "chCollectSchedule";
             this.chCollectSchedule.ReadOnly = true;
             // 

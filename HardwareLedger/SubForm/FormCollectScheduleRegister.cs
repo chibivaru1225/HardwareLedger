@@ -52,7 +52,14 @@ namespace HardwareLedger
             //cbxState.ValueMember = nameof(ComboBoxItemType.Value);
             //cbxState.DisplayMember = nameof(ComboBoxItemType.Display);
 
+            cbCollected.CheckedChanged += cbCollected_CheckedChanged;
+
             SetComboBoxes();
+        }
+
+        private void cbCollected_CheckedChanged(object sender, EventArgs e)
+        {
+            dtpCollectedTime.Enabled = cbCollected.Checked;
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -79,6 +86,7 @@ namespace HardwareLedger
                     cms.ItemTypeCode = cbxtype;
                     cms.ItemStateCode = cbxstate;
                     cms.CollectScheduleTime = dtpScheduleTime.Value.Date;
+                    cms.CollectTime = cbCollected.Checked ? dtpCollectedTime.Value.Date : (DateTime?)null;
                     cms.InsertTime = DateTime.Now;
                     cms.UpdateTime = DateTime.Now;
 
@@ -86,7 +94,8 @@ namespace HardwareLedger
                         DBAccessor.Instance.UpsertJson<CollectSchedule, DBObject.CollectSchedule>(cms);
 
                     MessageBox.Show(this, "登録しました", "ハードウェア管理");
-                    Clear();
+                    OpenMalfunctionRegister(cms);
+                    this.Visible = false;
                 }
                 else
                 {
@@ -97,13 +106,15 @@ namespace HardwareLedger
                     cs.ItemTypeCode = cbxtype;
                     cs.ItemStateCode = cbxstate;
                     cs.CollectScheduleTime = dtpScheduleTime.Value.Date;
+                    cs.CollectTime = cbCollected.Checked ? dtpCollectedTime.Value.Date : (DateTime?)null;
                     cs.UpdateTime = DateTime.Now;
 
                     DBAccessor.Instance.CollectSchedules =
                         DBAccessor.Instance.UpsertJson<CollectSchedule, DBObject.CollectSchedule>(cs);
 
                     MessageBox.Show(this, "登録しました", "ハードウェア管理");
-                    Clear();
+                    OpenMalfunctionRegister(cs);
+                    this.Visible = false;
                 }
             }
         }
@@ -118,12 +129,17 @@ namespace HardwareLedger
                     cbxType.SelectedValue = Reserve.ItemTypeCode;
                     cbxState.SelectedValue = Reserve.ItemStateCode;
                 }
+
                 if (Malfunction != null)
                 {
                     txtMalfunctionCode.Text = Malfunction.MalfunctionCode.ToString();
                     cbxType.SelectedValue = Malfunction.ItemTypeCode;
                     cbxState.SelectedValue = Malfunction.ItemStateCode;
                 }
+
+                cbCollected.Checked = false;
+                dtpCollectedTime.Enabled = false;
+                dtpCollectedTime.Value = DateTime.Today;
             }
             else
             {
@@ -138,6 +154,19 @@ namespace HardwareLedger
                 {
                     cbxType.SelectedValue = cs.ItemTypeCode;
                     cbxState.SelectedValue = cs.ItemStateCode;
+
+                    if (cs.CollectTime == null)
+                    {
+                        cbCollected.Checked = false;
+                        dtpCollectedTime.Enabled = false;
+                        dtpCollectedTime.Value = DateTime.Today;
+                    }
+                    else
+                    {
+                        cbCollected.Checked = true;
+                        dtpCollectedTime.Enabled = true;
+                        dtpCollectedTime.Value = cs.CollectTime.Value;
+                    }
                 }
             }
 
@@ -169,7 +198,6 @@ namespace HardwareLedger
 
             var list2 = new List<ItemState>();
             list2.Add(new ItemState() { ItemStateCode = 0 });
-            //list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Malfunction)));
             list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.CollectionState)));
 
             //var list2 = new List<ComboBoxItemType>();
@@ -188,9 +216,13 @@ namespace HardwareLedger
             cbxState.DataSource = list2;
         }
 
-        private void Clear()
+        private void OpenMalfunctionRegister(CollectSchedule schedule)
         {
-
+            if (schedule.CollectTime != null && MessageBox.Show(this, "回収完了しています。故障機を登録しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                FormMalfunctionRegister.Instance.Relation = DBAccessor.Instance.GetRelation(schedule);
+                FormMalfunctionRegister.Instance.Show();
+            }
         }
 
         private class ComboBoxItemType

@@ -44,6 +44,9 @@ namespace HardwareLedger
 
         private void btnCollectScheduleAdd_Click(object sender, EventArgs e)
         {
+            FormCollectScheduleRegister.Instance.Reserve = null;
+            FormCollectScheduleRegister.Instance.Relation = null;
+            FormCollectScheduleRegister.Instance.Malfunction = null;
             FormCollectScheduleRegister.Instance.Show();
         }
 

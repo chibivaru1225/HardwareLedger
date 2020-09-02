@@ -98,6 +98,7 @@ namespace HardwareLedger
             states.Add(state);
             SetDetail(state);
             dgvStateList.FirstDisplayedScrollingRowIndex = dgvStateList.Rows.Count - 1;
+            dgvStateList.CurrentCell = dgvStateList[0, dgvStateList.Rows.Count - 1];
         }
 
         private void btnRowDelete_Click(object sender, EventArgs e)

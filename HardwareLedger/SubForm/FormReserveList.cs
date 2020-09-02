@@ -40,12 +40,18 @@ namespace HardwareLedger
             InitDataGridView();
             SetDataGridView();
 
+            dgvReserveList.RowPrePaint += dgvReserveList_RowPrePaint;
             dgvReserveList.CellDoubleClick += dgvReserveList_CellDoubleClick;
 
             this.FormClosing += FormReserveList_FormClosing;
             this.Activated += FormReserveList_Activated;
 
             dgvReserveList.DataSource = bindinglist;
+        }
+
+        private void dgvReserveList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
+        {
+            dgvReserveList.Rows[e.RowIndex].DefaultCellStyle.BackColor = bindinglist[e.RowIndex].State?.StateColorValue ?? Color.White;
         }
 
         private void dgvReserveList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -108,7 +114,7 @@ namespace HardwareLedger
 
             public CollectSchedule CollectSchedule { get; set; }
 
-            public string CollectScheduleStr => CollectSchedule == null ? "なし" : "あり";
+            public string CollectScheduleStr => CollectSchedule == null ? "回収予定なし" : CollectSchedule.CollectTime == null ? "回収予定あり" : "回収済み";
 
             public DateTime InsertTime { get; set; }
 

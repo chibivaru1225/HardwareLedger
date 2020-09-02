@@ -62,7 +62,7 @@ namespace HardwareLedger
 
                 var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
 
-                txtCollectSchedule.Text = cs == null ? "なし" : "あり";
+                txtCollectSchedule.Text = cs == null ? "回収予定なし" : cs.CollectTime == null ? "回収予定あり" : "回収済み";
                 btnCSCheck.Enabled = cs != null;
             }
             else
@@ -105,7 +105,7 @@ namespace HardwareLedger
 
                 var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
 
-                txtCollectSchedule.Text = cs == null ? "なし" : "あり";
+                txtCollectSchedule.Text = cs == null ? "回収予定なし" : cs.CollectTime == null ? "回収予定あり" : "回収済み";
                 btnCSCheck.Enabled = cs != null;
             }
             else

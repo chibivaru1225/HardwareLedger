@@ -41,6 +41,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtMalfunctionCode = new System.Windows.Forms.TextBox();
+            this.cbCollected = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dtpCollectedTime = new System.Windows.Forms.DateTimePicker();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -98,7 +102,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(153, 154);
+            this.btnCancel.Location = new System.Drawing.Point(153, 210);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 72);
             this.btnCancel.TabIndex = 27;
@@ -107,7 +111,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 154);
+            this.btnUpdate.Location = new System.Drawing.Point(12, 210);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(135, 72);
             this.btnUpdate.TabIndex = 26;
@@ -148,13 +152,52 @@
             this.txtMalfunctionCode.Size = new System.Drawing.Size(185, 22);
             this.txtMalfunctionCode.TabIndex = 28;
             // 
+            // cbCollected
+            // 
+            this.cbCollected.AutoSize = true;
+            this.cbCollected.Location = new System.Drawing.Point(103, 159);
+            this.cbCollected.Name = "cbCollected";
+            this.cbCollected.Size = new System.Drawing.Size(71, 19);
+            this.cbCollected.TabIndex = 30;
+            this.cbCollected.Text = "回収済";
+            this.cbCollected.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 160);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 15);
+            this.label5.TabIndex = 31;
+            this.label5.Text = "回収済";
+            // 
+            // dtpCollectedTime
+            // 
+            this.dtpCollectedTime.Location = new System.Drawing.Point(103, 182);
+            this.dtpCollectedTime.Name = "dtpCollectedTime";
+            this.dtpCollectedTime.Size = new System.Drawing.Size(185, 22);
+            this.dtpCollectedTime.TabIndex = 33;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 188);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 34;
+            this.label7.Text = "回収日";
+            // 
             // FormCollectScheduleRegister
             // 
             this.AcceptButton = this.btnUpdate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(300, 238);
+            this.ClientSize = new System.Drawing.Size(300, 294);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.dtpCollectedTime);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cbCollected);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtMalfunctionCode);
             this.Controls.Add(this.btnCancel);
@@ -193,5 +236,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtMalfunctionCode;
+        private System.Windows.Forms.CheckBox cbCollected;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.DateTimePicker dtpCollectedTime;
+        private System.Windows.Forms.Label label7;
     }
 }

@@ -70,7 +70,6 @@
     <Compile Include="Database\DBObject\Relation.cs" />
     <Compile Include="Database\IPgmRow.cs" />
     <Compile Include="Database\Malfunction.cs" />
-    <Compile Include="Database\PgmRow.cs" />
     <Compile Include="Database\ItemState.cs" />
     <Compile Include="Database\ItemType.cs" />
     <Compile Include="Database\DBAccessor.cs" />
@@ -102,6 +101,12 @@
     <Compile Include="SubForm\FormCollectScheduleRegister.Designer.cs">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForm\FormMalfunctionRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForm\FormMalfunctionRegister.Designer.cs">
+      <DependentUpon>FormMalfunctionRegister.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForm\FormReserveDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,10 +125,10 @@
     <Compile Include="SubForm\FormReserveRegister.Designer.cs">
       <DependentUpon>FormReserveRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormStateMaster.cs">
+    <Compile Include="MasterForm\FormStateMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormStateMaster.Designer.cs">
+    <Compile Include="MasterForm\FormStateMaster.Designer.cs">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormMenu.resx">
@@ -153,7 +158,7 @@
     <EmbeddedResource Include="SubForm\FormReserveRegister.resx">
       <DependentUpon>FormReserveRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormStateMaster.resx">
+    <EmbeddedResource Include="MasterForm\FormStateMaster.resx">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

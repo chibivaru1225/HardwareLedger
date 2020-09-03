@@ -37,6 +37,7 @@
             this.btnCollectScheduleList = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.btnStateMaster = new System.Windows.Forms.Button();
+            this.btnTypeMaster = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -106,6 +107,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.btnTypeMaster);
             this.groupBox3.Controls.Add(this.btnStateMaster);
             this.groupBox3.Location = new System.Drawing.Point(9, 179);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
@@ -124,6 +126,15 @@
             this.btnStateMaster.TabIndex = 3;
             this.btnStateMaster.Text = "状態マスタ";
             this.btnStateMaster.UseVisualStyleBackColor = true;
+            // 
+            // btnTypeMaster
+            // 
+            this.btnTypeMaster.Location = new System.Drawing.Point(7, 22);
+            this.btnTypeMaster.Name = "btnTypeMaster";
+            this.btnTypeMaster.Size = new System.Drawing.Size(150, 50);
+            this.btnTypeMaster.TabIndex = 4;
+            this.btnTypeMaster.Text = "種別マスタ";
+            this.btnTypeMaster.UseVisualStyleBackColor = true;
             // 
             // FormMenu
             // 
@@ -158,6 +169,7 @@
         private System.Windows.Forms.Button btnCollectScheduleAdd;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button btnStateMaster;
+        private System.Windows.Forms.Button btnTypeMaster;
     }
 }
 

@@ -29,7 +29,13 @@ namespace HardwareLedger
             btnCollectScheduleAdd.Click += btnCollectScheduleAdd_Click;
             btnCollectScheduleList.Click += btnCollectScheduleList_Click;
 
+            btnTypeMaster.Click += btnTypeMaster_Click;
             btnStateMaster.Click += btnStateMaster_Click;
+        }
+
+        private void btnTypeMaster_Click(object sender, EventArgs e)
+        {
+            FormTypeMaster.Instance.Show();
         }
 
         private void btnStateMaster_Click(object sender, EventArgs e)

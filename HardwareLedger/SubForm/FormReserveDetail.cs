@@ -73,6 +73,26 @@ namespace HardwareLedger
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
+            if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode)
+            {
+                var name = txtName.Text;
+
+                if (tcode != ReserveDetail.ItemTypeCode ||
+                    scode != ReserveDetail.ItemStateCode ||
+                    name != ReserveDetail.Name)
+                {
+                    if (MessageBox.Show(this, "行が変更されています。保存しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
+                        ReserveDetail.ItemTypeCode = tcode;
+                        ReserveDetail.ItemStateCode = scode;
+                        ReserveDetail.Name = name;
+                        ReserveDetail.UpdateTime = DateTime.Now;
+
+                        DBAccessor.Instance.Reserves = DBAccessor.Instance.UpsertJson<Reserve, DBObject.Reserve>(ReserveDetail);
+                        MessageBox.Show(this, "登録しました", "ハードウェア管理");
+                    }
+                }
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -146,7 +166,7 @@ namespace HardwareLedger
             txtName.Text = String.Empty;
             txtInsertTime.Text = String.Empty;
             txtUpdateTime.Text = String.Empty;
-            txtCollectSchedule.Text = "なし" ;
+            txtCollectSchedule.Text = "なし";
             btnCSCheck.Enabled = false;
         }
     }

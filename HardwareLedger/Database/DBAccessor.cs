@@ -52,9 +52,9 @@ namespace HardwareLedger
         {
             var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             //SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
-            Directory = documents + @"\HardwareLedger\Database\";
+            Directory = documents + @"\HardwareLedger\Database\{0}.json";
 
-            SafeCreateDirectory(Directory);
+            SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
             DB = new LiteDatabase(nameof(HardwareLedger) + @".db");
 
             //Reserves = Get<Reserve, DBObject.Reserve>();
@@ -75,7 +75,7 @@ namespace HardwareLedger
 
         public List<T> UpsertJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
         {
-            var filepath = Directory + typeof(D).Name + @".json";
+            var filepath = String.Format(Directory, typeof(D).Name);
 
             var dd = new D();
             var basedata = ReadJson<D>();
@@ -112,7 +112,7 @@ namespace HardwareLedger
 
         public List<T> RemoveJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
         {
-            var filepath = Directory + typeof(D).Name + @".json";
+            var filepath = String.Format(Directory, typeof(D).Name);
 
             var dd = new D();
             var basedata = ReadJson<D>();
@@ -220,7 +220,7 @@ namespace HardwareLedger
 
         public List<T> ReadJson<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
         {
-            var filepath = Directory + typeof(D).Name + @".json";
+            var filepath = String.Format(Directory, typeof(D).Name);
             var list = new List<T>();
 
             if (File.Exists(filepath) == false)
@@ -253,7 +253,7 @@ namespace HardwareLedger
 
         private List<D> ReadJson<D>() where D : DBData, new()
         {
-            var filepath = Directory + typeof(D).Name + @".json";
+            var filepath = String.Format(Directory, typeof(D).Name);
 
             if (File.Exists(filepath) == false)
                 return new List<D>();

@@ -46,7 +46,6 @@ namespace HardwareLedger
             dgvApplyKbnList.AllowUserToAddRows = false;
 
             this.FormClosing += FormStateMaster_FormClosing;
-            //this.Activated += FormStateMaster_Activated;
             this.VisibleChanged += FormStateMaster_VisibleChanged;
 
             btnDetailColor.Click += btnDetailColor_Click;

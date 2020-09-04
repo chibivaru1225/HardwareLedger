@@ -80,6 +80,7 @@ namespace HardwareLedger
             chMalfunctionCode.DataPropertyName = nameof(ScheduleRow.MalfunctionCodeStr);
             chItemType.DataPropertyName = nameof(ScheduleRow.TypeStr);
             chItemState.DataPropertyName = nameof(ScheduleRow.StateStr);
+            chShop.DataPropertyName = nameof(ScheduleRow.ShopStr);
             chCollectDate.DataPropertyName = nameof(ScheduleRow.CollectDateStr);
             chCollectScheduleDate.DataPropertyName = nameof(ScheduleRow.CollectScheduleDateStr);
             chInsertTime.DataPropertyName = nameof(ScheduleRow.InsertTimeStr);
@@ -108,6 +109,10 @@ namespace HardwareLedger
 
             public string StateStr => State?.StateName ?? String.Empty;
 
+            public ShopType Shop { get; set; }
+
+            public string ShopStr => Shop?.ShopNum ?? String.Empty;
+
             public DateTime CollectScheduleDate { get; set; }
 
             public String CollectScheduleDateStr => CollectScheduleDate.ToString("yyyy/MM/dd");
@@ -134,6 +139,7 @@ namespace HardwareLedger
                 row.MalfunctionCode = DBAccessor.Instance.GetRelation(res).MalfunctionCode;
                 row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
                 row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
+                row.Shop = DBAccessor.Instance.ShopTypes.Where(x => x.ShopCode == res.ShopCode).FirstOrDefault();
                 row.CollectScheduleDate = res.CollectScheduleTime;
                 row.CollectDate = res.CollectTime;
                 row.InsertTime = res.InsertTime;
@@ -150,6 +156,7 @@ namespace HardwareLedger
                 res.RelationCode = row.RelationCode;
                 res.ItemTypeCode = row.Type.ItemTypeCode;
                 res.ItemStateCode = row.State.ItemStateCode;
+                res.ShopCode = row.Shop.ShopCode;
                 res.CollectScheduleTime = row.CollectScheduleDate;
                 res.CollectTime = row.CollectDate;
                 row.InsertTime = row.InsertTime;

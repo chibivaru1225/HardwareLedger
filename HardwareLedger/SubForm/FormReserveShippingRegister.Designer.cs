@@ -1,6 +1,6 @@
 ﻿namespace HardwareLedger
 {
-    partial class FormMalfunctionRegister
+    partial class FormReserveShippingRegister
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMalfunctionRegister));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReserveShippingRegister));
             this.SuspendLayout();
             // 
-            // FormMalfunctionRegister
+            // FormReserveShippingRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -40,8 +40,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormMalfunctionRegister";
-            this.Text = "故障機登録";
+            this.Name = "FormReserveShippingRegister";
+            this.Text = "発送状況登録";
             this.ResumeLayout(false);
 
         }

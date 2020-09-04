@@ -189,6 +189,7 @@
             this.btnCSCheck.TabIndex = 17;
             this.btnCSCheck.Text = "回収状況閲覧";
             this.btnCSCheck.UseVisualStyleBackColor = true;
+            this.btnCSCheck.Visible = false;
             // 
             // button1
             // 
@@ -196,7 +197,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(126, 51);
             this.button1.TabIndex = 18;
-            this.button1.Text = "発送状況登録";
+            this.button1.Text = "発送状況\r\n登録/変更";
             this.button1.UseVisualStyleBackColor = true;
             // 
             // textBox1

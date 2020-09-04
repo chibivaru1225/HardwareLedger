@@ -49,8 +49,9 @@ namespace HardwareLedger
 
             cbxState.ValueMember = nameof(ItemState.ItemStateCode);
             cbxState.DisplayMember = nameof(ItemState.StateName);
-            //cbxState.ValueMember = nameof(ComboBoxItemType.Value);
-            //cbxState.DisplayMember = nameof(ComboBoxItemType.Display);
+
+            cbxShop.ValueMember = nameof(ShopType.ShopCode);
+            cbxShop.DisplayMember = nameof(ShopType.FullName);
 
             cbCollected.CheckedChanged += cbCollected_CheckedChanged;
 
@@ -64,8 +65,14 @@ namespace HardwareLedger
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (cbxType.SelectedValue is int cbxtype && cbxState.SelectedValue is int cbxstate)
+            if (cbxType.SelectedValue is int cbxtype && cbxState.SelectedValue is int cbxstate && cbxShop.SelectedValue is int cbxshop)
             {
+                if (cbxshop == 0)
+                {
+                    MessageBox.Show(this, "店舗は必ず選択してください。", "ハードウェア管理");
+                    return;
+                }
+
                 if (Relation == null)
                 {
                     var rels = DBAccessor.Instance.Relations;
@@ -85,6 +92,7 @@ namespace HardwareLedger
                     cms.RelationCode = rel.RelationCode;
                     cms.ItemTypeCode = cbxtype;
                     cms.ItemStateCode = cbxstate;
+                    cms.ShopCode = cbxshop;
                     cms.CollectScheduleTime = dtpScheduleTime.Value.Date;
                     cms.CollectTime = cbCollected.Checked ? dtpCollectedTime.Value.Date : (DateTime?)null;
                     cms.InsertTime = DateTime.Now;
@@ -105,6 +113,7 @@ namespace HardwareLedger
 
                     cs.ItemTypeCode = cbxtype;
                     cs.ItemStateCode = cbxstate;
+                    cs.ShopCode = cbxshop;
                     cs.CollectScheduleTime = dtpScheduleTime.Value.Date;
                     cs.CollectTime = cbCollected.Checked ? dtpCollectedTime.Value.Date : (DateTime?)null;
                     cs.UpdateTime = DateTime.Now;
@@ -154,6 +163,7 @@ namespace HardwareLedger
                 {
                     cbxType.SelectedValue = cs.ItemTypeCode;
                     cbxState.SelectedValue = cs.ItemStateCode;
+                    cbxShop.SelectedValue = cs.ShopCode;
 
                     if (cs.CollectTime == null)
                     {
@@ -200,20 +210,14 @@ namespace HardwareLedger
             list2.Add(new ItemState() { ItemStateCode = 0 });
             list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.CollectionState)));
 
-            //var list2 = new List<ComboBoxItemType>();
-
-            //foreach (var t in System.Enum.GetValues(typeof(ItemStateTypes)))
-            //{
-            //    if (t is ItemStateTypes type && type != ItemStateTypes.NONE && ItemStateType.GetApplyKbn(type).Enclose(ApplyKbns.CollectionState))
-            //    {
-            //        var item = new ComboBoxItemType();
-            //        item.ItemState = type;
-
-            //        list2.Add(item);
-            //    }
-            //}
-
             cbxState.DataSource = list2;
+
+
+            var list3 = new List<ShopType>();
+            list3.Add(new ShopType() { ShopCode = 0 });
+            list3.AddRange(DBAccessor.Instance.ShopTypes.Where(x => x.Enable).OrderBy(x => x.ShopNum));
+
+            cbxShop.DataSource = list3;
         }
 
         private void OpenMalfunctionRegister(CollectSchedule schedule)
@@ -223,15 +227,6 @@ namespace HardwareLedger
                 FormMalfunctionRegister.Instance.Relation = DBAccessor.Instance.GetRelation(schedule);
                 FormMalfunctionRegister.Instance.Show();
             }
-        }
-
-        private class ComboBoxItemType
-        {
-            public ItemStateType ItemState { get; set; }
-
-            public ItemStateTypes Value => ItemState.Value;
-
-            public string Display => ItemState.ViewValue;
         }
     }
 }

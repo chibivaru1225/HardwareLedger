@@ -34,6 +34,7 @@
             this.chMalfunctionCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chItemState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chShop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chCollectScheduleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chCollectDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chInsertTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,6 +52,7 @@
             this.chMalfunctionCode,
             this.chItemType,
             this.chItemState,
+            this.chShop,
             this.chCollectScheduleDate,
             this.chCollectDate,
             this.chInsertTime,
@@ -61,7 +63,7 @@
             this.dgvCollectScheduleList.Name = "dgvCollectScheduleList";
             this.dgvCollectScheduleList.ReadOnly = true;
             this.dgvCollectScheduleList.RowTemplate.Height = 21;
-            this.dgvCollectScheduleList.Size = new System.Drawing.Size(1056, 486);
+            this.dgvCollectScheduleList.Size = new System.Drawing.Size(1136, 486);
             this.dgvCollectScheduleList.TabIndex = 0;
             // 
             // chReserveCode
@@ -89,6 +91,13 @@
             this.chItemState.HeaderText = "状態";
             this.chItemState.Name = "chItemState";
             this.chItemState.ReadOnly = true;
+            // 
+            // chShop
+            // 
+            this.chShop.HeaderText = "店舗";
+            this.chShop.Name = "chShop";
+            this.chShop.ReadOnly = true;
+            this.chShop.Width = 80;
             // 
             // chCollectScheduleDate
             // 
@@ -122,7 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1074, 504);
+            this.ClientSize = new System.Drawing.Size(1154, 504);
             this.Controls.Add(this.dgvCollectScheduleList);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -144,6 +153,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chMalfunctionCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn chItemType;
         private System.Windows.Forms.DataGridViewTextBoxColumn chItemState;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chShop;
         private System.Windows.Forms.DataGridViewTextBoxColumn chCollectScheduleDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn chCollectDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn chInsertTime;

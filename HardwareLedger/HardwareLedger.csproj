@@ -147,6 +147,12 @@
     <Compile Include="MasterForm\FormStateMaster.Designer.cs">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForm\FormReserveShippingRegister.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForm\FormReserveShippingRegister.Designer.cs">
+      <DependentUpon>FormReserveShippingRegister.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -171,6 +177,9 @@
     <EmbeddedResource Include="SubForm\FormCollectScheduleRegister.resx">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SubForm\FormMalfunctionRegister.resx">
+      <DependentUpon>FormMalfunctionRegister.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormReserveDetail.resx">
       <DependentUpon>FormReserveDetail.cs</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +191,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MasterForm\FormStateMaster.resx">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForm\FormReserveShippingRegister.resx">
+      <DependentUpon>FormReserveShippingRegister.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

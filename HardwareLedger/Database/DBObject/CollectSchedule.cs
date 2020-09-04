@@ -27,6 +27,9 @@ namespace HardwareLedger.DBObject
         public int ItemTypeCode { get; set; }
 
         [Required]
+        public int ShopCode { get; set; }
+
+        [Required]
         public DateTime CollectScheduleTime { get; set; }
 
         [Required]
@@ -46,6 +49,7 @@ namespace HardwareLedger.DBObject
             yield return nameof(RelationCode);
             yield return nameof(ItemStateCode);
             yield return nameof(ItemTypeCode);
+            yield return nameof(ShopCode);
             yield return nameof(CollectScheduleTime);
             yield return nameof(CollectTime);
             yield return nameof(InsertTime);

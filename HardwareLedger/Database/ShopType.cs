@@ -9,6 +9,8 @@ namespace HardwareLedger
 {
     public class ShopType : DBObject.ShopType, IPgmRow
     {
+        public string FullName => ShopNum == null ? String.Empty : ShopNum + " - " + ShopName;
+
         public IPgmRow DownCastToIPgmRow(DBData data)
         {
             foreach (var column in data.Properties())

@@ -45,12 +45,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dtpCollectedTime = new System.Windows.Forms.DateTimePicker();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbxShop = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 100);
+            this.label3.Location = new System.Drawing.Point(12, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 19;
@@ -60,7 +62,7 @@
             // 
             this.cbxState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxState.FormattingEnabled = true;
-            this.cbxState.Location = new System.Drawing.Point(103, 97);
+            this.cbxState.Location = new System.Drawing.Point(103, 126);
             this.cbxState.Name = "cbxState";
             this.cbxState.Size = new System.Drawing.Size(185, 23);
             this.cbxState.TabIndex = 17;
@@ -85,7 +87,7 @@
             // 
             // dtpScheduleTime
             // 
-            this.dtpScheduleTime.Location = new System.Drawing.Point(103, 126);
+            this.dtpScheduleTime.Location = new System.Drawing.Point(103, 155);
             this.dtpScheduleTime.Name = "dtpScheduleTime";
             this.dtpScheduleTime.Size = new System.Drawing.Size(185, 22);
             this.dtpScheduleTime.TabIndex = 24;
@@ -93,7 +95,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 132);
+            this.label6.Location = new System.Drawing.Point(12, 161);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(67, 15);
             this.label6.TabIndex = 25;
@@ -102,7 +104,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(153, 210);
+            this.btnCancel.Location = new System.Drawing.Point(153, 239);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 72);
             this.btnCancel.TabIndex = 27;
@@ -111,7 +113,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 210);
+            this.btnUpdate.Location = new System.Drawing.Point(12, 239);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(135, 72);
             this.btnUpdate.TabIndex = 26;
@@ -155,7 +157,7 @@
             // cbCollected
             // 
             this.cbCollected.AutoSize = true;
-            this.cbCollected.Location = new System.Drawing.Point(103, 159);
+            this.cbCollected.Location = new System.Drawing.Point(103, 188);
             this.cbCollected.Name = "cbCollected";
             this.cbCollected.Size = new System.Drawing.Size(71, 19);
             this.cbCollected.TabIndex = 30;
@@ -165,7 +167,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 160);
+            this.label5.Location = new System.Drawing.Point(12, 189);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 15);
             this.label5.TabIndex = 31;
@@ -173,7 +175,7 @@
             // 
             // dtpCollectedTime
             // 
-            this.dtpCollectedTime.Location = new System.Drawing.Point(103, 182);
+            this.dtpCollectedTime.Location = new System.Drawing.Point(103, 211);
             this.dtpCollectedTime.Name = "dtpCollectedTime";
             this.dtpCollectedTime.Size = new System.Drawing.Size(185, 22);
             this.dtpCollectedTime.TabIndex = 33;
@@ -181,11 +183,29 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 188);
+            this.label7.Location = new System.Drawing.Point(12, 217);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 15);
             this.label7.TabIndex = 34;
             this.label7.Text = "回収日";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 100);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(37, 15);
+            this.label8.TabIndex = 36;
+            this.label8.Text = "店舗";
+            // 
+            // cbShop
+            // 
+            this.cbxShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxShop.FormattingEnabled = true;
+            this.cbxShop.Location = new System.Drawing.Point(103, 97);
+            this.cbxShop.Name = "cbShop";
+            this.cbxShop.Size = new System.Drawing.Size(185, 23);
+            this.cbxShop.TabIndex = 35;
             // 
             // FormCollectScheduleRegister
             // 
@@ -193,7 +213,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(300, 294);
+            this.ClientSize = new System.Drawing.Size(300, 323);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cbxShop);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.dtpCollectedTime);
             this.Controls.Add(this.label5);
@@ -240,5 +262,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.DateTimePicker dtpCollectedTime;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbxShop;
     }
 }

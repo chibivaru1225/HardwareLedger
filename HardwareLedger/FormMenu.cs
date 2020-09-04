@@ -31,6 +31,12 @@ namespace HardwareLedger
 
             btnTypeMaster.Click += btnTypeMaster_Click;
             btnStateMaster.Click += btnStateMaster_Click;
+            btnShopMaster.Click += btnShopMaster_Click;
+        }
+
+        private void btnShopMaster_Click(object sender, EventArgs e)
+        {
+            FormShopMaster.Instance.Show();
         }
 
         private void btnTypeMaster_Click(object sender, EventArgs e)

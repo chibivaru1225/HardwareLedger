@@ -8,6 +8,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
@@ -112,9 +113,9 @@ namespace HardwareLedger
 
             public string StateStr => State?.StateName ?? String.Empty;
 
-            public CollectSchedule CollectSchedule { get; set; }
+            public CollectState CollectState { get; set; }
 
-            public string CollectScheduleStr => CollectSchedule == null ? "回収予定なし" : CollectSchedule.CollectTime == null ? "回収予定あり" : "回収済み";
+            public string CollectScheduleStr => CollectState.ViewValue;
 
             public DateTime InsertTime { get; set; }
 
@@ -132,7 +133,7 @@ namespace HardwareLedger
                 row.Name = res.Name;
                 row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
                 row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
-                row.CollectSchedule = DBAccessor.Instance.GetCollectSchedule(res);
+                row.CollectState = new CollectState(res);
                 row.InsertTime = res.InsertTime;
                 row.UpdateTime = res.UpdateTime;
 

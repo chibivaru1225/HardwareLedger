@@ -68,6 +68,8 @@
     <Compile Include="Database\CollectSchedule.cs" />
     <Compile Include="Database\DBObject\CollectSchedule.cs" />
     <Compile Include="Database\DBObject\Relation.cs" />
+    <Compile Include="Database\DBObject\ReserveShipping.cs" />
+    <Compile Include="Database\DBObject\ShopType.cs" />
     <Compile Include="Database\IPgmRow.cs" />
     <Compile Include="Database\Malfunction.cs" />
     <Compile Include="Database\ItemState.cs" />
@@ -81,11 +83,19 @@
     <Compile Include="Database\DBObject\ReserveHistory.cs" />
     <Compile Include="Database\Relation.cs" />
     <Compile Include="Database\Reserve.cs" />
+    <Compile Include="Database\ReserveShipping.cs" />
+    <Compile Include="Database\ShopType.cs" />
     <Compile Include="FormMenu.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormMenu.Designer.cs">
       <DependentUpon>FormMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MasterForm\FormShopMaster.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MasterForm\FormShopMaster.Designer.cs">
+      <DependentUpon>FormShopMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="MasterForm\FormTypeMaster.cs">
       <SubType>Form</SubType>
@@ -139,6 +149,9 @@
     </Compile>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MasterForm\FormShopMaster.resx">
+      <DependentUpon>FormShopMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MasterForm\FormTypeMaster.resx">
       <DependentUpon>FormTypeMaster.cs</DependentUpon>

@@ -35,6 +35,7 @@
             this.chReserveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chCollectSchedule = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chReserveShipping = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveInsertTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveUpdateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReserveList)).BeginInit();
@@ -51,6 +52,7 @@
             this.chReserveName,
             this.chReserveState,
             this.chCollectSchedule,
+            this.chReserveShipping,
             this.chReserveInsertTime,
             this.chReserveUpdateTime});
             this.dgvReserveList.Location = new System.Drawing.Point(9, 9);
@@ -59,7 +61,7 @@
             this.dgvReserveList.Name = "dgvReserveList";
             this.dgvReserveList.ReadOnly = true;
             this.dgvReserveList.RowTemplate.Height = 21;
-            this.dgvReserveList.Size = new System.Drawing.Size(986, 421);
+            this.dgvReserveList.Size = new System.Drawing.Size(1166, 693);
             this.dgvReserveList.TabIndex = 0;
             // 
             // chReserveCode
@@ -90,9 +92,17 @@
             // 
             // chCollectSchedule
             // 
-            this.chCollectSchedule.HeaderText = "回収状況";
+            this.chCollectSchedule.HeaderText = "故障機回収状況";
             this.chCollectSchedule.Name = "chCollectSchedule";
             this.chCollectSchedule.ReadOnly = true;
+            this.chCollectSchedule.Width = 140;
+            // 
+            // chReserveShipping
+            // 
+            this.chReserveShipping.HeaderText = "予備機発送状況";
+            this.chReserveShipping.Name = "chReserveShipping";
+            this.chReserveShipping.ReadOnly = true;
+            this.chReserveShipping.Width = 140;
             // 
             // chReserveInsertTime
             // 
@@ -112,7 +122,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 439);
+            this.ClientSize = new System.Drawing.Size(1184, 711);
             this.Controls.Add(this.dgvReserveList);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -135,6 +145,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveName;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveState;
         private System.Windows.Forms.DataGridViewTextBoxColumn chCollectSchedule;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chReserveShipping;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveInsertTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveUpdateTime;
     }

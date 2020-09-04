@@ -79,7 +79,7 @@
             this.btnRowSave.Location = new System.Drawing.Point(399, 76);
             this.btnRowSave.Name = "btnRowSave";
             this.btnRowSave.Size = new System.Drawing.Size(126, 51);
-            this.btnRowSave.TabIndex = 8;
+            this.btnRowSave.TabIndex = 3;
             this.btnRowSave.Text = "保存";
             this.btnRowSave.UseVisualStyleBackColor = true;
             // 
@@ -105,7 +105,7 @@
             this.dgvApplyKbnList.Name = "dgvApplyKbnList";
             this.dgvApplyKbnList.RowTemplate.Height = 21;
             this.dgvApplyKbnList.Size = new System.Drawing.Size(519, 234);
-            this.dgvApplyKbnList.TabIndex = 6;
+            this.dgvApplyKbnList.TabIndex = 4;
             // 
             // chDetailIsApply
             // 
@@ -126,7 +126,7 @@
             this.btnDetailColor.Location = new System.Drawing.Point(79, 77);
             this.btnDetailColor.Name = "btnDetailColor";
             this.btnDetailColor.Size = new System.Drawing.Size(200, 22);
-            this.btnDetailColor.TabIndex = 5;
+            this.btnDetailColor.TabIndex = 2;
             this.btnDetailColor.UseVisualStyleBackColor = false;
             // 
             // label3
@@ -152,7 +152,7 @@
             this.txtDetailName.Location = new System.Drawing.Point(79, 49);
             this.txtDetailName.Name = "txtDetailName";
             this.txtDetailName.Size = new System.Drawing.Size(200, 22);
-            this.txtDetailName.TabIndex = 2;
+            this.txtDetailName.TabIndex = 1;
             // 
             // txtDetailCode
             // 
@@ -160,7 +160,7 @@
             this.txtDetailCode.Name = "txtDetailCode";
             this.txtDetailCode.ReadOnly = true;
             this.txtDetailCode.Size = new System.Drawing.Size(200, 22);
-            this.txtDetailCode.TabIndex = 1;
+            this.txtDetailCode.TabIndex = 0;
             // 
             // label1
             // 
@@ -188,7 +188,7 @@
             this.dgvStateList.RowTemplate.Height = 21;
             this.dgvStateList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStateList.Size = new System.Drawing.Size(519, 187);
-            this.dgvStateList.TabIndex = 1;
+            this.dgvStateList.TabIndex = 0;
             // 
             // chListCode
             // 
@@ -235,7 +235,7 @@
             this.btnRowDelete.Location = new System.Drawing.Point(399, 214);
             this.btnRowDelete.Name = "btnRowDelete";
             this.btnRowDelete.Size = new System.Drawing.Size(126, 51);
-            this.btnRowDelete.TabIndex = 4;
+            this.btnRowDelete.TabIndex = 2;
             this.btnRowDelete.Text = "行削除";
             this.btnRowDelete.UseVisualStyleBackColor = true;
             // 
@@ -244,7 +244,7 @@
             this.btnRowAdd.Location = new System.Drawing.Point(6, 214);
             this.btnRowAdd.Name = "btnRowAdd";
             this.btnRowAdd.Size = new System.Drawing.Size(126, 51);
-            this.btnRowAdd.TabIndex = 3;
+            this.btnRowAdd.TabIndex = 1;
             this.btnRowAdd.Text = "行追加";
             this.btnRowAdd.UseVisualStyleBackColor = true;
             // 

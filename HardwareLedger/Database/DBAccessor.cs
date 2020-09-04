@@ -38,6 +38,8 @@ namespace HardwareLedger
 
         public List<Reserve> Reserves { get; set; }
 
+        public List<ShopType> ShopTypes { get; set; }
+
         public List<ItemType> ItemTypes { get; set; }
 
         public List<ItemState> ItemStates { get; set; }
@@ -47,6 +49,8 @@ namespace HardwareLedger
         public List<Relation> Relations { get; set; }
 
         public List<CollectSchedule> CollectSchedules { get; set; }
+
+        public List<ReserveShipping> ReserveShippings { get; set; }
 
         private DBAccessor()
         {
@@ -64,11 +68,13 @@ namespace HardwareLedger
             //Relations = Get<Relation, DBObject.Relation>();
 
             Reserves = ReadJson<Reserve, DBObject.Reserve>();
+            ShopTypes = ReadJson<ShopType, DBObject.ShopType>();
             ItemTypes = ReadJson<ItemType, DBObject.ItemType>();
             ItemStates = ReadJson<ItemState, DBObject.ItemState>();
             Malfunctions = ReadJson<Malfunction, DBObject.Malfunction>();
             Relations = ReadJson<Relation, DBObject.Relation>();
             CollectSchedules = ReadJson<CollectSchedule, DBObject.CollectSchedule>();
+            ReserveShippings = ReadJson<ReserveShipping, DBObject.ReserveShipping>();
 
             //SetDummyData();
         }

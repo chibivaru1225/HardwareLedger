@@ -379,5 +379,148 @@ namespace HardwareLedger
         }
 
         #endregion
+
+        #region 故障機回収状況区分
+
+        public enum CollectStates
+        {
+            Undecided,
+            Appointment,
+            Done,
+            NONE,
+        }
+
+        public class CollectState
+        {
+            private CollectStates type;
+            private Reserve res;
+
+            public CollectState(CollectStates v)
+            {
+                this.type = v;
+            }
+
+            public CollectState(string flag)
+            {
+                this.type = GetTypeForDBValue(flag);
+            }
+
+            public static CollectState GetTypeForDBValue(string DBValue)
+            {
+                switch (DBValue)
+                {
+                    case "1": return CollectStates.Undecided;
+                    case "2": return CollectStates.Appointment;
+                    case "3": return CollectStates.Done;
+                    default: return CollectStates.NONE;
+                }
+            }
+
+            public CollectState(Reserve res)
+            {
+                this.type = GetTypeForReserve(res);
+            }
+
+            public static CollectState GetTypeForReserve(Reserve res)
+            {
+                var cs = DBAccessor.Instance.GetCollectSchedule(res);
+
+                if (cs == null)
+                    return CollectStates.Undecided;
+
+                if (cs.CollectTime == null)
+                    return CollectStates.Appointment;
+                else
+                    return CollectStates.Done;
+            }
+
+            public string DBValue
+            {
+                get
+                {
+                    switch (this.type)
+                    {
+                        case CollectStates.Undecided: return "1";
+                        case CollectStates.Appointment: return "2";
+                        case CollectStates.Done: return "3";
+                        default: return "0";
+                    }
+                }
+            }
+
+            public static string GetViewValue(CollectStates type)
+            {
+                switch (type)
+                {
+                    case CollectStates.Undecided: return "回収予定なし";
+                    case CollectStates.Appointment: return "回収予定あり";
+                    case CollectStates.Done: return "回収済み";
+                    default: return String.Empty;
+                }
+            }
+
+            public string ViewValue
+            {
+                get
+                {
+                    return GetViewValue(this.type);
+                }
+            }
+
+            //public Color RowColor
+            //{
+            //    get
+            //    {
+            //        switch (this.type)
+            //        {
+            //            case CollectStates.BeforeErased: return Color.White;
+            //            case CollectStates.Erased: return Color.LightGreen;
+            //            case CollectStates.Abandoned: return Color.Yellow;
+            //            case CollectStates.Discard: return Color.LightPink;
+            //            case CollectStates.Reuse: return Color.SkyBlue;
+            //            case CollectStates.PhysicalDestruction: return Color.Orange;
+            //            default: return Color.White;
+            //        }
+            //    }
+            //}
+
+            public CollectStates Value
+            {
+                get
+                {
+                    return this.type;
+                }
+            }
+
+            public Reserve Reserve
+            {
+                get
+                {
+                    return this.res;
+                }
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Class -> Enum
+            /// </summary>
+            /// <param name="CollectState"></param>
+            public static implicit operator CollectStates(CollectState CollectState)
+            {
+                return CollectState.type;
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Enum -> Class
+            /// </summary>
+            /// <param name="CollectStates"></param>
+            public static implicit operator CollectState(CollectStates CollectStates)
+            {
+                return new CollectState(CollectStates);
+            }
+        }
+
+        #endregion
     }
 }

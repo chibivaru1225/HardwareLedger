@@ -36,7 +36,6 @@ namespace HardwareLedger
             this.Activated += FormReserveDetail_Activated;
             this.VisibleChanged += FormReserveDetail_VisibleChanged;
 
-
             cbxType.ValueMember = nameof(ItemType.ItemTypeCode);
             cbxType.DisplayMember = nameof(ItemType.ItemTypeName);
 
@@ -60,10 +59,11 @@ namespace HardwareLedger
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
                 txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
 
-                var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
+                //var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
+                var cs = new CollectState(ReserveDetail);
 
-                txtCollectSchedule.Text = cs == null ? "回収予定なし" : cs.CollectTime == null ? "回収予定あり" : "回収済み";
-                btnCSCheck.Enabled = cs != null;
+                txtCollectSchedule.Text = cs.ViewValue;
+                btnCSCheck.Enabled = cs.Value != CollectStates.Undecided;
             }
             else
             {
@@ -123,10 +123,10 @@ namespace HardwareLedger
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
                 txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
 
-                var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
+                var cs = new CollectState(ReserveDetail);
 
-                txtCollectSchedule.Text = cs == null ? "回収予定なし" : cs.CollectTime == null ? "回収予定あり" : "回収済み";
-                btnCSCheck.Enabled = cs != null;
+                txtCollectSchedule.Text = cs.ViewValue;
+                btnCSCheck.Enabled = cs.Value != CollectStates.Undecided;
             }
             else
             {
@@ -166,7 +166,7 @@ namespace HardwareLedger
             txtName.Text = String.Empty;
             txtInsertTime.Text = String.Empty;
             txtUpdateTime.Text = String.Empty;
-            txtCollectSchedule.Text = "なし";
+            txtCollectSchedule.Text = CollectState.GetViewValue(CollectStates.Undecided);
             btnCSCheck.Enabled = false;
         }
     }

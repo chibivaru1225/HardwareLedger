@@ -16,6 +16,8 @@ namespace HardwareLedger
 
         private static FormTypeMaster instance;
 
+        private ItemTypeRow typerow;
+
         public static FormTypeMaster Instance
         {
             get
@@ -32,6 +34,9 @@ namespace HardwareLedger
             InitializeComponent();
 
             types = new BindingList<ItemTypeRow>();
+
+            dgvTypeList.AutoGenerateColumns = false;
+            dgvTypeList.AllowUserToAddRows = false;
 
             btnRowAdd.Click += btnRowAdd_Click;
             btnRowDelete.Click += btnRowDelete_Click;
@@ -94,14 +99,48 @@ namespace HardwareLedger
 
         private void btnRowDelete_Click(object sender, EventArgs e)
         {
+            if (MessageBox.Show(this, "削除すると戻せません。削除しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                DBAccessor.Instance.ItemTypes =
+                    DBAccessor.Instance.RemoveJson<ItemType, DBObject.ItemType>(typerow);
+                MessageBox.Show(this, "削除しました", "ハードウェア管理");
+                SetDataGridView();
+            }
         }
 
         private void btnRowSave_Click(object sender, EventArgs e)
         {
+            if (EditedDetail() == true && MessageBox.Show(this, "変更されています。保存しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                typerow.Name = txtDetailName.Text;
+
+                DBAccessor.Instance.ItemTypes =
+                    DBAccessor.Instance.UpsertJson<ItemType, DBObject.ItemType>(typerow);
+                MessageBox.Show(this, "登録しました", "ハードウェア管理");
+                SetDataGridView();
+            }
         }
 
         private void SetDetail(ItemTypeRow row)
         {
+            if (row != null)
+            {
+                typerow = row;
+
+                txtDetailName.Text = row.Name;
+                txtDetailCode.Text = row.Code.ToString();
+            }
+        }
+
+        private bool EditedDetail()
+        {
+            if (typerow == null)
+                return true;
+
+            if (typerow.Name != txtDetailName.Text)
+                return true;
+
+            return false;
         }
 
         private class ItemTypeRow

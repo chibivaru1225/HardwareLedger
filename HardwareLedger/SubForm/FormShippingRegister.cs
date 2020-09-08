@@ -100,12 +100,14 @@ namespace HardwareLedger
                 cbxState.SelectedValue = 0;
                 cbxShop.SelectedValue = 0;
                 dtpShippingTime.Value = DateTime.Today;
+                txtMemo.Clear();
             }
             else
             {
                 cbxState.SelectedValue = ship.State;
                 cbxShop.SelectedValue = ship.ShopCode;
                 dtpShippingTime.Value = ship.ShippingTime;
+                txtMemo.Text = ship.Biko;
             }
         }
 

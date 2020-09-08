@@ -123,6 +123,8 @@ namespace HardwareLedger
 
         private void FormReserveDetail_VisibleChanged(object sender, EventArgs e)
         {
+            SetComboBoxes();
+
             if (ReserveDetail != null)
             {
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;

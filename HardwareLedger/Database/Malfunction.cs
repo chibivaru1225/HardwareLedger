@@ -9,6 +9,10 @@ namespace HardwareLedger
 {
     public class Malfunction : DBObject.Malfunction, IPgmRow
     {
+        public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
+
+        public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
+
         public IPgmRow DownCastToIPgmRow(DBData data)
         {
             foreach (var column in data.Properties())

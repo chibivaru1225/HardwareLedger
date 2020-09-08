@@ -41,7 +41,7 @@ namespace HardwareLedger
             this.Activated += FormMalfunctionList_Activated;
 
             dgvMalfunctionList.RowPrePaint += dgvMalfunctionList_RowPrePaint;
-            //dgvMalfunctionList.CellDoubleClick += dgvMalfunctionList_CellDoubleClick;
+            dgvMalfunctionList.CellDoubleClick += dgvMalfunctionList_CellDoubleClick;
 
 
             InitDataGridView();
@@ -53,14 +53,14 @@ namespace HardwareLedger
             SetDataGridView();
         }
 
-        //private void dgvMalfunctionList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        //{
-        //    if (e.RowIndex >= 0 && Receiver != null)
-        //    {
-        //        Receiver.SetResult(bindinglist[e.RowIndex]);
-        //        this.Visible = false;
-        //    }
-        //}
+        private void dgvMalfunctionList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                FormMalfunctionDetail.Instance.MalfunctionDetail = bindinglist[e.RowIndex];
+                FormMalfunctionDetail.Instance.Show();
+            }
+        }
 
         private void dgvMalfunctionList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
         {

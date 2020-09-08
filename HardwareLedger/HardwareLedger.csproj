@@ -131,6 +131,12 @@
     <Compile Include="SubForm\FormCollectScheduleRegister.Designer.cs">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
     </Compile>
+    <Compile Include="SubForm\FormMalfunctionDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForm\FormMalfunctionDetail.Designer.cs">
+      <DependentUpon>FormMalfunctionDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForm\FormMalfunctionList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -202,6 +208,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormCollectScheduleRegister.resx">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForm\FormMalfunctionDetail.resx">
+      <DependentUpon>FormMalfunctionDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormMalfunctionList.resx">
       <DependentUpon>FormMalfunctionList.cs</DependentUpon>

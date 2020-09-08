@@ -216,6 +216,8 @@ namespace HardwareLedger
 
         private void FormCollectScheduleRegister_VisibleChanged(object sender, EventArgs e)
         {
+            SetComboBoxes();
+
             if (Relation == null)
             {
                 btnReserveSelect.Enabled = Reserve == null;

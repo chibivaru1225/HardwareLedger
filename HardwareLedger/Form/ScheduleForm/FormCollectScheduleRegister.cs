@@ -68,6 +68,8 @@ namespace HardwareLedger
 
                 if (Relation != null)
                     Relation.MalfunctionCode = null;
+
+                btnMalfunctionClear.Enabled = Malfunction != null;
             }
         }
 
@@ -109,6 +111,8 @@ namespace HardwareLedger
 
                 if (Relation != null)
                     Relation.Reserve = null;
+
+                btnReserveClear.Enabled = Reserve != null;
             }
         }
 
@@ -260,12 +264,14 @@ namespace HardwareLedger
 
                 btnReserveSelect.Enabled = Relation.ReserveCode == null;
                 btnMalfuinctionSelect.Enabled = Relation.MalfunctionCode == null;
+                dtpScheduleTime.Value = DateTime.Today;
 
                 if (cs != null)
                 {
                     cbxType.SelectedValue = cs.ItemTypeCode;
                     cbxState.SelectedValue = cs.ItemStateCode;
                     cbxShop.SelectedValue = cs.ShopCode;
+                    dtpScheduleTime.Value = cs.CollectScheduleTime;
 
                     if (cs.CollectTime == null)
                     {
@@ -284,8 +290,6 @@ namespace HardwareLedger
 
             btnReserveClear.Enabled = Reserve != null;
             btnMalfunctionClear.Enabled = Malfunction != null;
-
-            dtpScheduleTime.Value = DateTime.Today;
         }
 
         private void FormCollectScheduleRegister_FormClosing(object sender, FormClosingEventArgs e)

@@ -93,99 +93,99 @@
     <Compile Include="FormMenu.Designer.cs">
       <DependentUpon>FormMenu.cs</DependentUpon>
     </Compile>
-    <Compile Include="MasterForm\FormShopMaster.cs">
+    <Compile Include="Form\MasterForm\FormShopMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MasterForm\FormShopMaster.Designer.cs">
+    <Compile Include="Form\MasterForm\FormShopMaster.Designer.cs">
       <DependentUpon>FormShopMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="MasterForm\FormTypeMaster.cs">
+    <Compile Include="Form\MasterForm\FormTypeMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MasterForm\FormTypeMaster.Designer.cs">
+    <Compile Include="Form\MasterForm\FormTypeMaster.Designer.cs">
       <DependentUpon>FormTypeMaster.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SearchForm\FormSearchMalfunction.cs">
+    <Compile Include="Form\SearchForm\FormSearchMalfunction.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForm\FormSearchMalfunction.Designer.cs">
+    <Compile Include="Form\SearchForm\FormSearchMalfunction.Designer.cs">
       <DependentUpon>FormSearchMalfunction.cs</DependentUpon>
     </Compile>
-    <Compile Include="SearchForm\FormSearchReserve.cs">
+    <Compile Include="Form\SearchForm\FormSearchReserve.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SearchForm\FormSearchReserve.Designer.cs">
+    <Compile Include="Form\SearchForm\FormSearchReserve.Designer.cs">
       <DependentUpon>FormSearchReserve.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormCollectScheduleList.cs">
+    <Compile Include="Form\ScheduleForm\FormCollectScheduleList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormCollectScheduleList.Designer.cs">
+    <Compile Include="Form\ScheduleForm\FormCollectScheduleList.Designer.cs">
       <DependentUpon>FormCollectScheduleList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormCollectScheduleRegister.cs">
+    <Compile Include="Form\ScheduleForm\FormCollectScheduleRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormCollectScheduleRegister.Designer.cs">
+    <Compile Include="Form\ScheduleForm\FormCollectScheduleRegister.Designer.cs">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormMalfunctionDetail.cs">
+    <Compile Include="Form\MalfunctionForm\FormMalfunctionDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormMalfunctionDetail.Designer.cs">
+    <Compile Include="Form\MalfunctionForm\FormMalfunctionDetail.Designer.cs">
       <DependentUpon>FormMalfunctionDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormMalfunctionList.cs">
+    <Compile Include="Form\MalfunctionForm\FormMalfunctionList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormMalfunctionList.Designer.cs">
+    <Compile Include="Form\MalfunctionForm\FormMalfunctionList.Designer.cs">
       <DependentUpon>FormMalfunctionList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormMalfunctionRegister.cs">
+    <Compile Include="Form\MalfunctionForm\FormMalfunctionRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormMalfunctionRegister.Designer.cs">
+    <Compile Include="Form\MalfunctionForm\FormMalfunctionRegister.Designer.cs">
       <DependentUpon>FormMalfunctionRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormReserveDetail.cs">
+    <Compile Include="Form\ReserveForm\FormReserveDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormReserveDetail.Designer.cs">
+    <Compile Include="Form\ReserveForm\FormReserveDetail.Designer.cs">
       <DependentUpon>FormReserveDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormReserveList.cs">
+    <Compile Include="Form\ReserveForm\FormReserveList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormReserveList.Designer.cs">
+    <Compile Include="Form\ReserveForm\FormReserveList.Designer.cs">
       <DependentUpon>FormReserveList.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormReserveRegister.cs">
+    <Compile Include="Form\ReserveForm\FormReserveRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormReserveRegister.Designer.cs">
+    <Compile Include="Form\ReserveForm\FormReserveRegister.Designer.cs">
       <DependentUpon>FormReserveRegister.cs</DependentUpon>
     </Compile>
-    <Compile Include="MasterForm\FormStateMaster.cs">
+    <Compile Include="Form\MasterForm\FormStateMaster.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MasterForm\FormStateMaster.Designer.cs">
+    <Compile Include="Form\MasterForm\FormStateMaster.Designer.cs">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormShippingRegister.cs">
+    <Compile Include="Form\ReserveForm\FormShippingRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormShippingRegister.Designer.cs">
+    <Compile Include="Form\ReserveForm\FormShippingRegister.Designer.cs">
       <DependentUpon>FormShippingRegister.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MasterForm\FormShopMaster.resx">
+    <EmbeddedResource Include="Form\MasterForm\FormShopMaster.resx">
       <DependentUpon>FormShopMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MasterForm\FormTypeMaster.resx">
+    <EmbeddedResource Include="Form\MasterForm\FormTypeMaster.resx">
       <DependentUpon>FormTypeMaster.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -197,40 +197,40 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SearchForm\FormSearchMalfunction.resx">
+    <EmbeddedResource Include="Form\SearchForm\FormSearchMalfunction.resx">
       <DependentUpon>FormSearchMalfunction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SearchForm\FormSearchReserve.resx">
+    <EmbeddedResource Include="Form\SearchForm\FormSearchReserve.resx">
       <DependentUpon>FormSearchReserve.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormCollectScheduleList.resx">
+    <EmbeddedResource Include="Form\ScheduleForm\FormCollectScheduleList.resx">
       <DependentUpon>FormCollectScheduleList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormCollectScheduleRegister.resx">
+    <EmbeddedResource Include="Form\ScheduleForm\FormCollectScheduleRegister.resx">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormMalfunctionDetail.resx">
+    <EmbeddedResource Include="Form\MalfunctionForm\FormMalfunctionDetail.resx">
       <DependentUpon>FormMalfunctionDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormMalfunctionList.resx">
+    <EmbeddedResource Include="Form\MalfunctionForm\FormMalfunctionList.resx">
       <DependentUpon>FormMalfunctionList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormMalfunctionRegister.resx">
+    <EmbeddedResource Include="Form\MalfunctionForm\FormMalfunctionRegister.resx">
       <DependentUpon>FormMalfunctionRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormReserveDetail.resx">
+    <EmbeddedResource Include="Form\ReserveForm\FormReserveDetail.resx">
       <DependentUpon>FormReserveDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormReserveList.resx">
+    <EmbeddedResource Include="Form\ReserveForm\FormReserveList.resx">
       <DependentUpon>FormReserveList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormReserveRegister.resx">
+    <EmbeddedResource Include="Form\ReserveForm\FormReserveRegister.resx">
       <DependentUpon>FormReserveRegister.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MasterForm\FormStateMaster.resx">
+    <EmbeddedResource Include="Form\MasterForm\FormStateMaster.resx">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormShippingRegister.resx">
+    <EmbeddedResource Include="Form\ReserveForm\FormShippingRegister.resx">
       <DependentUpon>FormShippingRegister.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

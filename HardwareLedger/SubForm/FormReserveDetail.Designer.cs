@@ -45,8 +45,8 @@
             this.txtCollectSchedule = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btnCSCheck = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.btnShipping = new System.Windows.Forms.Button();
+            this.txtShipping = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -191,22 +191,22 @@
             this.btnCSCheck.UseVisualStyleBackColor = true;
             this.btnCSCheck.Visible = false;
             // 
-            // button1
+            // btnShipping
             // 
-            this.button1.Location = new System.Drawing.Point(321, 126);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 51);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "発送状況\r\n登録/変更";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnShipping.Location = new System.Drawing.Point(321, 126);
+            this.btnShipping.Name = "btnShipping";
+            this.btnShipping.Size = new System.Drawing.Size(126, 51);
+            this.btnShipping.TabIndex = 18;
+            this.btnShipping.Text = "発送状況\r\n登録/変更";
+            this.btnShipping.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // txtShipping
             // 
-            this.textBox1.Location = new System.Drawing.Point(130, 126);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(185, 22);
-            this.textBox1.TabIndex = 19;
+            this.txtShipping.Location = new System.Drawing.Point(130, 126);
+            this.txtShipping.Name = "txtShipping";
+            this.txtShipping.ReadOnly = true;
+            this.txtShipping.Size = new System.Drawing.Size(185, 22);
+            this.txtShipping.TabIndex = 19;
             // 
             // label7
             // 
@@ -225,8 +225,8 @@
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(459, 274);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtShipping);
+            this.Controls.Add(this.btnShipping);
             this.Controls.Add(this.btnCSCheck);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtCollectSchedule);
@@ -274,8 +274,8 @@
         private System.Windows.Forms.TextBox txtCollectSchedule;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnCSCheck;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button btnShipping;
+        private System.Windows.Forms.TextBox txtShipping;
         private System.Windows.Forms.Label label7;
     }
 }

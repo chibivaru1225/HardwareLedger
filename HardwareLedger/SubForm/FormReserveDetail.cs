@@ -45,8 +45,15 @@ namespace HardwareLedger
             SetComboBoxes();
 
             this.btnCollectRegist.Click += btnCollectRegist_Click;
+            this.btnShipping.Click += btnShipping_Click;
             this.btnUpdate.Click += btnUpdate_Click;
             this.btnCancel.Click += btnCancel_Click;
+        }
+
+        private void btnShipping_Click(object sender, EventArgs e)
+        {
+            FormShippingRegister.Instance.Reserve = this.ReserveDetail;
+            FormShippingRegister.Instance.Show();
         }
 
         private void FormReserveDetail_Activated(object sender, EventArgs e)
@@ -59,11 +66,12 @@ namespace HardwareLedger
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
                 txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
 
-                //var cs = DBAccessor.Instance.GetCollectSchedule(ReserveDetail);
                 var cs = new CollectState(ReserveDetail);
-
                 txtCollectSchedule.Text = cs.ViewValue;
                 btnCSCheck.Enabled = cs.Value != CollectStates.Undecided;
+
+                var ss = new ShippingState(ReserveDetail);
+                txtShipping.Text = ss.ViewValue;
             }
             else
             {

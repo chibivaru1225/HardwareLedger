@@ -33,12 +33,14 @@
             this.btnReserveList = new System.Windows.Forms.Button();
             this.btnReserveRegister = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnMalfunctionList = new System.Windows.Forms.Button();
+            this.btnMalfunctionRegister = new System.Windows.Forms.Button();
             this.btnCollectScheduleAdd = new System.Windows.Forms.Button();
             this.btnCollectScheduleList = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnShopMaster = new System.Windows.Forms.Button();
             this.btnTypeMaster = new System.Windows.Forms.Button();
             this.btnStateMaster = new System.Windows.Forms.Button();
-            this.btnShopMaster = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -52,7 +54,7 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(476, 79);
+            this.groupBox1.Size = new System.Drawing.Size(632, 79);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "予備機";
@@ -77,23 +79,43 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.btnMalfunctionList);
+            this.groupBox2.Controls.Add(this.btnMalfunctionRegister);
             this.groupBox2.Controls.Add(this.btnCollectScheduleAdd);
             this.groupBox2.Controls.Add(this.btnCollectScheduleList);
             this.groupBox2.Location = new System.Drawing.Point(9, 96);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(476, 79);
+            this.groupBox2.Size = new System.Drawing.Size(632, 79);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "故障機";
+            // 
+            // btnMalfunctionList
+            // 
+            this.btnMalfunctionList.Location = new System.Drawing.Point(475, 22);
+            this.btnMalfunctionList.Name = "btnMalfunctionList";
+            this.btnMalfunctionList.Size = new System.Drawing.Size(150, 50);
+            this.btnMalfunctionList.TabIndex = 3;
+            this.btnMalfunctionList.Text = "故障機一覧";
+            this.btnMalfunctionList.UseVisualStyleBackColor = true;
+            // 
+            // btnMalfunctionRegister
+            // 
+            this.btnMalfunctionRegister.Location = new System.Drawing.Point(319, 22);
+            this.btnMalfunctionRegister.Name = "btnMalfunctionRegister";
+            this.btnMalfunctionRegister.Size = new System.Drawing.Size(150, 50);
+            this.btnMalfunctionRegister.TabIndex = 2;
+            this.btnMalfunctionRegister.Text = "故障機登録";
+            this.btnMalfunctionRegister.UseVisualStyleBackColor = true;
             // 
             // btnCollectScheduleAdd
             // 
             this.btnCollectScheduleAdd.Location = new System.Drawing.Point(7, 22);
             this.btnCollectScheduleAdd.Name = "btnCollectScheduleAdd";
             this.btnCollectScheduleAdd.Size = new System.Drawing.Size(150, 50);
-            this.btnCollectScheduleAdd.TabIndex = 3;
+            this.btnCollectScheduleAdd.TabIndex = 0;
             this.btnCollectScheduleAdd.Text = "故障機\r\n回収予定登録";
             this.btnCollectScheduleAdd.UseVisualStyleBackColor = true;
             // 
@@ -102,7 +124,7 @@
             this.btnCollectScheduleList.Location = new System.Drawing.Point(163, 22);
             this.btnCollectScheduleList.Name = "btnCollectScheduleList";
             this.btnCollectScheduleList.Size = new System.Drawing.Size(150, 50);
-            this.btnCollectScheduleList.TabIndex = 2;
+            this.btnCollectScheduleList.TabIndex = 1;
             this.btnCollectScheduleList.Text = "故障機\r\n回収予定一覧";
             this.btnCollectScheduleList.UseVisualStyleBackColor = true;
             // 
@@ -115,17 +137,26 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(476, 79);
+            this.groupBox3.Size = new System.Drawing.Size(632, 79);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "マスタ";
+            // 
+            // btnShopMaster
+            // 
+            this.btnShopMaster.Location = new System.Drawing.Point(319, 22);
+            this.btnShopMaster.Name = "btnShopMaster";
+            this.btnShopMaster.Size = new System.Drawing.Size(150, 50);
+            this.btnShopMaster.TabIndex = 2;
+            this.btnShopMaster.Text = "店舗マスタ";
+            this.btnShopMaster.UseVisualStyleBackColor = true;
             // 
             // btnTypeMaster
             // 
             this.btnTypeMaster.Location = new System.Drawing.Point(7, 22);
             this.btnTypeMaster.Name = "btnTypeMaster";
             this.btnTypeMaster.Size = new System.Drawing.Size(150, 50);
-            this.btnTypeMaster.TabIndex = 4;
+            this.btnTypeMaster.TabIndex = 0;
             this.btnTypeMaster.Text = "種別マスタ";
             this.btnTypeMaster.UseVisualStyleBackColor = true;
             // 
@@ -134,24 +165,15 @@
             this.btnStateMaster.Location = new System.Drawing.Point(163, 22);
             this.btnStateMaster.Name = "btnStateMaster";
             this.btnStateMaster.Size = new System.Drawing.Size(150, 50);
-            this.btnStateMaster.TabIndex = 3;
+            this.btnStateMaster.TabIndex = 1;
             this.btnStateMaster.Text = "状態マスタ";
             this.btnStateMaster.UseVisualStyleBackColor = true;
-            // 
-            // btnShopMaster
-            // 
-            this.btnShopMaster.Location = new System.Drawing.Point(319, 22);
-            this.btnShopMaster.Name = "btnShopMaster";
-            this.btnShopMaster.Size = new System.Drawing.Size(150, 50);
-            this.btnShopMaster.TabIndex = 5;
-            this.btnShopMaster.Text = "店マスタ";
-            this.btnShopMaster.UseVisualStyleBackColor = true;
             // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(494, 267);
+            this.ClientSize = new System.Drawing.Size(650, 267);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -182,6 +204,8 @@
         private System.Windows.Forms.Button btnStateMaster;
         private System.Windows.Forms.Button btnTypeMaster;
         private System.Windows.Forms.Button btnShopMaster;
+        private System.Windows.Forms.Button btnMalfunctionList;
+        private System.Windows.Forms.Button btnMalfunctionRegister;
     }
 }
 

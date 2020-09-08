@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Basic\Enum.cs" />
+    <Compile Include="Basic\IMalfunctionReceiver.cs" />
+    <Compile Include="Basic\IReserveReceiver.cs" />
     <Compile Include="Database\CollectSchedule.cs" />
     <Compile Include="Database\DBObject\CollectSchedule.cs" />
     <Compile Include="Database\DBObject\Relation.cs" />
@@ -105,6 +107,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchForm\FormSearchMalfunction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm\FormSearchMalfunction.Designer.cs">
+      <DependentUpon>FormSearchMalfunction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchForm\FormSearchReserve.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchForm\FormSearchReserve.Designer.cs">
+      <DependentUpon>FormSearchReserve.cs</DependentUpon>
+    </Compile>
     <Compile Include="SubForm\FormCollectScheduleList.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +130,12 @@
     </Compile>
     <Compile Include="SubForm\FormCollectScheduleRegister.Designer.cs">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SubForm\FormMalfunctionList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SubForm\FormMalfunctionList.Designer.cs">
+      <DependentUpon>FormMalfunctionList.cs</DependentUpon>
     </Compile>
     <Compile Include="SubForm\FormMalfunctionRegister.cs">
       <SubType>Form</SubType>
@@ -147,11 +167,11 @@
     <Compile Include="MasterForm\FormStateMaster.Designer.cs">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </Compile>
-    <Compile Include="SubForm\FormReserveShippingRegister.cs">
+    <Compile Include="SubForm\FormShippingRegister.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SubForm\FormReserveShippingRegister.Designer.cs">
-      <DependentUpon>FormReserveShippingRegister.cs</DependentUpon>
+    <Compile Include="SubForm\FormShippingRegister.Designer.cs">
+      <DependentUpon>FormShippingRegister.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
@@ -171,11 +191,20 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="SearchForm\FormSearchMalfunction.resx">
+      <DependentUpon>FormSearchMalfunction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchForm\FormSearchReserve.resx">
+      <DependentUpon>FormSearchReserve.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormCollectScheduleList.resx">
       <DependentUpon>FormCollectScheduleList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormCollectScheduleRegister.resx">
       <DependentUpon>FormCollectScheduleRegister.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SubForm\FormMalfunctionList.resx">
+      <DependentUpon>FormMalfunctionList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SubForm\FormMalfunctionRegister.resx">
       <DependentUpon>FormMalfunctionRegister.cs</DependentUpon>
@@ -192,8 +221,8 @@
     <EmbeddedResource Include="MasterForm\FormStateMaster.resx">
       <DependentUpon>FormStateMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SubForm\FormReserveShippingRegister.resx">
-      <DependentUpon>FormReserveShippingRegister.cs</DependentUpon>
+    <EmbeddedResource Include="SubForm\FormShippingRegister.resx">
+      <DependentUpon>FormShippingRegister.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

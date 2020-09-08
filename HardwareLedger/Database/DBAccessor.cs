@@ -360,22 +360,76 @@ namespace HardwareLedger
             return r1;
         }
 
+        public ReserveShipping GetShipping(Reserve reserve)
+        {
+            var r1 = (from a in ReserveShippings
+                      where a.ReserveCode == reserve.ReserveCode
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
+        public Malfunction GetMalfunction(CollectSchedule schedule)
+        {
+            var r1 = (from a in Relations
+                      where a.RelationCode == schedule.RelationCode
+                      select a).FirstOrDefault();
+
+            if (r1 == null)
+                return null;
+
+            var r2 = (from b in Malfunctions
+                      where b.MalfunctionCode == r1.MalfunctionCode
+                      select b).FirstOrDefault();
+
+            return r2;
+        }
+
+        public Reserve GetReserve(CollectSchedule schedule)
+        {
+            var r1 = (from a in Relations
+                      where a.RelationCode == schedule.RelationCode
+                      select a).FirstOrDefault();
+
+            if (r1 == null)
+                return null;
+
+            var r2 = (from b in Reserves
+                      where b.ReserveCode == r1.ReserveCode
+                      select b).FirstOrDefault();
+
+            return r2;
+        }
+
+        public int MaxUniqueNumber<D>() where D : DBData, new()
+        {
+            var d = new D();
+            var dd = ReadJson<D>();
+
+            if (dd.Count() == 0)
+                return 0;
+
+            var max = dd.Max(x => x[d.GetKeyColumnName()]);
+
+            return (int)max;
+        }
+
         //public List<D> Get<D>() where D : DBData
         //{
         //    //var list = new List<T>();
 
-        //    //var dres = DB.GetCollection<D>(typeof(D).Name);
+            //    //var dres = DB.GetCollection<D>(typeof(D).Name);
 
-        //    //foreach (var row in dres.Query().ToEnumerable())
-        //    //{
-        //    //    if (row is T trow)
-        //    //    {
-        //    //        list.Add(trow);
-        //    //    }
-        //    //}
+            //    //foreach (var row in dres.Query().ToEnumerable())
+            //    //{
+            //    //    if (row is T trow)
+            //    //    {
+            //    //        list.Add(trow);
+            //    //    }
+            //    //}
 
-        //    return DB.GetCollection<D>(typeof(D).Name).Query().ToList();
-        //}
+            //    return DB.GetCollection<D>(typeof(D).Name).Query().ToList();
+            //}
 
         private void SetDummyData()
         {

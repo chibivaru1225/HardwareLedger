@@ -21,7 +21,13 @@ namespace HardwareLedger.DBObject
         public int ShopCode { get; set; }
 
         [Required]
+        public int State { get; set; }
+
+        [Required]
         public string Biko { get; set; }
+
+        [Required]
+        public DateTime ShippingTime { get; set; }
 
         [Required]
         public DateTime InsertTime { get; set; }
@@ -36,7 +42,9 @@ namespace HardwareLedger.DBObject
             yield return nameof(ReserveShippingCode);
             yield return nameof(ReserveCode);
             yield return nameof(ShopCode);
+            yield return nameof(State);
             yield return nameof(Biko);
+            yield return nameof(ShippingTime);
             yield return nameof(InsertTime);
             yield return nameof(UpdateTime);
         }

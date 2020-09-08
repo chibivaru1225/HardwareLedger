@@ -40,9 +40,21 @@ namespace HardwareLedger
             this.Activated += FormCollectScheduleList_Activated;
 
             dgvCollectScheduleList.RowPrePaint += dgvCollectScheduleList_RowPrePaint;
+            dgvCollectScheduleList.CellDoubleClick += dgvCollectScheduleList_CellDoubleClick;
 
             InitDataGridView();
             SetDataGridView();
+        }
+
+        private void dgvCollectScheduleList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                FormCollectScheduleRegister.Instance.Relation = DBAccessor.Instance.GetRelation(bindinglist[e.RowIndex]);
+                FormCollectScheduleRegister.Instance.Malfunction = DBAccessor.Instance.GetMalfunction(bindinglist[e.RowIndex]);
+                FormCollectScheduleRegister.Instance.Reserve = DBAccessor.Instance.GetReserve(bindinglist[e.RowIndex]);
+                FormCollectScheduleRegister.Instance.Show();
+            }
         }
 
         private void dgvCollectScheduleList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)

@@ -59,6 +59,7 @@ namespace HardwareLedger
         private void FormReserveRegister_VisibleChanged(object sender, EventArgs e)
         {
             Clear();
+            SetComboBoxes();
         }
 
         private void btnRegist_Click(object sender, EventArgs e)

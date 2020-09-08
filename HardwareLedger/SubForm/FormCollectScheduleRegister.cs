@@ -1,18 +1,13 @@
-﻿using HardwareLedger.DBObject;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public partial class FormCollectScheduleRegister : Form
+    public partial class FormCollectScheduleRegister : Form, IReserveReceiver, IMalfunctionReceiver
     {
         public Reserve Reserve { get; set; }
 
@@ -56,6 +51,94 @@ namespace HardwareLedger
             cbCollected.CheckedChanged += cbCollected_CheckedChanged;
 
             SetComboBoxes();
+
+            btnReserveSelect.Click += btnReserveSelect_Click;
+            btnReserveClear.Click += btnReserveClear_Click;
+
+            btnMalfuinctionSelect.Click += btnMalfuinctionSelect_Click;
+            btnMalfunctionClear.Click += btnMalfunctionClear_Click;
+        }
+
+        private void btnMalfunctionClear_Click(object sender, EventArgs e)
+        {
+            if (Malfunction != null && MessageBox.Show(this, "故障機紐付を解除しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Malfunction = null;
+                txtMalfunctionCode.Clear();
+
+                if (Relation != null)
+                    Relation.MalfunctionCode = null;
+            }
+        }
+
+        private void btnMalfuinctionSelect_Click(object sender, EventArgs e)
+        {
+            var mas = new List<Malfunction>();
+
+            foreach (var row in DBAccessor.Instance.Malfunctions)
+            {
+                var r1 = (from a in DBAccessor.Instance.Relations
+                          where a.MalfunctionCode == row.MalfunctionCode
+                          select a).FirstOrDefault();
+
+                if (r1 == null || r1.ReserveCode == null)
+                {
+                    mas.Add(row);
+                    continue;
+                }
+            }
+
+            if (mas.Count() == 0)
+            {
+                MessageBox.Show(this, "紐付のない故障機がありません。故障機を登録してください。", "ハードウェア管理");
+            }
+            else
+            {
+                FormSearchMalfunction.Instance.Malfunctions = mas;
+                FormSearchMalfunction.Instance.Receiver = this;
+                FormSearchMalfunction.Instance.Show();
+            }
+        }
+
+        private void btnReserveClear_Click(object sender, EventArgs e)
+        {
+            if (Reserve != null && MessageBox.Show(this, "予備機紐付を解除しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Reserve = null;
+                txtReserveCode.Clear();
+
+                if (Relation != null)
+                    Relation.Reserve = null;
+            }
+        }
+
+        private void btnReserveSelect_Click(object sender, EventArgs e)
+        {
+            var res = new List<Reserve>();
+
+            foreach (var row in DBAccessor.Instance.Reserves)
+            {
+                var r1 = (from a in DBAccessor.Instance.Relations
+                          where a.ReserveCode == row.ReserveCode
+                          select a).FirstOrDefault();
+
+                if (r1 == null || r1.ReserveCode == null)
+                {
+                    res.Add(row);
+                    continue;
+                }
+            }
+
+            if (res.Count() == 0)
+            {
+                MessageBox.Show(this, "紐付のない予備機がありません。予備機を登録してください。", "ハードウェア管理");
+            }
+            else
+            {
+                FormSearchReserve.Instance.Reserves = res;
+                FormSearchReserve.Instance.Receiver = this;
+                FormSearchReserve.Instance.Show();
+            }
         }
 
         private void cbCollected_CheckedChanged(object sender, EventArgs e)
@@ -75,10 +158,8 @@ namespace HardwareLedger
 
                 if (Relation == null)
                 {
-                    var rels = DBAccessor.Instance.Relations;
-
                     var rel = new Relation();
-                    rel.RelationCode = rels.Count() == 0 ? 1 : rels.Max(x => x.RelationCode) + 1;
+                    rel.RelationCode = DBAccessor.Instance.MaxUniqueNumber<DBObject.Relation>() + 1;
                     rel.ReserveCode = Reserve?.ReserveCode;
                     rel.MalfunctionCode = Malfunction?.MalfunctionCode;
 
@@ -87,8 +168,7 @@ namespace HardwareLedger
                     Relation = rel;
 
                     var cms = new CollectSchedule();
-                    cms.CollectScheduleCode = DBAccessor.Instance.CollectSchedules.Count() == 0 ?
-                        1 : DBAccessor.Instance.CollectSchedules.Max(x => x.CollectScheduleCode) + 1;
+                    cms.CollectScheduleCode = DBAccessor.Instance.MaxUniqueNumber<DBObject.CollectSchedule>() + 1;
                     cms.RelationCode = rel.RelationCode;
                     cms.ItemTypeCode = cbxtype;
                     cms.ItemStateCode = cbxstate;
@@ -107,6 +187,12 @@ namespace HardwareLedger
                 }
                 else
                 {
+                    Relation.ReserveCode = Reserve?.ReserveCode;
+                    Relation.MalfunctionCode = Malfunction?.MalfunctionCode;
+
+                    DBAccessor.Instance.Relations =
+                        DBAccessor.Instance.UpsertJson<Relation, DBObject.Relation>(Relation);
+
                     var cs = (from a in DBAccessor.Instance.CollectSchedules
                               where a.RelationCode == Relation.RelationCode
                               select a).FirstOrDefault();
@@ -132,6 +218,9 @@ namespace HardwareLedger
         {
             if (Relation == null)
             {
+                btnReserveSelect.Enabled = Reserve == null;
+                btnMalfuinctionSelect.Enabled = Malfunction == null;
+
                 if (Reserve != null)
                 {
                     txtReserveCode.Text = Reserve.ReserveCode.ToString();
@@ -146,18 +235,29 @@ namespace HardwareLedger
                     cbxState.SelectedValue = Malfunction.ItemStateCode;
                 }
 
+                if (Reserve == null && Malfunction == null)
+                {
+                    txtReserveCode.Clear();
+                    txtMalfunctionCode.Clear();
+                    cbxType.SelectedValue = 0;
+                    cbxState.SelectedValue = 0;
+                }
+
                 cbCollected.Checked = false;
                 dtpCollectedTime.Enabled = false;
                 dtpCollectedTime.Value = DateTime.Today;
             }
             else
             {
-                txtReserveCode.Text = Relation.ReserveCode.ToString();
-                txtMalfunctionCode.Text = Relation.MalfunctionCode.ToString();
-
                 var cs = (from a in DBAccessor.Instance.CollectSchedules
                           where a.RelationCode == Relation.RelationCode
                           select a).FirstOrDefault();
+
+                txtReserveCode.Text = Relation.ReserveCode.ToString();
+                txtMalfunctionCode.Text = Relation.MalfunctionCode.ToString();
+
+                btnReserveSelect.Enabled = Relation.ReserveCode == null;
+                btnMalfuinctionSelect.Enabled = Relation.MalfunctionCode == null;
 
                 if (cs != null)
                 {
@@ -179,6 +279,9 @@ namespace HardwareLedger
                     }
                 }
             }
+
+            btnReserveClear.Enabled = Reserve != null;
+            btnMalfunctionClear.Enabled = Malfunction != null;
 
             dtpScheduleTime.Value = DateTime.Today;
         }
@@ -222,11 +325,25 @@ namespace HardwareLedger
 
         private void OpenMalfunctionRegister(CollectSchedule schedule)
         {
-            if (schedule.CollectTime != null && MessageBox.Show(this, "回収完了しています。故障機を登録しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (schedule.CollectTime != null && Malfunction == null && MessageBox.Show(this, "回収完了しています。故障機を登録しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 FormMalfunctionRegister.Instance.Relation = DBAccessor.Instance.GetRelation(schedule);
                 FormMalfunctionRegister.Instance.Show();
             }
+        }
+
+        public void SetResult(Reserve res)
+        {
+            Reserve = res;
+            txtReserveCode.Text = Reserve.ReserveCode.ToString();
+            btnReserveClear.Enabled = Reserve != null;
+        }
+
+        public void SetResult(Malfunction mal)
+        {
+            Malfunction = mal;
+            txtMalfunctionCode.Text = Malfunction.MalfunctionCode.ToString();
+            btnMalfunctionClear.Enabled = Malfunction != null;
         }
     }
 }

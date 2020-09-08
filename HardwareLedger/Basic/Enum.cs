@@ -16,8 +16,9 @@ namespace HardwareLedger
             NONE = 0,
             Reserve = 1,
             Malfunction = 2,
-            MalfunctionState = 4,
+            ShippingState = 4,
             CollectionState = 8,
+            MalfunctionState = 16,
         }
 
         public class ApplyKbn
@@ -77,8 +78,9 @@ namespace HardwareLedger
                 {
                     case ApplyKbns.Reserve: return "予備機";
                     case ApplyKbns.Malfunction: return "故障機";
-                    case ApplyKbns.MalfunctionState: return "故障機状況";
+                    case ApplyKbns.ShippingState: return "発送状況";
                     case ApplyKbns.CollectionState: return "回収状況";
+                    case ApplyKbns.MalfunctionState: return "故障機状況";
                     default: return String.Empty;
                 }
             }
@@ -375,6 +377,120 @@ namespace HardwareLedger
             public static implicit operator ItemStateType(ItemStateTypes ItemStateTypes)
             {
                 return new ItemStateType(ItemStateTypes);
+            }
+        }
+
+        #endregion
+
+        #region 予備機発送状況区分
+
+        public enum ShippingStates
+        {
+            Undecided,
+            Etc,
+            NONE,
+        }
+
+        public class ShippingState
+        {
+            private ShippingStates type;
+            private ItemState state;
+
+            public ShippingState(ShippingStates v)
+            {
+                this.type = v;
+            }
+
+            public ShippingState(string flag)
+            {
+                this.type = GetTypeForDBValue(flag);
+            }
+
+            public static ShippingState GetTypeForDBValue(string DBValue)
+            {
+                switch (DBValue)
+                {
+                    case "1": return ShippingStates.Undecided;
+                    case "2": return ShippingStates.Etc;
+                    default: return ShippingStates.NONE;
+                }
+            }
+
+            public ShippingState(Reserve res)
+            {
+                this.type = GetTypeForReserve(res);
+
+                if (this.type == ShippingStates.Etc)
+                {
+                    var si = DBAccessor.Instance.GetShipping(res);
+                    this.state = (from a in DBAccessor.Instance.ItemStates
+                                  where a.ItemStateCode == si.State
+                                  select a).FirstOrDefault();
+                }
+            }
+
+            public static ShippingState GetTypeForReserve(Reserve res)
+            {
+                var cs = DBAccessor.Instance.GetShipping(res);
+
+                if (cs == null)
+                    return ShippingStates.Undecided;
+
+                return ShippingStates.Etc;
+            }
+
+            public string DBValue
+            {
+                get
+                {
+                    switch (this.type)
+                    {
+                        case ShippingStates.Undecided: return "1";
+                        case ShippingStates.Etc: return "2";
+                        default: return "0";
+                    }
+                }
+            }
+
+            public string ViewValue
+            {
+                get
+                {
+                    switch (type)
+                    {
+                        case ShippingStates.Undecided: return "未登録";
+                        case ShippingStates.Etc: return state.StateName;
+                        default: return String.Empty;
+                    }
+                }
+            }
+
+            public ShippingStates Value
+            {
+                get
+                {
+                    return this.type;
+                }
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Class -> Enum
+            /// </summary>
+            /// <param name="ShippingState"></param>
+            public static implicit operator ShippingStates(ShippingState ShippingState)
+            {
+                return ShippingState.type;
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Enum -> Class
+            /// </summary>
+            /// <param name="ShippingStates"></param>
+            public static implicit operator ShippingState(ShippingStates ShippingStates)
+            {
+                return new ShippingState(ShippingStates);
             }
         }
 

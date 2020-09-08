@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -12,31 +11,36 @@ using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public partial class FormReserveList : Form
+    public partial class FormSearchReserve : Form
     {
+        public IReserveReceiver Receiver;
+
+        public List<Reserve> Reserves { get; set; }
+
         private BindingList<ReserveListRow> bindinglist;
 
-        private static FormReserveList instance;
+        private static FormSearchReserve instance;
 
-        public static FormReserveList Instance
+        public static FormSearchReserve Instance
         {
             get
             {
                 if (instance == null)
-                    instance = new FormReserveList();
+                    instance = new FormSearchReserve();
 
                 return instance;
             }
         }
 
-        private FormReserveList()
+        private FormSearchReserve()
         {
             InitializeComponent();
 
             dgvReserveList.AutoGenerateColumns = false;
             dgvReserveList.AllowUserToAddRows = false;
 
-            bindinglist = new BindingList<ReserveListRow>();
+            this.bindinglist = new BindingList<ReserveListRow>();
+            this.Reserves = new List<Reserve>();
 
             InitDataGridView();
             SetDataGridView();
@@ -44,10 +48,8 @@ namespace HardwareLedger
             dgvReserveList.RowPrePaint += dgvReserveList_RowPrePaint;
             dgvReserveList.CellDoubleClick += dgvReserveList_CellDoubleClick;
 
-            this.FormClosing += FormReserveList_FormClosing;
-            this.Activated += FormReserveList_Activated;
-
-            dgvReserveList.DataSource = bindinglist;
+            this.FormClosing += FormSearchReserve_FormClosing;
+            this.Activated += FormSearchReserve_Activated;
         }
 
         private void dgvReserveList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -57,19 +59,19 @@ namespace HardwareLedger
 
         private void dgvReserveList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex >= 0 && Receiver != null)
             {
-                FormReserveDetail.Instance.ReserveDetail = bindinglist[e.RowIndex];
-                FormReserveDetail.Instance.Show();
+                Receiver.SetResult(bindinglist[e.RowIndex]);
+                this.Visible = false;
             }
         }
 
-        private void FormReserveList_Activated(object sender, EventArgs e)
+        private void FormSearchReserve_Activated(object sender, EventArgs e)
         {
             SetDataGridView();
         }
 
-        private void FormReserveList_FormClosing(object sender, FormClosingEventArgs e)
+        private void FormSearchReserve_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (e.CloseReason == CloseReason.UserClosing)
             {
@@ -94,7 +96,7 @@ namespace HardwareLedger
         {
             bindinglist.Clear();
 
-            foreach (var row in DBAccessor.Instance.Reserves)
+            foreach (var row in Reserves)
                 bindinglist.Add(row);
 
             dgvReserveList.DataSource = bindinglist;

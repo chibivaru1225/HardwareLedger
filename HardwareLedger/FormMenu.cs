@@ -22,9 +22,13 @@ namespace HardwareLedger
 
             //var db = new SQLite();
             //db.SetDummyData();
+            //var r = DBAccessor.Instance.MaxUniqueNumber<DBObject.ReserveShipping>() + 1;
 
             btnReserveRegister.Click += btnReserveRegister_Click;
             btnReserveList.Click += btnReserveList_Click;
+
+            btnMalfunctionRegister.Click += btnMalfunctionRegister_Click;
+            btnMalfunctionList.Click += btnMalfunctionList_Click;
 
             btnCollectScheduleAdd.Click += btnCollectScheduleAdd_Click;
             btnCollectScheduleList.Click += btnCollectScheduleList_Click;
@@ -32,6 +36,18 @@ namespace HardwareLedger
             btnTypeMaster.Click += btnTypeMaster_Click;
             btnStateMaster.Click += btnStateMaster_Click;
             btnShopMaster.Click += btnShopMaster_Click;
+        }
+
+        private void btnMalfunctionList_Click(object sender, EventArgs e)
+        {
+            FormMalfunctionList.Instance.Show();
+        }
+
+        private void btnMalfunctionRegister_Click(object sender, EventArgs e)
+        {
+            FormMalfunctionRegister.Instance.Relation = null;
+            FormMalfunctionRegister.Instance.Malfunction = null;
+            FormMalfunctionRegister.Instance.Show();
         }
 
         private void btnShopMaster_Click(object sender, EventArgs e)

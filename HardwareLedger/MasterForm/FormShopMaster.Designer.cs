@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormShopMaster));
             this.dgvShopList = new System.Windows.Forms.DataGridView();
+            this.chListRowState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.chListNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chListName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtShopCode = new System.Windows.Forms.TextBox();
             this.txtShopName = new System.Windows.Forms.TextBox();
@@ -39,9 +42,6 @@
             this.txtShopNum = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbEnable = new System.Windows.Forms.CheckBox();
-            this.chListRowState = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.chListNum = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chListName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvShopList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +62,31 @@
             this.dgvShopList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvShopList.Size = new System.Drawing.Size(460, 187);
             this.dgvShopList.TabIndex = 0;
+            // 
+            // chListRowState
+            // 
+            this.chListRowState.HeaderText = "表示";
+            this.chListRowState.Name = "chListRowState";
+            this.chListRowState.ReadOnly = true;
+            this.chListRowState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.chListRowState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.chListRowState.Width = 80;
+            // 
+            // chListNum
+            // 
+            this.chListNum.HeaderText = "店番";
+            this.chListNum.Name = "chListNum";
+            this.chListNum.ReadOnly = true;
+            this.chListNum.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.chListNum.Width = 80;
+            // 
+            // chListName
+            // 
+            this.chListName.HeaderText = "名前";
+            this.chListName.Name = "chListName";
+            this.chListName.ReadOnly = true;
+            this.chListName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.chListName.Width = 220;
             // 
             // label1
             // 
@@ -141,31 +166,6 @@
             this.cbEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cbEnable.UseVisualStyleBackColor = true;
             // 
-            // chListRowState
-            // 
-            this.chListRowState.HeaderText = "表示";
-            this.chListRowState.Name = "chListRowState";
-            this.chListRowState.ReadOnly = true;
-            this.chListRowState.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.chListRowState.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.chListRowState.Width = 80;
-            // 
-            // chListNum
-            // 
-            this.chListNum.HeaderText = "店番";
-            this.chListNum.Name = "chListNum";
-            this.chListNum.ReadOnly = true;
-            this.chListNum.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.chListNum.Width = 80;
-            // 
-            // chListName
-            // 
-            this.chListName.HeaderText = "名前";
-            this.chListName.Name = "chListName";
-            this.chListName.ReadOnly = true;
-            this.chListName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.chListName.Width = 220;
-            // 
             // FormShopMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -182,6 +182,7 @@
             this.Controls.Add(this.btnRowAdd);
             this.Controls.Add(this.cbEnable);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;

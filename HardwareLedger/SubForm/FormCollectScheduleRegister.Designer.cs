@@ -47,6 +47,10 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.cbxShop = new System.Windows.Forms.ComboBox();
+            this.btnReserveSelect = new System.Windows.Forms.Button();
+            this.btnMalfuinctionSelect = new System.Windows.Forms.Button();
+            this.btnReserveClear = new System.Windows.Forms.Button();
+            this.btnMalfunctionClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label3
@@ -64,7 +68,7 @@
             this.cbxState.FormattingEnabled = true;
             this.cbxState.Location = new System.Drawing.Point(103, 126);
             this.cbxState.Name = "cbxState";
-            this.cbxState.Size = new System.Drawing.Size(185, 23);
+            this.cbxState.Size = new System.Drawing.Size(262, 23);
             this.cbxState.TabIndex = 17;
             // 
             // label1
@@ -82,14 +86,14 @@
             this.cbxType.FormattingEnabled = true;
             this.cbxType.Location = new System.Drawing.Point(103, 68);
             this.cbxType.Name = "cbxType";
-            this.cbxType.Size = new System.Drawing.Size(185, 23);
+            this.cbxType.Size = new System.Drawing.Size(262, 23);
             this.cbxType.TabIndex = 14;
             // 
             // dtpScheduleTime
             // 
             this.dtpScheduleTime.Location = new System.Drawing.Point(103, 155);
             this.dtpScheduleTime.Name = "dtpScheduleTime";
-            this.dtpScheduleTime.Size = new System.Drawing.Size(185, 22);
+            this.dtpScheduleTime.Size = new System.Drawing.Size(262, 22);
             this.dtpScheduleTime.TabIndex = 24;
             // 
             // label6
@@ -104,7 +108,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(153, 239);
+            this.btnCancel.Location = new System.Drawing.Point(230, 239);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 72);
             this.btnCancel.TabIndex = 27;
@@ -123,9 +127,10 @@
             // txtReserveCode
             // 
             this.txtReserveCode.Location = new System.Drawing.Point(103, 12);
+            this.txtReserveCode.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.txtReserveCode.Name = "txtReserveCode";
             this.txtReserveCode.ReadOnly = true;
-            this.txtReserveCode.Size = new System.Drawing.Size(185, 22);
+            this.txtReserveCode.Size = new System.Drawing.Size(162, 22);
             this.txtReserveCode.TabIndex = 15;
             // 
             // label2
@@ -149,9 +154,10 @@
             // txtMalfunctionCode
             // 
             this.txtMalfunctionCode.Location = new System.Drawing.Point(103, 40);
+            this.txtMalfunctionCode.Margin = new System.Windows.Forms.Padding(3, 3, 0, 3);
             this.txtMalfunctionCode.Name = "txtMalfunctionCode";
             this.txtMalfunctionCode.ReadOnly = true;
-            this.txtMalfunctionCode.Size = new System.Drawing.Size(185, 22);
+            this.txtMalfunctionCode.Size = new System.Drawing.Size(162, 22);
             this.txtMalfunctionCode.TabIndex = 28;
             // 
             // cbCollected
@@ -177,7 +183,7 @@
             // 
             this.dtpCollectedTime.Location = new System.Drawing.Point(103, 211);
             this.dtpCollectedTime.Name = "dtpCollectedTime";
-            this.dtpCollectedTime.Size = new System.Drawing.Size(185, 22);
+            this.dtpCollectedTime.Size = new System.Drawing.Size(262, 22);
             this.dtpCollectedTime.TabIndex = 33;
             // 
             // label7
@@ -198,14 +204,54 @@
             this.label8.TabIndex = 36;
             this.label8.Text = "店舗";
             // 
-            // cbShop
+            // cbxShop
             // 
             this.cbxShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxShop.FormattingEnabled = true;
             this.cbxShop.Location = new System.Drawing.Point(103, 97);
-            this.cbxShop.Name = "cbShop";
-            this.cbxShop.Size = new System.Drawing.Size(185, 23);
+            this.cbxShop.Name = "cbxShop";
+            this.cbxShop.Size = new System.Drawing.Size(262, 23);
             this.cbxShop.TabIndex = 35;
+            // 
+            // btnReserveSelect
+            // 
+            this.btnReserveSelect.Location = new System.Drawing.Point(265, 11);
+            this.btnReserveSelect.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.btnReserveSelect.Name = "btnReserveSelect";
+            this.btnReserveSelect.Size = new System.Drawing.Size(50, 23);
+            this.btnReserveSelect.TabIndex = 37;
+            this.btnReserveSelect.Text = "選択";
+            this.btnReserveSelect.UseVisualStyleBackColor = true;
+            // 
+            // btnMalfuinctionSelect
+            // 
+            this.btnMalfuinctionSelect.Location = new System.Drawing.Point(265, 39);
+            this.btnMalfuinctionSelect.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.btnMalfuinctionSelect.Name = "btnMalfuinctionSelect";
+            this.btnMalfuinctionSelect.Size = new System.Drawing.Size(50, 23);
+            this.btnMalfuinctionSelect.TabIndex = 38;
+            this.btnMalfuinctionSelect.Text = "選択";
+            this.btnMalfuinctionSelect.UseVisualStyleBackColor = true;
+            // 
+            // btnReserveClear
+            // 
+            this.btnReserveClear.Location = new System.Drawing.Point(315, 11);
+            this.btnReserveClear.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.btnReserveClear.Name = "btnReserveClear";
+            this.btnReserveClear.Size = new System.Drawing.Size(50, 23);
+            this.btnReserveClear.TabIndex = 39;
+            this.btnReserveClear.Text = "解除";
+            this.btnReserveClear.UseVisualStyleBackColor = true;
+            // 
+            // btnMalfunctionClear
+            // 
+            this.btnMalfunctionClear.Location = new System.Drawing.Point(315, 39);
+            this.btnMalfunctionClear.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
+            this.btnMalfunctionClear.Name = "btnMalfunctionClear";
+            this.btnMalfunctionClear.Size = new System.Drawing.Size(50, 23);
+            this.btnMalfunctionClear.TabIndex = 40;
+            this.btnMalfunctionClear.Text = "解除";
+            this.btnMalfunctionClear.UseVisualStyleBackColor = true;
             // 
             // FormCollectScheduleRegister
             // 
@@ -213,7 +259,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(300, 323);
+            this.ClientSize = new System.Drawing.Size(377, 323);
+            this.Controls.Add(this.btnMalfunctionClear);
+            this.Controls.Add(this.btnReserveClear);
+            this.Controls.Add(this.btnMalfuinctionSelect);
+            this.Controls.Add(this.btnReserveSelect);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cbxShop);
             this.Controls.Add(this.label7);
@@ -264,5 +314,9 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ComboBox cbxShop;
+        private System.Windows.Forms.Button btnReserveSelect;
+        private System.Windows.Forms.Button btnMalfuinctionSelect;
+        private System.Windows.Forms.Button btnReserveClear;
+        private System.Windows.Forms.Button btnMalfunctionClear;
     }
 }

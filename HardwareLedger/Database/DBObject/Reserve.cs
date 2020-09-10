@@ -33,6 +33,9 @@ namespace HardwareLedger.DBObject
         public int ItemStateCode { get; set; }
 
         [Required]
+        public string ZaikoKbn { get; set; }
+
+        [Required]
         public DateTime InsertTime { get; set; }
 
         [Required]
@@ -47,6 +50,7 @@ namespace HardwareLedger.DBObject
             yield return nameof(Name);
             yield return nameof(ModelNo);
             yield return nameof(ItemStateCode);
+            yield return nameof(ZaikoKbn);
             yield return nameof(InsertTime);
             yield return nameof(UpdateTime);
         }

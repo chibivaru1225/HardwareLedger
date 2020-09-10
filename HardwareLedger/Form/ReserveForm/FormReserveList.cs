@@ -89,6 +89,7 @@ namespace HardwareLedger
             chReserveShipping.DataPropertyName = nameof(ReserveListRow.ShippingStateStr);
             chReserveInsertTime.DataPropertyName = nameof(ReserveListRow.InsertTimeStr);
             chReserveUpdateTime.DataPropertyName = nameof(ReserveListRow.UpdateTimeStr);
+            chZaiko.DataPropertyName = nameof(ReserveListRow.ZaikoStr);
         }
 
         private void SetDataGridView()
@@ -125,6 +126,10 @@ namespace HardwareLedger
 
             public string ShippingStateStr => ShippingState.ViewValue;
 
+            public ZaikoType Zaiko { get; set; }
+
+            public string ZaikoStr => Zaiko.ViewValue;
+
             public DateTime InsertTime { get; set; }
 
             public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -140,10 +145,11 @@ namespace HardwareLedger
                 row.ReserveCode = res.ReserveCode;
                 row.Name = res.Name;
                 row.ModelNo = res.ModelNo;
-                row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
-                row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
+                row.State = DBAccessor.Instance.GetItemState(res);
+                row.Type = DBAccessor.Instance.GetItemType(res);
                 row.CollectState = new CollectState(res);
                 row.ShippingState = new ShippingState(res);
+                row.Zaiko = res.Zaiko;
                 row.InsertTime = res.InsertTime;
                 row.UpdateTime = res.UpdateTime;
 
@@ -159,6 +165,7 @@ namespace HardwareLedger
                 res.ModelNo = row.ModelNo;
                 res.ItemStateCode = row.State?.ItemStateCode ?? 0;
                 res.ItemTypeCode = row.Type?.ItemTypeCode ?? 0;
+                res.Zaiko = row.Zaiko;
                 res.InsertTime = row.InsertTime;
                 res.UpdateTime = row.UpdateTime;
 

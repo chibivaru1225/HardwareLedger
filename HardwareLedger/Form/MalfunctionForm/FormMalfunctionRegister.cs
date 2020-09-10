@@ -46,6 +46,9 @@ namespace HardwareLedger
             cbxShop.ValueMember = nameof(ShopType.ShopCode);
             cbxShop.DisplayMember = nameof(ShopType.FullName);
 
+            cbxZaiko.ValueMember = nameof(ZaikoRow.Value);
+            cbxZaiko.DisplayMember = nameof(ZaikoRow.ViewValue);
+
             SetComboBoxes();
 
             this.btnRegist.Click += btnRegist_Click;
@@ -54,7 +57,7 @@ namespace HardwareLedger
 
         private void btnRegist_Click(object sender, EventArgs e)
         {
-            if (cbxType.SelectedValue is int ts && cbxShop.SelectedValue is int ss && cbxState.SelectedValue is int es)
+            if (cbxType.SelectedValue is int ts && cbxShop.SelectedValue is int ss && cbxState.SelectedValue is int es && cbxZaiko.SelectedValue is ZaikoTypes zt)
             {
                 Malfunction mar;
 
@@ -86,6 +89,7 @@ namespace HardwareLedger
                 mar.ItemStateCode = es;
                 mar.Name = txtItemName.Text;
                 mar.ModelNo = txtModelNo.Text;
+                mar.Zaiko = zt;
                 mar.UpdateTime = DateTime.Now;
 
                 DBAccessor.Instance.Malfunctions = DBAccessor.Instance.UpsertJson<Malfunction, DBObject.Malfunction>(mar);
@@ -121,6 +125,7 @@ namespace HardwareLedger
             cbxType.SelectedValue = 0;
             cbxState.SelectedValue = 0;
             cbxShop.SelectedValue = 0;
+            cbxZaiko.SelectedValue = ZaikoTypes.HiZaiko;
             txtItemName.Clear();
             txtModelNo.Clear();
         }
@@ -155,6 +160,33 @@ namespace HardwareLedger
             list3.AddRange(DBAccessor.Instance.ShopTypes.Where(x => x.Enable).OrderBy(x => x.ShopNum));
 
             cbxShop.DataSource = list3;
+
+
+            var list4 = new List<ZaikoRow>();
+            list4.Clear();
+
+            foreach (var etype in System.Enum.GetValues(typeof(ZaikoTypes)))
+            {
+                if (etype is ZaikoTypes type && type != ZaikoTypes.NONE)
+                {
+                    var item = new ZaikoRow();
+                    item.ZaikoType = type;
+
+                    list4.Add(item);
+                }
+            }
+
+            cbxZaiko.DataSource = list4;
+            cbxZaiko.SelectedValue = ZaikoTypes.HiZaiko;
+        }
+
+        private class ZaikoRow
+        {
+            public ZaikoType ZaikoType { get; set; }
+
+            public string ViewValue => ZaikoType.ViewValue;
+
+            public ZaikoTypes Value => ZaikoType.Value;
         }
     }
 }

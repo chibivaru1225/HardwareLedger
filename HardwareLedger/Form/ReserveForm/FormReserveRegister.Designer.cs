@@ -39,6 +39,8 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtModelNo = new System.Windows.Forms.TextBox();
+            this.cbxZaiko = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // cbxItemType
@@ -56,77 +58,95 @@
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 15);
-            this.label1.TabIndex = 1;
+            this.label1.TabIndex = 7;
             this.label1.Text = "種別";
             // 
             // txtItemName
             // 
-            this.txtItemName.Location = new System.Drawing.Point(55, 41);
+            this.txtItemName.Location = new System.Drawing.Point(55, 70);
             this.txtItemName.Name = "txtItemName";
             this.txtItemName.Size = new System.Drawing.Size(184, 22);
-            this.txtItemName.TabIndex = 1;
+            this.txtItemName.TabIndex = 2;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 44);
+            this.label2.Location = new System.Drawing.Point(12, 73);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 15);
-            this.label2.TabIndex = 3;
+            this.label2.TabIndex = 9;
             this.label2.Text = "名前";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 100);
+            this.label3.Location = new System.Drawing.Point(12, 129);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
-            this.label3.TabIndex = 4;
+            this.label3.TabIndex = 11;
             this.label3.Text = "状態";
             // 
             // cbxItemState
             // 
             this.cbxItemState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxItemState.FormattingEnabled = true;
-            this.cbxItemState.Location = new System.Drawing.Point(55, 97);
+            this.cbxItemState.Location = new System.Drawing.Point(55, 126);
             this.cbxItemState.Name = "cbxItemState";
             this.cbxItemState.Size = new System.Drawing.Size(184, 23);
-            this.cbxItemState.TabIndex = 3;
+            this.cbxItemState.TabIndex = 4;
             // 
             // btnRegist
             // 
-            this.btnRegist.Location = new System.Drawing.Point(15, 126);
+            this.btnRegist.Location = new System.Drawing.Point(15, 155);
             this.btnRegist.Name = "btnRegist";
             this.btnRegist.Size = new System.Drawing.Size(109, 72);
-            this.btnRegist.TabIndex = 4;
+            this.btnRegist.TabIndex = 5;
             this.btnRegist.Text = "登録";
             this.btnRegist.UseVisualStyleBackColor = true;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(130, 126);
+            this.btnCancel.Location = new System.Drawing.Point(130, 155);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(109, 72);
-            this.btnCancel.TabIndex = 5;
+            this.btnCancel.TabIndex = 6;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 72);
+            this.label4.Location = new System.Drawing.Point(12, 101);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(37, 15);
-            this.label4.TabIndex = 6;
+            this.label4.TabIndex = 10;
             this.label4.Text = "型番";
             // 
             // txtModelNo
             // 
-            this.txtModelNo.Location = new System.Drawing.Point(55, 69);
+            this.txtModelNo.Location = new System.Drawing.Point(55, 98);
             this.txtModelNo.Name = "txtModelNo";
             this.txtModelNo.Size = new System.Drawing.Size(184, 22);
-            this.txtModelNo.TabIndex = 2;
+            this.txtModelNo.TabIndex = 3;
+            // 
+            // cbxZaiko
+            // 
+            this.cbxZaiko.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxZaiko.FormattingEnabled = true;
+            this.cbxZaiko.Location = new System.Drawing.Point(55, 41);
+            this.cbxZaiko.Name = "cbxZaiko";
+            this.cbxZaiko.Size = new System.Drawing.Size(184, 23);
+            this.cbxZaiko.TabIndex = 1;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 44);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(37, 15);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "在庫";
             // 
             // FormReserveRegister
             // 
@@ -134,7 +154,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(251, 210);
+            this.ClientSize = new System.Drawing.Size(251, 239);
+            this.Controls.Add(this.cbxZaiko);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtModelNo);
             this.Controls.Add(this.btnCancel);
@@ -170,5 +192,7 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtModelNo;
+        private System.Windows.Forms.ComboBox cbxZaiko;
+        private System.Windows.Forms.Label label5;
     }
 }

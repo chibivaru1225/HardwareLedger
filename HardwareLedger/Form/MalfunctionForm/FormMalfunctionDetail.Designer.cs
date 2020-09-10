@@ -45,58 +45,60 @@
             this.cbxShop = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtModelNo = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.cbxZaiko = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 186);
+            this.label5.Location = new System.Drawing.Point(12, 215);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 15);
-            this.label5.TabIndex = 32;
+            this.label5.TabIndex = 17;
             this.label5.Text = "更新日時";
             // 
             // txtUpdateTime
             // 
-            this.txtUpdateTime.Location = new System.Drawing.Point(85, 183);
+            this.txtUpdateTime.Location = new System.Drawing.Point(85, 212);
             this.txtUpdateTime.Name = "txtUpdateTime";
             this.txtUpdateTime.ReadOnly = true;
             this.txtUpdateTime.Size = new System.Drawing.Size(185, 22);
-            this.txtUpdateTime.TabIndex = 6;
+            this.txtUpdateTime.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 158);
+            this.label4.Location = new System.Drawing.Point(12, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 15);
-            this.label4.TabIndex = 30;
+            this.label4.TabIndex = 16;
             this.label4.Text = "登録日時";
             // 
             // txtInsertTime
             // 
-            this.txtInsertTime.Location = new System.Drawing.Point(85, 155);
+            this.txtInsertTime.Location = new System.Drawing.Point(85, 184);
             this.txtInsertTime.Name = "txtInsertTime";
             this.txtInsertTime.ReadOnly = true;
             this.txtInsertTime.Size = new System.Drawing.Size(185, 22);
-            this.txtInsertTime.TabIndex = 5;
+            this.txtInsertTime.TabIndex = 6;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(144, 211);
+            this.btnCancel.Location = new System.Drawing.Point(144, 240);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(126, 51);
-            this.btnCancel.TabIndex = 8;
+            this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 211);
+            this.btnUpdate.Location = new System.Drawing.Point(12, 240);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(126, 51);
-            this.btnUpdate.TabIndex = 7;
+            this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
             // 
@@ -106,7 +108,7 @@
             this.label3.Location = new System.Drawing.Point(12, 100);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
-            this.label3.TabIndex = 26;
+            this.label3.TabIndex = 13;
             this.label3.Text = "状態";
             // 
             // cbxState
@@ -124,7 +126,7 @@
             this.label2.Location = new System.Drawing.Point(12, 44);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(37, 15);
-            this.label2.TabIndex = 25;
+            this.label2.TabIndex = 11;
             this.label2.Text = "名前";
             // 
             // txtName
@@ -140,7 +142,7 @@
             this.label1.Location = new System.Drawing.Point(12, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 15);
-            this.label1.TabIndex = 23;
+            this.label1.TabIndex = 10;
             this.label1.Text = "種別";
             // 
             // cbxType
@@ -158,7 +160,7 @@
             this.label8.Location = new System.Drawing.Point(12, 129);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(37, 15);
-            this.label8.TabIndex = 44;
+            this.label8.TabIndex = 14;
             this.label8.Text = "店舗";
             // 
             // cbxShop
@@ -176,7 +178,7 @@
             this.label6.Location = new System.Drawing.Point(12, 72);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(37, 15);
-            this.label6.TabIndex = 46;
+            this.label6.TabIndex = 12;
             this.label6.Text = "型番";
             // 
             // txtModelNo
@@ -186,11 +188,32 @@
             this.txtModelNo.Size = new System.Drawing.Size(185, 22);
             this.txtModelNo.TabIndex = 2;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 158);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 15);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "在庫";
+            // 
+            // cbxZaiko
+            // 
+            this.cbxZaiko.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxZaiko.Enabled = false;
+            this.cbxZaiko.FormattingEnabled = true;
+            this.cbxZaiko.Location = new System.Drawing.Point(85, 155);
+            this.cbxZaiko.Name = "cbxZaiko";
+            this.cbxZaiko.Size = new System.Drawing.Size(185, 23);
+            this.cbxZaiko.TabIndex = 5;
+            // 
             // FormMalfunctionDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 274);
+            this.ClientSize = new System.Drawing.Size(279, 303);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.cbxZaiko);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtModelNo);
             this.Controls.Add(this.label8);
@@ -238,5 +261,7 @@
         private System.Windows.Forms.ComboBox cbxShop;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtModelNo;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox cbxZaiko;
     }
 }

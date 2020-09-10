@@ -4,11 +4,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
     public class Malfunction : DBObject.Malfunction, IPgmRow, ITypeCodeColumn
     {
+        public ZaikoType Zaiko
+        {
+            get
+            {
+                return ZaikoType.GetTypeForDBValue(ZaikoKbn);
+            }
+            set
+            {
+                this.ZaikoKbn = ZaikoType.GetDBValue(value);
+            }
+        }
+
         public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
         public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");

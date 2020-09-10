@@ -67,6 +67,10 @@ namespace HardwareLedger
 
             public string State { get; set; }
 
+            public string Zaiko { get; set; }
+
+            public string Code { get; set; }
+
 
             public static implicit operator ReportRow(Reserve res)
             {
@@ -76,6 +80,8 @@ namespace HardwareLedger
                 row.Type = DBAccessor.Instance.GetItemType(res).ItemTypeName;
                 row.Name = res.Name;
                 row.ModelNo = res.ModelNo;
+                row.Zaiko = res.Zaiko.ViewValue;
+                row.Code = String.Format("{0:D8}", res.ReserveCode);
 
                 return row;
             }
@@ -88,6 +94,8 @@ namespace HardwareLedger
                 row.Type = DBAccessor.Instance.GetItemType(mal).ItemTypeName;
                 row.Name = mal.Name;
                 row.ModelNo = mal.ModelNo;
+                row.Zaiko = mal.Zaiko.ViewValue;
+                row.Code = String.Format("{0:D8}", mal.MalfunctionCode);
 
                 return row;
             }

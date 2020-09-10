@@ -638,5 +638,117 @@ namespace HardwareLedger
         }
 
         #endregion
+
+        #region 在庫区分
+
+        public enum ZaikoTypes
+        {
+            Zaiko,
+            HiZaiko,
+            NONE,
+        }
+
+        public class ZaikoType
+        {
+            private ZaikoTypes type;
+
+            public ZaikoType(ZaikoTypes v)
+            {
+                this.type = v;
+            }
+
+            public ZaikoType(string flag)
+            {
+                this.type = GetTypeForDBValue(flag);
+            }
+
+            public static ZaikoType GetTypeForDBValue(string DBValue)
+            {
+                switch (DBValue)
+                {
+                    case "1": return ZaikoTypes.Zaiko;
+                    case "2": return ZaikoTypes.HiZaiko;
+                    default: return ZaikoTypes.NONE;
+                }
+            }
+
+            public string DBValue
+            {
+                get
+                {
+                    return GetDBValue(this.type);
+                }
+            }
+
+            public static string GetDBValue(ZaikoTypes type)
+            {
+                switch (type)
+                {
+                    case ZaikoTypes.Zaiko: return "1";
+                    case ZaikoTypes.HiZaiko: return "2";
+                    default: return "0";
+                }
+            }
+
+            public string ViewValue
+            {
+                get
+                {
+                    switch (this.type)
+                    {
+                        case ZaikoTypes.Zaiko: return "在庫品";
+                        case ZaikoTypes.HiZaiko: return "非在庫";
+                        default: return String.Empty;
+                    }
+                }
+            }
+
+            //public Color RowColor
+            //{
+            //    get
+            //    {
+            //        switch (this.type)
+            //        {
+            //            case ZaikoTypes.BeforeErased: return Color.White;
+            //            case ZaikoTypes.Erased: return Color.LightGreen;
+            //            case ZaikoTypes.Abandoned: return Color.Yellow;
+            //            case ZaikoTypes.Discard: return Color.LightPink;
+            //            case ZaikoTypes.Reuse: return Color.SkyBlue;
+            //            case ZaikoTypes.PhysicalDestruction: return Color.Orange;
+            //            default: return Color.White;
+            //        }
+            //    }
+            //}
+
+            public ZaikoTypes Value
+            {
+                get
+                {
+                    return this.type;
+                }
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Class -> Enum
+            /// </summary>
+            /// <param name="ZaikoType"></param>
+            public static implicit operator ZaikoTypes(ZaikoType ZaikoType)
+            {
+                return ZaikoType.type;
+            }
+
+            /// <summary>
+            /// 静的型変換
+            /// Enum -> Class
+            /// </summary>
+            /// <param name="ZaikoTypes"></param>
+            public static implicit operator ZaikoType(ZaikoTypes ZaikoTypes)
+            {
+                return new ZaikoType(ZaikoTypes);
+            }
+        }
+
+        #endregion
     }
 }

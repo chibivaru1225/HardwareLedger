@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
@@ -120,6 +121,8 @@ namespace HardwareLedger
 
             public DateTime InsertTime { get; set; }
 
+            public ZaikoType Zaiko { get; set; }
+
             public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
             public DateTime UpdateTime { get; set; }
@@ -137,6 +140,7 @@ namespace HardwareLedger
                 row.Shop = DBAccessor.Instance.ShopTypes.Where(x => x.ShopCode == res.ShopCode).FirstOrDefault();
                 row.Name = res.Name;
                 row.ModelNo = res.ModelNo;
+                row.Zaiko = res.Zaiko;
                 row.InsertTime = res.InsertTime;
                 row.UpdateTime = res.UpdateTime;
 
@@ -153,6 +157,7 @@ namespace HardwareLedger
                 res.ModelNo = row.ModelNo;
                 res.ItemStateCode = row.State.ItemStateCode;
                 res.ShopCode = row.Shop?.ShopCode ?? 0;
+                res.Zaiko = row.Zaiko;
                 res.InsertTime = row.InsertTime;
                 res.UpdateTime = row.UpdateTime;
 

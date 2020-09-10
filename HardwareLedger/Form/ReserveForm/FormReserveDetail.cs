@@ -42,6 +42,9 @@ namespace HardwareLedger
             cbxState.ValueMember = nameof(ItemState.ItemStateCode);
             cbxState.DisplayMember = nameof(ItemState.StateName);
 
+            cbxZaiko.ValueMember = nameof(ZaikoRow.Value);
+            cbxZaiko.DisplayMember = nameof(ZaikoRow.ViewValue);
+
             SetComboBoxes();
 
             this.btnCollectRegist.Click += btnCollectRegist_Click;
@@ -62,6 +65,7 @@ namespace HardwareLedger
             {
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
                 cbxState.SelectedValue = ReserveDetail.ItemStateCode;
+                cbxZaiko.SelectedValue = ReserveDetail.Zaiko.Value;
                 txtName.Text = ReserveDetail.Name;
                 txtModelNo.Text = ReserveDetail.ModelNo;
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
@@ -82,15 +86,16 @@ namespace HardwareLedger
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode)
+            if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode && cbxZaiko.SelectedValue is ZaikoTypes zt)
             {
                 var name = txtName.Text;
                 var modelno = txtModelNo.Text;
 
                 if (tcode != ReserveDetail.ItemTypeCode ||
                     scode != ReserveDetail.ItemStateCode ||
-                    name != ReserveDetail.Name || 
-                    modelno != ReserveDetail.ModelNo)
+                    name != ReserveDetail.Name ||
+                    modelno != ReserveDetail.ModelNo ||
+                    zt != ReserveDetail.Zaiko)
                 {
                     if (MessageBox.Show(this, "行が変更されています。保存しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -99,6 +104,7 @@ namespace HardwareLedger
                         ReserveDetail.Name = name;
                         ReserveDetail.ModelNo = modelno;
                         ReserveDetail.UpdateTime = DateTime.Now;
+                        ReserveDetail.Zaiko = zt;
 
                         DBAccessor.Instance.Reserves = DBAccessor.Instance.UpsertJson<Reserve, DBObject.Reserve>(ReserveDetail);
                         MessageBox.Show(this, "登録しました", "ハードウェア管理");
@@ -133,6 +139,7 @@ namespace HardwareLedger
             {
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
                 cbxState.SelectedValue = ReserveDetail.ItemStateCode;
+                cbxZaiko.SelectedValue = ReserveDetail.Zaiko.Value;
                 txtName.Text = ReserveDetail.Name;
                 txtModelNo.Text = ReserveDetail.ModelNo;
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
@@ -172,18 +179,46 @@ namespace HardwareLedger
             list2.AddRange(DBAccessor.Instance.ItemStates.Where(x => x.ApplyKbnValue.Enclose(ApplyKbns.Reserve)));
 
             cbxState.DataSource = list2;
+
+
+            var list4 = new List<ZaikoRow>();
+            list4.Clear();
+
+            foreach (var etype in System.Enum.GetValues(typeof(ZaikoTypes)))
+            {
+                if (etype is ZaikoTypes type && type != ZaikoTypes.NONE)
+                {
+                    var item = new ZaikoRow();
+                    item.ZaikoType = type;
+
+                    list4.Add(item);
+                }
+            }
+
+            cbxZaiko.DataSource = list4;
+            cbxZaiko.SelectedValue = ZaikoTypes.HiZaiko;
         }
 
         private void Clear()
         {
             cbxType.SelectedValue = 0;
             cbxState.SelectedValue = 0;
+            cbxZaiko.SelectedValue = ZaikoTypes.HiZaiko;
             txtName.Clear();
             txtModelNo.Clear();
             txtInsertTime.Text = String.Empty;
             txtUpdateTime.Text = String.Empty;
             txtCollectSchedule.Text = CollectState.GetViewValue(CollectStates.Undecided);
             btnCSCheck.Enabled = false;
+        }
+
+        private class ZaikoRow
+        {
+            public ZaikoType ZaikoType { get; set; }
+
+            public string ViewValue => ZaikoType.ViewValue;
+
+            public ZaikoTypes Value => ZaikoType.Value;
         }
     }
 }

@@ -45,6 +45,9 @@ namespace HardwareLedger
             cbxShop.ValueMember = nameof(ShopType.ShopCode);
             cbxShop.DisplayMember = nameof(ShopType.FullName);
 
+            cbxZaiko.ValueMember = nameof(ZaikoRow.Value);
+            cbxZaiko.DisplayMember = nameof(ZaikoRow.ViewValue);
+
             SetComboBoxes();
 
             this.btnUpdate.Click += btnUpdate_Click;
@@ -60,6 +63,7 @@ namespace HardwareLedger
                 cbxType.SelectedValue = MalfunctionDetail.ItemTypeCode;
                 cbxState.SelectedValue = MalfunctionDetail.ItemStateCode;
                 cbxShop.SelectedValue = MalfunctionDetail.ShopCode;
+                cbxZaiko.SelectedValue = MalfunctionDetail.Zaiko.Value;
                 txtName.Text = MalfunctionDetail.Name;
                 txtModelNo.Text = MalfunctionDetail.ModelNo;
                 txtInsertTime.Text = MalfunctionDetail.InsertTimeStr;
@@ -87,6 +91,7 @@ namespace HardwareLedger
                 cbxType.SelectedValue = MalfunctionDetail.ItemTypeCode;
                 cbxState.SelectedValue = MalfunctionDetail.ItemStateCode;
                 cbxShop.SelectedValue = MalfunctionDetail.ShopCode;
+                cbxZaiko.SelectedValue = MalfunctionDetail.Zaiko.Value;
                 txtName.Text = MalfunctionDetail.Name;
                 txtModelNo.Text = MalfunctionDetail.ModelNo;
                 txtInsertTime.Text = MalfunctionDetail.InsertTimeStr;
@@ -100,7 +105,7 @@ namespace HardwareLedger
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode && cbxShop.SelectedValue is int hcode)
+            if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode && cbxShop.SelectedValue is int hcode && cbxZaiko.SelectedValue is ZaikoTypes zt)
             {
                 var name = txtName.Text;
                 var modelno = txtModelNo.Text;
@@ -119,6 +124,7 @@ namespace HardwareLedger
                         MalfunctionDetail.Name = name;
                         MalfunctionDetail.ModelNo = modelno;
                         MalfunctionDetail.UpdateTime = DateTime.Now;
+                        MalfunctionDetail.Zaiko = zt;
 
                         DBAccessor.Instance.Malfunctions = DBAccessor.Instance.UpsertJson<Malfunction, DBObject.Malfunction>(MalfunctionDetail);
                         MessageBox.Show(this, "登録しました", "ハードウェア管理");
@@ -153,6 +159,24 @@ namespace HardwareLedger
             list3.AddRange(DBAccessor.Instance.ShopTypes.Where(x => x.Enable).OrderBy(x => x.ShopNum));
 
             cbxShop.DataSource = list3;
+
+
+            var list4 = new List<ZaikoRow>();
+            list4.Clear();
+
+            foreach (var etype in System.Enum.GetValues(typeof(ZaikoTypes)))
+            {
+                if (etype is ZaikoTypes type && type != ZaikoTypes.NONE)
+                {
+                    var item = new ZaikoRow();
+                    item.ZaikoType = type;
+
+                    list4.Add(item);
+                }
+            }
+
+            cbxZaiko.DataSource = list4;
+            cbxZaiko.SelectedValue = ZaikoTypes.HiZaiko;
         }
 
         private void Clear()
@@ -160,10 +184,20 @@ namespace HardwareLedger
             cbxType.SelectedValue = 0;
             cbxState.SelectedValue = 0;
             cbxShop.SelectedValue = 0;
+            cbxZaiko.SelectedValue = ZaikoTypes.HiZaiko;
             txtName.Clear();
             txtModelNo.Clear();
             txtInsertTime.Text = String.Empty;
             txtUpdateTime.Text = String.Empty;
+        }
+
+        private class ZaikoRow
+        {
+            public ZaikoType ZaikoType { get; set; }
+
+            public string ViewValue => ZaikoType.ViewValue;
+
+            public ZaikoTypes Value => ZaikoType.Value;
         }
     }
 }

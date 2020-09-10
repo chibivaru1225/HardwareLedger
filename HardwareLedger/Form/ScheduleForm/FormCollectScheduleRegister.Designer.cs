@@ -69,7 +69,7 @@
             this.cbxState.Location = new System.Drawing.Point(103, 126);
             this.cbxState.Name = "cbxState";
             this.cbxState.Size = new System.Drawing.Size(262, 23);
-            this.cbxState.TabIndex = 17;
+            this.cbxState.TabIndex = 8;
             // 
             // label1
             // 
@@ -87,14 +87,14 @@
             this.cbxType.Location = new System.Drawing.Point(103, 68);
             this.cbxType.Name = "cbxType";
             this.cbxType.Size = new System.Drawing.Size(262, 23);
-            this.cbxType.TabIndex = 14;
+            this.cbxType.TabIndex = 6;
             // 
             // dtpScheduleTime
             // 
             this.dtpScheduleTime.Location = new System.Drawing.Point(103, 155);
             this.dtpScheduleTime.Name = "dtpScheduleTime";
             this.dtpScheduleTime.Size = new System.Drawing.Size(262, 22);
-            this.dtpScheduleTime.TabIndex = 24;
+            this.dtpScheduleTime.TabIndex = 9;
             // 
             // label6
             // 
@@ -111,7 +111,7 @@
             this.btnCancel.Location = new System.Drawing.Point(230, 239);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 72);
-            this.btnCancel.TabIndex = 27;
+            this.btnCancel.TabIndex = 13;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
@@ -120,7 +120,7 @@
             this.btnUpdate.Location = new System.Drawing.Point(12, 239);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(135, 72);
-            this.btnUpdate.TabIndex = 26;
+            this.btnUpdate.TabIndex = 12;
             this.btnUpdate.Text = "登録/更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
             // 
@@ -131,7 +131,7 @@
             this.txtReserveCode.Name = "txtReserveCode";
             this.txtReserveCode.ReadOnly = true;
             this.txtReserveCode.Size = new System.Drawing.Size(162, 22);
-            this.txtReserveCode.TabIndex = 15;
+            this.txtReserveCode.TabIndex = 0;
             // 
             // label2
             // 
@@ -158,7 +158,7 @@
             this.txtMalfunctionCode.Name = "txtMalfunctionCode";
             this.txtMalfunctionCode.ReadOnly = true;
             this.txtMalfunctionCode.Size = new System.Drawing.Size(162, 22);
-            this.txtMalfunctionCode.TabIndex = 28;
+            this.txtMalfunctionCode.TabIndex = 3;
             // 
             // cbCollected
             // 
@@ -166,7 +166,7 @@
             this.cbCollected.Location = new System.Drawing.Point(103, 188);
             this.cbCollected.Name = "cbCollected";
             this.cbCollected.Size = new System.Drawing.Size(71, 19);
-            this.cbCollected.TabIndex = 30;
+            this.cbCollected.TabIndex = 10;
             this.cbCollected.Text = "回収済";
             this.cbCollected.UseVisualStyleBackColor = true;
             // 
@@ -184,7 +184,7 @@
             this.dtpCollectedTime.Location = new System.Drawing.Point(103, 211);
             this.dtpCollectedTime.Name = "dtpCollectedTime";
             this.dtpCollectedTime.Size = new System.Drawing.Size(262, 22);
-            this.dtpCollectedTime.TabIndex = 33;
+            this.dtpCollectedTime.TabIndex = 11;
             // 
             // label7
             // 
@@ -211,7 +211,7 @@
             this.cbxShop.Location = new System.Drawing.Point(103, 97);
             this.cbxShop.Name = "cbxShop";
             this.cbxShop.Size = new System.Drawing.Size(262, 23);
-            this.cbxShop.TabIndex = 35;
+            this.cbxShop.TabIndex = 7;
             // 
             // btnReserveSelect
             // 
@@ -219,7 +219,7 @@
             this.btnReserveSelect.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.btnReserveSelect.Name = "btnReserveSelect";
             this.btnReserveSelect.Size = new System.Drawing.Size(50, 23);
-            this.btnReserveSelect.TabIndex = 37;
+            this.btnReserveSelect.TabIndex = 1;
             this.btnReserveSelect.Text = "選択";
             this.btnReserveSelect.UseVisualStyleBackColor = true;
             // 
@@ -229,7 +229,7 @@
             this.btnMalfuinctionSelect.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.btnMalfuinctionSelect.Name = "btnMalfuinctionSelect";
             this.btnMalfuinctionSelect.Size = new System.Drawing.Size(50, 23);
-            this.btnMalfuinctionSelect.TabIndex = 38;
+            this.btnMalfuinctionSelect.TabIndex = 4;
             this.btnMalfuinctionSelect.Text = "選択";
             this.btnMalfuinctionSelect.UseVisualStyleBackColor = true;
             // 
@@ -239,7 +239,7 @@
             this.btnReserveClear.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnReserveClear.Name = "btnReserveClear";
             this.btnReserveClear.Size = new System.Drawing.Size(50, 23);
-            this.btnReserveClear.TabIndex = 39;
+            this.btnReserveClear.TabIndex = 2;
             this.btnReserveClear.Text = "解除";
             this.btnReserveClear.UseVisualStyleBackColor = true;
             // 
@@ -249,7 +249,7 @@
             this.btnMalfunctionClear.Margin = new System.Windows.Forms.Padding(0, 3, 3, 3);
             this.btnMalfunctionClear.Name = "btnMalfunctionClear";
             this.btnMalfunctionClear.Size = new System.Drawing.Size(50, 23);
-            this.btnMalfunctionClear.TabIndex = 40;
+            this.btnMalfunctionClear.TabIndex = 5;
             this.btnMalfunctionClear.Text = "解除";
             this.btnMalfunctionClear.UseVisualStyleBackColor = true;
             // 

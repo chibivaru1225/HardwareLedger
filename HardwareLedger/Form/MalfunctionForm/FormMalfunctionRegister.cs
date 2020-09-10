@@ -64,12 +64,6 @@ namespace HardwareLedger
                     return;
                 }
 
-                if (ss == 0)
-                {
-                    MessageBox.Show(this, "店舗を選択してください。", "ハードウェア管理");
-                    return;
-                }
-
                 if (es == 0)
                 {
                     MessageBox.Show(this, "状態を選択してください。", "ハードウェア管理");
@@ -91,6 +85,7 @@ namespace HardwareLedger
                 mar.ItemTypeCode = ts;
                 mar.ItemStateCode = es;
                 mar.Name = txtItemName.Text;
+                mar.ModelNo = txtModelNo.Text;
                 mar.UpdateTime = DateTime.Now;
 
                 DBAccessor.Instance.Malfunctions = DBAccessor.Instance.UpsertJson<Malfunction, DBObject.Malfunction>(mar);
@@ -104,6 +99,9 @@ namespace HardwareLedger
 
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 this.Visible = false;
+
+                FormReportTest.Instance.SetData(mar);
+                FormReportTest.Instance.Show();
             }
         }
 
@@ -124,6 +122,7 @@ namespace HardwareLedger
             cbxState.SelectedValue = 0;
             cbxShop.SelectedValue = 0;
             txtItemName.Clear();
+            txtModelNo.Clear();
         }
 
         private void FormMalfunctionRegister_FormClosing(object sender, FormClosingEventArgs e)

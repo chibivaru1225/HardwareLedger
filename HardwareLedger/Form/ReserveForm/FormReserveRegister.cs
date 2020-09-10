@@ -78,6 +78,7 @@ namespace HardwareLedger
 
                 res.ReserveCode = rs.Count() == 0 ? 1 : rs.Max(x => x.ReserveCode) + 1;
                 res.Name = txtItemName.Text.Trim();
+                res.ModelNo = txtModelNo.Text.Trim();
                 res.InsertTime = DateTime.Now;
                 res.UpdateTime = DateTime.Now;
                 res.ItemTypeCode = itc;
@@ -87,6 +88,9 @@ namespace HardwareLedger
 
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 Clear();
+
+                FormReportTest.Instance.SetData(res);
+                FormReportTest.Instance.Show();
             }
         }
 
@@ -95,6 +99,7 @@ namespace HardwareLedger
             cbxItemType.SelectedValue = 0;
             cbxItemState.SelectedValue = 0;
             txtItemName.Clear();
+            txtModelNo.Clear();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

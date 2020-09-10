@@ -89,6 +89,7 @@ namespace HardwareLedger
                 txtReserveCode.Text = Reserve.ReserveCode.ToString();
                 txtType.Text = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == Reserve.ItemTypeCode).FirstOrDefault().ItemTypeName;
                 txtReserveName.Text = Reserve.Name;
+                txtModelNo.Text = Reserve.ModelNo;
 
                 ship = (from a in DBAccessor.Instance.ReserveShippings
                         where a.ReserveCode == Reserve.ReserveCode

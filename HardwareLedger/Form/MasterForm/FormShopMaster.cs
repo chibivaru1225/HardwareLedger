@@ -114,8 +114,12 @@ namespace HardwareLedger
                 shops.Add(row);
 
             dgvShopList.DataSource = shops;
-            dgvShopList.FirstDisplayedScrollingRowIndex = dgvShopList.Rows.Count - 1;
-            dgvShopList.CurrentCell = dgvShopList[0, dgvShopList.Rows.Count - 1];
+
+            if (shops.Count() != 0)
+            {
+                dgvShopList.FirstDisplayedScrollingRowIndex = dgvShopList.Rows.Count - 1;
+                dgvShopList.CurrentCell = dgvShopList[0, dgvShopList.Rows.Count - 1];
+            }
         }
 
         private void SetColumnBindingName()

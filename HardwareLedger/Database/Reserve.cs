@@ -9,11 +9,22 @@ using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public class Reserve : DBObject.Reserve, IPgmRow
+    public class Reserve : DBObject.Reserve, IPgmRow, IStateCodeColumn, ITypeCodeColumn
     {
         public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
         public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
+
+
+        public int GetStateCode()
+        {
+            return ItemStateCode;
+        }
+
+        public int GetTypeCode()
+        {
+            return ItemTypeCode;
+        }
 
         public IPgmRow DownCastToIPgmRow(DBData data)
         {

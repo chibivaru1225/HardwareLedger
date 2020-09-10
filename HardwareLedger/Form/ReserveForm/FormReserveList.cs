@@ -82,6 +82,7 @@ namespace HardwareLedger
         {
             chReserveCode.DataPropertyName = nameof(ReserveListRow.ReserveCode);
             chReserveName.DataPropertyName = nameof(ReserveListRow.Name);
+            chModelNo.DataPropertyName = nameof(ReserveListRow.ModelNo);
             chReserveType.DataPropertyName = nameof(ReserveListRow.TypeStr);
             chReserveState.DataPropertyName = nameof(ReserveListRow.StateStr);
             chCollectSchedule.DataPropertyName = nameof(ReserveListRow.CollectStateStr);
@@ -105,6 +106,8 @@ namespace HardwareLedger
             public int ReserveCode { get; set; }
 
             public string Name { get; set; }
+
+            public string ModelNo { get; set; }
 
             public ItemType Type { get; set; }
 
@@ -136,6 +139,7 @@ namespace HardwareLedger
 
                 row.ReserveCode = res.ReserveCode;
                 row.Name = res.Name;
+                row.ModelNo = res.ModelNo;
                 row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
                 row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
                 row.CollectState = new CollectState(res);
@@ -152,6 +156,7 @@ namespace HardwareLedger
 
                 res.ReserveCode = row.ReserveCode;
                 res.Name = row.Name;
+                res.ModelNo = row.ModelNo;
                 res.ItemStateCode = row.State?.ItemStateCode ?? 0;
                 res.ItemTypeCode = row.Type?.ItemTypeCode ?? 0;
                 res.InsertTime = row.InsertTime;

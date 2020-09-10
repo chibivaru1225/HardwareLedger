@@ -33,6 +33,7 @@
             this.chReserveCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chModelNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chCollectSchedule = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chReserveShipping = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -50,6 +51,7 @@
             this.chReserveCode,
             this.chReserveType,
             this.chReserveName,
+            this.chModelNo,
             this.chReserveState,
             this.chCollectSchedule,
             this.chReserveShipping,
@@ -61,7 +63,7 @@
             this.dgvReserveList.Name = "dgvReserveList";
             this.dgvReserveList.ReadOnly = true;
             this.dgvReserveList.RowTemplate.Height = 21;
-            this.dgvReserveList.Size = new System.Drawing.Size(1166, 693);
+            this.dgvReserveList.Size = new System.Drawing.Size(1286, 693);
             this.dgvReserveList.TabIndex = 1;
             // 
             // chReserveCode
@@ -83,6 +85,12 @@
             this.chReserveName.Name = "chReserveName";
             this.chReserveName.ReadOnly = true;
             this.chReserveName.Width = 200;
+            // 
+            // chModelNo
+            // 
+            this.chModelNo.HeaderText = "型番";
+            this.chModelNo.Name = "chModelNo";
+            this.chModelNo.ReadOnly = true;
             // 
             // chReserveState
             // 
@@ -122,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 711);
+            this.ClientSize = new System.Drawing.Size(1304, 711);
             this.Controls.Add(this.dgvReserveList);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -143,6 +151,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveType;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chModelNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveState;
         private System.Windows.Forms.DataGridViewTextBoxColumn chCollectSchedule;
         private System.Windows.Forms.DataGridViewTextBoxColumn chReserveShipping;

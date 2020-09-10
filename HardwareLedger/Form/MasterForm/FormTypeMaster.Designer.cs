@@ -56,7 +56,7 @@
             this.txtDetailName.Location = new System.Drawing.Point(58, 290);
             this.txtDetailName.Name = "txtDetailName";
             this.txtDetailName.Size = new System.Drawing.Size(200, 22);
-            this.txtDetailName.TabIndex = 2;
+            this.txtDetailName.TabIndex = 3;
             // 
             // txtDetailCode
             // 
@@ -64,7 +64,7 @@
             this.txtDetailCode.Name = "txtDetailCode";
             this.txtDetailCode.ReadOnly = true;
             this.txtDetailCode.Size = new System.Drawing.Size(200, 22);
-            this.txtDetailCode.TabIndex = 1;
+            this.txtDetailCode.TabIndex = 2;
             // 
             // label1
             // 
@@ -111,7 +111,7 @@
             this.btnRowDelete.Location = new System.Drawing.Point(186, 205);
             this.btnRowDelete.Name = "btnRowDelete";
             this.btnRowDelete.Size = new System.Drawing.Size(126, 51);
-            this.btnRowDelete.TabIndex = 6;
+            this.btnRowDelete.TabIndex = 1;
             this.btnRowDelete.Text = "行削除";
             this.btnRowDelete.UseVisualStyleBackColor = true;
             // 
@@ -120,7 +120,7 @@
             this.btnRowAdd.Location = new System.Drawing.Point(12, 205);
             this.btnRowAdd.Name = "btnRowAdd";
             this.btnRowAdd.Size = new System.Drawing.Size(126, 51);
-            this.btnRowAdd.TabIndex = 5;
+            this.btnRowAdd.TabIndex = 0;
             this.btnRowAdd.Text = "行追加";
             this.btnRowAdd.UseVisualStyleBackColor = true;
             // 
@@ -129,7 +129,7 @@
             this.btnRowSave.Location = new System.Drawing.Point(186, 318);
             this.btnRowSave.Name = "btnRowSave";
             this.btnRowSave.Size = new System.Drawing.Size(126, 51);
-            this.btnRowSave.TabIndex = 9;
+            this.btnRowSave.TabIndex = 4;
             this.btnRowSave.Text = "保存";
             this.btnRowSave.UseVisualStyleBackColor = true;
             // 

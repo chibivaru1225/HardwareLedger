@@ -7,11 +7,16 @@ using System.Threading.Tasks;
 
 namespace HardwareLedger
 {
-    public class Malfunction : DBObject.Malfunction, IPgmRow
+    public class Malfunction : DBObject.Malfunction, IPgmRow, ITypeCodeColumn
     {
         public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
         public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
+
+        public int GetTypeCode()
+        {
+            return this.ItemTypeCode;
+        }
 
         public IPgmRow DownCastToIPgmRow(DBData data)
         {

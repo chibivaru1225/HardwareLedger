@@ -103,14 +103,14 @@
             this.txtShopCode.Name = "txtShopCode";
             this.txtShopCode.ReadOnly = true;
             this.txtShopCode.Size = new System.Drawing.Size(200, 22);
-            this.txtShopCode.TabIndex = 3;
+            this.txtShopCode.TabIndex = 2;
             // 
             // txtShopName
             // 
             this.txtShopName.Location = new System.Drawing.Point(58, 345);
             this.txtShopName.Name = "txtShopName";
             this.txtShopName.Size = new System.Drawing.Size(200, 22);
-            this.txtShopName.TabIndex = 5;
+            this.txtShopName.TabIndex = 4;
             // 
             // label2
             // 
@@ -126,7 +126,7 @@
             this.btnRowSave.Location = new System.Drawing.Point(346, 316);
             this.btnRowSave.Name = "btnRowSave";
             this.btnRowSave.Size = new System.Drawing.Size(126, 51);
-            this.btnRowSave.TabIndex = 6;
+            this.btnRowSave.TabIndex = 5;
             this.btnRowSave.Text = "保存";
             this.btnRowSave.UseVisualStyleBackColor = true;
             // 
@@ -135,7 +135,7 @@
             this.btnRowAdd.Location = new System.Drawing.Point(12, 205);
             this.btnRowAdd.Name = "btnRowAdd";
             this.btnRowAdd.Size = new System.Drawing.Size(126, 51);
-            this.btnRowAdd.TabIndex = 1;
+            this.btnRowAdd.TabIndex = 0;
             this.btnRowAdd.Text = "行追加";
             this.btnRowAdd.UseVisualStyleBackColor = true;
             // 
@@ -144,7 +144,7 @@
             this.txtShopNum.Location = new System.Drawing.Point(58, 317);
             this.txtShopNum.Name = "txtShopNum";
             this.txtShopNum.Size = new System.Drawing.Size(200, 22);
-            this.txtShopNum.TabIndex = 4;
+            this.txtShopNum.TabIndex = 3;
             // 
             // label3
             // 
@@ -161,7 +161,7 @@
             this.cbEnable.Location = new System.Drawing.Point(12, 264);
             this.cbEnable.Name = "cbEnable";
             this.cbEnable.Size = new System.Drawing.Size(80, 19);
-            this.cbEnable.TabIndex = 2;
+            this.cbEnable.TabIndex = 1;
             this.cbEnable.Text = "表示する";
             this.cbEnable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.cbEnable.UseVisualStyleBackColor = true;

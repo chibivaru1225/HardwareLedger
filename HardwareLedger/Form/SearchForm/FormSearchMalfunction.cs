@@ -95,6 +95,7 @@ namespace HardwareLedger
             chMalfunctionCode.DataPropertyName = nameof(MalfunctionRow.MalfunctionCode);
             chItemType.DataPropertyName = nameof(MalfunctionRow.TypeStr);
             chName.DataPropertyName = nameof(MalfunctionRow.Name);
+            chModelNo.DataPropertyName = nameof(MalfunctionRow.ModelNo);
             chState.DataPropertyName = nameof(MalfunctionRow.StateStr);
             chShop.DataPropertyName = nameof(MalfunctionRow.ShopStr);
             chInsertTime.DataPropertyName = nameof(MalfunctionRow.InsertTimeStr);
@@ -119,6 +120,8 @@ namespace HardwareLedger
 
             public string Name { get; set; }
 
+            public string ModelNo { get; set; }
+
             public DateTime InsertTime { get; set; }
 
             public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
@@ -137,6 +140,7 @@ namespace HardwareLedger
                 row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
                 row.Shop = DBAccessor.Instance.ShopTypes.Where(x => x.ShopCode == res.ShopCode).FirstOrDefault();
                 row.Name = res.Name;
+                row.ModelNo = res.ModelNo;
                 row.InsertTime = res.InsertTime;
                 row.UpdateTime = res.UpdateTime;
 
@@ -150,8 +154,9 @@ namespace HardwareLedger
                 res.MalfunctionCode = row.MalfunctionCode;
                 res.ItemTypeCode = row.Type.ItemTypeCode;
                 res.Name = row.Name;
+                res.ModelNo = row.ModelNo;
                 res.ItemStateCode = row.State.ItemStateCode;
-                res.ShopCode = row.Shop.ShopCode;
+                res.ShopCode = row.Shop?.ShopCode ?? 0;
                 res.InsertTime = row.InsertTime;
                 res.UpdateTime = row.UpdateTime;
 

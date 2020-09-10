@@ -61,6 +61,7 @@ namespace HardwareLedger
                 cbxState.SelectedValue = MalfunctionDetail.ItemStateCode;
                 cbxShop.SelectedValue = MalfunctionDetail.ShopCode;
                 txtName.Text = MalfunctionDetail.Name;
+                txtModelNo.Text = MalfunctionDetail.ModelNo;
                 txtInsertTime.Text = MalfunctionDetail.InsertTimeStr;
                 txtUpdateTime.Text = MalfunctionDetail.UpdateTimeStr;
             }
@@ -87,6 +88,7 @@ namespace HardwareLedger
                 cbxState.SelectedValue = MalfunctionDetail.ItemStateCode;
                 cbxShop.SelectedValue = MalfunctionDetail.ShopCode;
                 txtName.Text = MalfunctionDetail.Name;
+                txtModelNo.Text = MalfunctionDetail.ModelNo;
                 txtInsertTime.Text = MalfunctionDetail.InsertTimeStr;
                 txtUpdateTime.Text = MalfunctionDetail.UpdateTimeStr;
             }
@@ -101,11 +103,13 @@ namespace HardwareLedger
             if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode && cbxShop.SelectedValue is int hcode)
             {
                 var name = txtName.Text;
+                var modelno = txtModelNo.Text;
 
                 if (tcode != MalfunctionDetail.ItemTypeCode ||
                     scode != MalfunctionDetail.ItemStateCode ||
                     name != MalfunctionDetail.Name || 
-                    hcode != MalfunctionDetail.ShopCode)
+                    hcode != MalfunctionDetail.ShopCode || 
+                    modelno != MalfunctionDetail.ModelNo)
                 {
                     if (MessageBox.Show(this, "行が変更されています。保存しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
@@ -113,6 +117,7 @@ namespace HardwareLedger
                         MalfunctionDetail.ItemStateCode = scode;
                         MalfunctionDetail.ShopCode = hcode;
                         MalfunctionDetail.Name = name;
+                        MalfunctionDetail.ModelNo = modelno;
                         MalfunctionDetail.UpdateTime = DateTime.Now;
 
                         DBAccessor.Instance.Malfunctions = DBAccessor.Instance.UpsertJson<Malfunction, DBObject.Malfunction>(MalfunctionDetail);
@@ -155,7 +160,8 @@ namespace HardwareLedger
             cbxType.SelectedValue = 0;
             cbxState.SelectedValue = 0;
             cbxShop.SelectedValue = 0;
-            txtName.Text = String.Empty;
+            txtName.Clear();
+            txtModelNo.Clear();
             txtInsertTime.Text = String.Empty;
             txtUpdateTime.Text = String.Empty;
         }

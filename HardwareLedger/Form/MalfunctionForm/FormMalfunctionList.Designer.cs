@@ -33,6 +33,7 @@
             this.chMalfunctionCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chItemType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chModelNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chState = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chShop = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chInsertTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +50,7 @@
             this.chMalfunctionCode,
             this.chItemType,
             this.chName,
+            this.chModelNo,
             this.chState,
             this.chShop,
             this.chInsertTime,
@@ -79,6 +81,12 @@
             this.chName.HeaderText = "名前";
             this.chName.Name = "chName";
             this.chName.ReadOnly = true;
+            // 
+            // chModelNo
+            // 
+            this.chModelNo.HeaderText = "型番";
+            this.chModelNo.Name = "chModelNo";
+            this.chModelNo.ReadOnly = true;
             // 
             // chState
             // 
@@ -115,7 +123,7 @@
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMalfunctionList";
@@ -131,6 +139,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chMalfunctionCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn chItemType;
         private System.Windows.Forms.DataGridViewTextBoxColumn chName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn chModelNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn chState;
         private System.Windows.Forms.DataGridViewTextBoxColumn chShop;
         private System.Windows.Forms.DataGridViewTextBoxColumn chInsertTime;

@@ -27,6 +27,9 @@ namespace HardwareLedger.DBObject
         public string Name { get; set; }
 
         [Required]
+        public string ModelNo { get; set; }
+
+        [Required]
         public int ItemStateCode { get; set; }
 
         [Required]
@@ -42,6 +45,7 @@ namespace HardwareLedger.DBObject
             yield return nameof(ReserveCode);
             yield return nameof(ItemTypeCode);
             yield return nameof(Name);
+            yield return nameof(ModelNo);
             yield return nameof(ItemStateCode);
             yield return nameof(InsertTime);
             yield return nameof(UpdateTime);

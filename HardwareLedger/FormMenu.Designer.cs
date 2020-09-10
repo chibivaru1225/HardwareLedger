@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMenu));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnShippingList = new System.Windows.Forms.Button();
             this.btnReserveList = new System.Windows.Forms.Button();
             this.btnReserveRegister = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -41,13 +42,17 @@
             this.btnShopMaster = new System.Windows.Forms.Button();
             this.btnTypeMaster = new System.Windows.Forms.Button();
             this.btnStateMaster = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnShippingList);
             this.groupBox1.Controls.Add(this.btnReserveList);
             this.groupBox1.Controls.Add(this.btnReserveRegister);
             this.groupBox1.Location = new System.Drawing.Point(9, 9);
@@ -58,6 +63,15 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "予備機";
+            // 
+            // btnShippingList
+            // 
+            this.btnShippingList.Location = new System.Drawing.Point(319, 22);
+            this.btnShippingList.Name = "btnShippingList";
+            this.btnShippingList.Size = new System.Drawing.Size(150, 50);
+            this.btnShippingList.TabIndex = 2;
+            this.btnShippingList.Text = "予備機発送一覧";
+            this.btnShippingList.UseVisualStyleBackColor = true;
             // 
             // btnReserveList
             // 
@@ -133,7 +147,7 @@
             this.groupBox3.Controls.Add(this.btnShopMaster);
             this.groupBox3.Controls.Add(this.btnTypeMaster);
             this.groupBox3.Controls.Add(this.btnStateMaster);
-            this.groupBox3.Location = new System.Drawing.Point(9, 179);
+            this.groupBox3.Location = new System.Drawing.Point(9, 262);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
@@ -169,11 +183,34 @@
             this.btnStateMaster.Text = "状態マスタ";
             this.btnStateMaster.UseVisualStyleBackColor = true;
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button2);
+            this.groupBox4.Location = new System.Drawing.Point(9, 179);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox4.Size = new System.Drawing.Size(632, 79);
+            this.groupBox4.TabIndex = 3;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "印刷";
+            // 
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(7, 22);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(150, 50);
+            this.button2.TabIndex = 0;
+            this.button2.Text = "データ出力";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
             // FormMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 267);
+            this.ClientSize = new System.Drawing.Size(650, 350);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -188,6 +225,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -206,6 +244,9 @@
         private System.Windows.Forms.Button btnShopMaster;
         private System.Windows.Forms.Button btnMalfunctionList;
         private System.Windows.Forms.Button btnMalfunctionRegister;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnShippingList;
     }
 }
 

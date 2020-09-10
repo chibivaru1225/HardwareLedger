@@ -63,6 +63,7 @@ namespace HardwareLedger
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
                 cbxState.SelectedValue = ReserveDetail.ItemStateCode;
                 txtName.Text = ReserveDetail.Name;
+                txtModelNo.Text = ReserveDetail.ModelNo;
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
                 txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
 
@@ -84,16 +85,19 @@ namespace HardwareLedger
             if (cbxType.SelectedValue is int tcode && cbxState.SelectedValue is int scode)
             {
                 var name = txtName.Text;
+                var modelno = txtModelNo.Text;
 
                 if (tcode != ReserveDetail.ItemTypeCode ||
                     scode != ReserveDetail.ItemStateCode ||
-                    name != ReserveDetail.Name)
+                    name != ReserveDetail.Name || 
+                    modelno != ReserveDetail.ModelNo)
                 {
                     if (MessageBox.Show(this, "行が変更されています。保存しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         ReserveDetail.ItemTypeCode = tcode;
                         ReserveDetail.ItemStateCode = scode;
                         ReserveDetail.Name = name;
+                        ReserveDetail.ModelNo = modelno;
                         ReserveDetail.UpdateTime = DateTime.Now;
 
                         DBAccessor.Instance.Reserves = DBAccessor.Instance.UpsertJson<Reserve, DBObject.Reserve>(ReserveDetail);
@@ -130,6 +134,7 @@ namespace HardwareLedger
                 cbxType.SelectedValue = ReserveDetail.ItemTypeCode;
                 cbxState.SelectedValue = ReserveDetail.ItemStateCode;
                 txtName.Text = ReserveDetail.Name;
+                txtModelNo.Text = ReserveDetail.ModelNo;
                 txtInsertTime.Text = ReserveDetail.InsertTimeStr;
                 txtUpdateTime.Text = ReserveDetail.UpdateTimeStr;
 
@@ -173,7 +178,8 @@ namespace HardwareLedger
         {
             cbxType.SelectedValue = 0;
             cbxState.SelectedValue = 0;
-            txtName.Text = String.Empty;
+            txtName.Clear();
+            txtModelNo.Clear();
             txtInsertTime.Text = String.Empty;
             txtUpdateTime.Text = String.Empty;
             txtCollectSchedule.Text = CollectState.GetViewValue(CollectStates.Undecided);

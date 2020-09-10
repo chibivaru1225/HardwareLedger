@@ -1,18 +1,13 @@
 ﻿using HardwareLedger.DBObject;
 using LiteDB;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
 namespace HardwareLedger
@@ -34,7 +29,7 @@ namespace HardwareLedger
             }
         }
 
-        public LiteDatabase DB { get; private set; }
+        //public LiteDatabase DB { get; private set; }
 
         public List<Reserve> Reserves { get; set; }
 
@@ -55,17 +50,13 @@ namespace HardwareLedger
         private DBAccessor()
         {
             var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
             //SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
-            Directory = documents + @"\HardwareLedger\Database\{0}.json";
+            //Directory = documents + @"\HardwareLedger\Database\{0}.json";
+            Directory = @"Database\{0}.json";
 
-            SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
-            DB = new LiteDatabase(nameof(HardwareLedger) + @".db");
-
-            //Reserves = Get<Reserve, DBObject.Reserve>();
-            //ItemTypes = Get<ItemType, DBObject.ItemType>();
-            //ItemStates = Get<ItemState, DBObject.ItemState>();
-            //Malfunctions = Get<Malfunction, DBObject.Malfunction>();
-            //Relations = Get<Relation, DBObject.Relation>();
+            //SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
+            SafeCreateDirectory(@"Database\");
 
             Reserves = ReadJson<Reserve, DBObject.Reserve>();
             ShopTypes = ReadJson<ShopType, DBObject.ShopType>();
@@ -75,8 +66,6 @@ namespace HardwareLedger
             Relations = ReadJson<Relation, DBObject.Relation>();
             CollectSchedules = ReadJson<CollectSchedule, DBObject.CollectSchedule>();
             ReserveShippings = ReadJson<ReserveShipping, DBObject.ReserveShipping>();
-
-            //SetDummyData();
         }
 
         public List<T> UpsertJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
@@ -151,39 +140,39 @@ namespace HardwareLedger
             return ConvertList<T, D>(basedata);
         }
 
-        private void Upsert<T, D>(params T[] rows) where T : IPgmRow where D : DBData, new()
-        {
-            var dd = new D();
-            var dbdata = DB.GetCollection<D>(typeof(D).Name);
-            var kcn = dd.GetKeyColumnName();
+        //private void Upsert<T, D>(params T[] rows) where T : IPgmRow where D : DBData, new()
+        //{
+        //    var dd = new D();
+        //    var dbdata = DB.GetCollection<D>(typeof(D).Name);
+        //    var kcn = dd.GetKeyColumnName();
 
-            if (DB.BeginTrans())
-            {
-                foreach (var row in rows)
-                {
-                    if (row is D)
-                    {
-                        var drow = row.UpCastToDBData() as D;
-                        var dkcn = drow[kcn];
-                        var dbdr = dbdata.Find(x => x[kcn] == dkcn).FirstOrDefault();
+        //    if (DB.BeginTrans())
+        //    {
+        //        foreach (var row in rows)
+        //        {
+        //            if (row is D)
+        //            {
+        //                var drow = row.UpCastToDBData() as D;
+        //                var dkcn = drow[kcn];
+        //                var dbdr = dbdata.Find(x => x[kcn] == dkcn).FirstOrDefault();
 
-                        if (dbdr == null)
-                            dbdata.Insert(drow);
-                        else
-                            dbdr.Copy(drow);
-                    }
-                    else
-                    {
-                        throw new InvalidOperationException();
-                    }
-                }
+        //                if (dbdr == null)
+        //                    dbdata.Insert(drow);
+        //                else
+        //                    dbdr.Copy(drow);
+        //            }
+        //            else
+        //            {
+        //                throw new InvalidOperationException();
+        //            }
+        //        }
 
-                if (DB.Commit() == false)
-                {
-                    throw new InvalidOperationException();
-                }
-            }
-        }
+        //        if (DB.Commit() == false)
+        //        {
+        //            throw new InvalidOperationException();
+        //        }
+        //    }
+        //}
 
         //public void Update<T, D>(params T[] rows) where T : PgmRow where D : DBData, new()
         //{
@@ -294,29 +283,29 @@ namespace HardwareLedger
             return lst;
         }
 
-        private List<T> Get<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
-        {
-            var list = new List<T>();
+        //private List<T> Get<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
+        //{
+        //    var list = new List<T>();
 
-            var dres = DB.GetCollection<D>(typeof(D).Name);
+        //    var dres = DB.GetCollection<D>(typeof(D).Name);
 
-            foreach (var row in dres.Query().ToEnumerable())
-            {
-                var drow = new T();
+        //    foreach (var row in dres.Query().ToEnumerable())
+        //    {
+        //        var drow = new T();
 
-                if (drow.PossibleDownCast<D>())
-                {
-                    drow.DownCastToIPgmRow(row);
-                    list.Add(drow);
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
-            }
+        //        if (drow.PossibleDownCast<D>())
+        //        {
+        //            drow.DownCastToIPgmRow(row);
+        //            list.Add(drow);
+        //        }
+        //        else
+        //        {
+        //            throw new InvalidOperationException();
+        //        }
+        //    }
 
-            return list;
-        }
+        //    return list;
+        //}
 
         public CollectSchedule GetCollectSchedule(Reserve reserve)
         {
@@ -399,6 +388,33 @@ namespace HardwareLedger
                       select b).FirstOrDefault();
 
             return r2;
+        }
+
+        public ItemState GetItemState(IStateCodeColumn poco)
+        {
+            var r1 = (from a in ItemStates
+                      where a.ItemStateCode == poco.GetStateCode()
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
+        public ShopType GetShop(IShopCodeColumn poco)
+        {
+            var r1 = (from a in ShopTypes
+                      where a.ShopCode == poco.GetShopCode()
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
+        public ItemType GetItemType(ITypeCodeColumn poco)
+        {
+            var r1 = (from a in ItemTypes
+                      where a.ItemTypeCode == poco.GetTypeCode()
+                      select a).FirstOrDefault();
+
+            return r1;
         }
 
         public int MaxUniqueNumber<D>() where D : DBData, new()

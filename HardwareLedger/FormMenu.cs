@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 using static HardwareLedger.Enum;
 
@@ -10,22 +11,9 @@ namespace HardwareLedger
         {
             InitializeComponent();
 
-            //var kbna1 = new ApplyKbn(ApplyKbns.Reserve | ApplyKbns.Malfunction);
-            //var kbna2 = new ApplyKbn(ApplyKbns.Reserve);
-            //var kbna3 = new ApplyKbn(ApplyKbns.Malfunction);
-            //var kbna4 = new ApplyKbn(ApplyKbns.Reserve & ApplyKbns.Malfunction);
-
-            //var kbnb1 = new ApplyKbn(0);
-            //var kbnb2 = new ApplyKbn(1);
-            //var kbnb3 = new ApplyKbn(2);
-            //var kbnb4 = new ApplyKbn(3);
-
-            //var db = new SQLite();
-            //db.SetDummyData();
-            //var r = DBAccessor.Instance.MaxUniqueNumber<DBObject.ReserveShipping>() + 1;
-
             btnReserveRegister.Click += btnReserveRegister_Click;
             btnReserveList.Click += btnReserveList_Click;
+            btnShippingList.Click += btnShippingList_Click;
 
             btnMalfunctionRegister.Click += btnMalfunctionRegister_Click;
             btnMalfunctionList.Click += btnMalfunctionList_Click;
@@ -36,6 +24,20 @@ namespace HardwareLedger
             btnTypeMaster.Click += btnTypeMaster_Click;
             btnStateMaster.Click += btnStateMaster_Click;
             btnShopMaster.Click += btnShopMaster_Click;
+        }
+
+        private void btnShippingList_Click(object sender, EventArgs e)
+        {
+            //var row = (from a in DBAccessor.Instance.Reserves
+            //            orderby a.UpdateTime descending
+            //            select a).FirstOrDefault();
+
+            //if (row != null)
+            //{
+            //    FormReportTest.Instance.SetData(row);
+            //    FormReportTest.Instance.Show();
+            //}
+            FormShippingList.Instance.Show();
         }
 
         private void btnMalfunctionList_Click(object sender, EventArgs e)

@@ -33,4 +33,9 @@ namespace HardwareLedger
             return dbdata;
         }
     }
+
+    public interface ITypeCodeColumn
+    {
+        int GetTypeCode();
+    }
 }

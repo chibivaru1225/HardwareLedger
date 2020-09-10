@@ -59,4 +59,9 @@ namespace HardwareLedger
             return dbdata;
         }
     }
+
+    public interface IStateCodeColumn
+    {
+        int GetStateCode();
+    }
 }

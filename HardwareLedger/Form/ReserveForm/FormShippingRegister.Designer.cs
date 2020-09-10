@@ -45,12 +45,14 @@
             this.txtType = new System.Windows.Forms.TextBox();
             this.txtReserveName = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtModelNo = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(12, 100);
+            this.label8.Location = new System.Drawing.Point(12, 128);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(37, 15);
             this.label8.TabIndex = 46;
@@ -60,15 +62,15 @@
             // 
             this.cbxShop.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxShop.FormattingEnabled = true;
-            this.cbxShop.Location = new System.Drawing.Point(103, 97);
+            this.cbxShop.Location = new System.Drawing.Point(103, 125);
             this.cbxShop.Name = "cbxShop";
             this.cbxShop.Size = new System.Drawing.Size(185, 23);
-            this.cbxShop.TabIndex = 45;
+            this.cbxShop.TabIndex = 4;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 161);
+            this.label6.Location = new System.Drawing.Point(12, 189);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 15);
             this.label6.TabIndex = 44;
@@ -76,15 +78,15 @@
             // 
             // dtpShippingTime
             // 
-            this.dtpShippingTime.Location = new System.Drawing.Point(103, 155);
+            this.dtpShippingTime.Location = new System.Drawing.Point(103, 183);
             this.dtpShippingTime.Name = "dtpShippingTime";
             this.dtpShippingTime.Size = new System.Drawing.Size(185, 22);
-            this.dtpShippingTime.TabIndex = 43;
+            this.dtpShippingTime.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 129);
+            this.label3.Location = new System.Drawing.Point(12, 157);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(37, 15);
             this.label3.TabIndex = 42;
@@ -94,10 +96,10 @@
             // 
             this.cbxState.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxState.FormattingEnabled = true;
-            this.cbxState.Location = new System.Drawing.Point(103, 126);
+            this.cbxState.Location = new System.Drawing.Point(103, 154);
             this.cbxState.Name = "cbxState";
             this.cbxState.Size = new System.Drawing.Size(185, 23);
-            this.cbxState.TabIndex = 40;
+            this.cbxState.TabIndex = 5;
             // 
             // label2
             // 
@@ -114,31 +116,31 @@
             this.txtReserveCode.Name = "txtReserveCode";
             this.txtReserveCode.ReadOnly = true;
             this.txtReserveCode.Size = new System.Drawing.Size(185, 22);
-            this.txtReserveCode.TabIndex = 38;
+            this.txtReserveCode.TabIndex = 0;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(153, 295);
+            this.btnCancel.Location = new System.Drawing.Point(153, 323);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(135, 72);
-            this.btnCancel.TabIndex = 48;
+            this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(12, 295);
+            this.btnUpdate.Location = new System.Drawing.Point(12, 323);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(135, 72);
-            this.btnUpdate.TabIndex = 47;
+            this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "登録/更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 186);
+            this.label4.Location = new System.Drawing.Point(12, 214);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(28, 15);
             this.label4.TabIndex = 49;
@@ -146,16 +148,16 @@
             // 
             // txtMemo
             // 
-            this.txtMemo.Location = new System.Drawing.Point(12, 211);
+            this.txtMemo.Location = new System.Drawing.Point(12, 239);
             this.txtMemo.Multiline = true;
             this.txtMemo.Name = "txtMemo";
             this.txtMemo.Size = new System.Drawing.Size(276, 78);
-            this.txtMemo.TabIndex = 51;
+            this.txtMemo.TabIndex = 7;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 71);
+            this.label1.Location = new System.Drawing.Point(12, 99);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(37, 15);
             this.label1.TabIndex = 53;
@@ -163,11 +165,11 @@
             // 
             // txtType
             // 
-            this.txtType.Location = new System.Drawing.Point(103, 68);
+            this.txtType.Location = new System.Drawing.Point(103, 96);
             this.txtType.Name = "txtType";
             this.txtType.ReadOnly = true;
             this.txtType.Size = new System.Drawing.Size(185, 22);
-            this.txtType.TabIndex = 54;
+            this.txtType.TabIndex = 3;
             // 
             // txtReserveName
             // 
@@ -175,7 +177,7 @@
             this.txtReserveName.Name = "txtReserveName";
             this.txtReserveName.ReadOnly = true;
             this.txtReserveName.Size = new System.Drawing.Size(185, 22);
-            this.txtReserveName.TabIndex = 55;
+            this.txtReserveName.TabIndex = 1;
             // 
             // label5
             // 
@@ -186,11 +188,30 @@
             this.label5.TabIndex = 56;
             this.label5.Text = "予備機名前";
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 71);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(82, 15);
+            this.label7.TabIndex = 58;
+            this.label7.Text = "予備機型番";
+            // 
+            // txtModelNo
+            // 
+            this.txtModelNo.Location = new System.Drawing.Point(103, 68);
+            this.txtModelNo.Name = "txtModelNo";
+            this.txtModelNo.ReadOnly = true;
+            this.txtModelNo.Size = new System.Drawing.Size(185, 22);
+            this.txtModelNo.TabIndex = 2;
+            // 
             // FormShippingRegister
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(300, 379);
+            this.ClientSize = new System.Drawing.Size(300, 407);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtModelNo);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtReserveName);
             this.Controls.Add(this.txtType);
@@ -238,5 +259,7 @@
         private System.Windows.Forms.TextBox txtType;
         private System.Windows.Forms.TextBox txtReserveName;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtModelNo;
     }
 }

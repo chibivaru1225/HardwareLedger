@@ -35,4 +35,9 @@ namespace HardwareLedger
             return dbdata;
         }
     }
+
+    public interface IShopCodeColumn
+    {
+        int GetShopCode();
+    }
 }

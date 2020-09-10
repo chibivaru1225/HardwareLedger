@@ -235,7 +235,7 @@
             this.btnRowDelete.Location = new System.Drawing.Point(399, 214);
             this.btnRowDelete.Name = "btnRowDelete";
             this.btnRowDelete.Size = new System.Drawing.Size(126, 51);
-            this.btnRowDelete.TabIndex = 2;
+            this.btnRowDelete.TabIndex = 1;
             this.btnRowDelete.Text = "行削除";
             this.btnRowDelete.UseVisualStyleBackColor = true;
             // 
@@ -244,7 +244,7 @@
             this.btnRowAdd.Location = new System.Drawing.Point(6, 214);
             this.btnRowAdd.Name = "btnRowAdd";
             this.btnRowAdd.Size = new System.Drawing.Size(126, 51);
-            this.btnRowAdd.TabIndex = 1;
+            this.btnRowAdd.TabIndex = 0;
             this.btnRowAdd.Text = "行追加";
             this.btnRowAdd.UseVisualStyleBackColor = true;
             // 

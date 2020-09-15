@@ -142,8 +142,8 @@ namespace HardwareLedger
                 row.ReserveCode = res.ReserveCode;
                 row.Name = res.Name;
                 row.ModelNo = res.ModelNo;
-                row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
-                row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
+                row.State = DBAccessor.Instance.GetItemState(res);
+                row.Type = DBAccessor.Instance.GetItemType(res);
                 row.CollectState = new CollectState(res);
                 row.ShippingState = new ShippingState(res);
                 row.InsertTime = res.InsertTime;
@@ -167,5 +167,10 @@ namespace HardwareLedger
                 return res;
             }
         }
+    }
+
+    public interface IReserveReceiver
+    {
+        void SetResult(Reserve res);
     }
 }

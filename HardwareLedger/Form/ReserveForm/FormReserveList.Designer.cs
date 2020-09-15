@@ -146,7 +146,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormReserveList";
             this.Text = "予備機一覧";
             ((System.ComponentModel.ISupportInitialize)(this.dgvReserveList)).EndInit();

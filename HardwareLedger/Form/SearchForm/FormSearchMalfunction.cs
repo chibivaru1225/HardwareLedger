@@ -136,9 +136,9 @@ namespace HardwareLedger
                 var row = new MalfunctionRow();
 
                 row.MalfunctionCode = res.MalfunctionCode;
-                row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
-                row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
-                row.Shop = DBAccessor.Instance.ShopTypes.Where(x => x.ShopCode == res.ShopCode).FirstOrDefault();
+                row.State = DBAccessor.Instance.GetItemState(res);
+                row.Type = DBAccessor.Instance.GetItemType(res);
+                row.Shop = DBAccessor.Instance.GetShop(res);
                 row.Name = res.Name;
                 row.ModelNo = res.ModelNo;
                 row.InsertTime = res.InsertTime;
@@ -163,5 +163,10 @@ namespace HardwareLedger
                 return res;
             }
         }
+    }
+
+    public interface IMalfunctionReceiver
+    {
+        void SetResult(Malfunction mal);
     }
 }

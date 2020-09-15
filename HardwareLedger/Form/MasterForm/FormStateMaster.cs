@@ -171,6 +171,7 @@ namespace HardwareLedger
             {
                 if (k is ApplyKbns type && type != ApplyKbns.NONE)
                 {
+                    //その区分を含んでいればtrueになる
                     var item = new ApplyRow();
                     item.Kbns = type;
                     item.IsEnable = kbn == null ? false : kbn.Enclose(type);
@@ -199,6 +200,10 @@ namespace HardwareLedger
             }
         }
 
+        /// <summary>
+        /// 適用されている区分を調べる
+        /// </summary>
+        /// <returns></returns>
         private ApplyKbns GetApplyKbnsForList()
         {
             ApplyKbns kbns = ApplyKbns.NONE;
@@ -212,6 +217,11 @@ namespace HardwareLedger
             return kbns;
         }
 
+        /// <summary>
+        /// 適用中の区分と指定された区分が等価か調べる
+        /// </summary>
+        /// <param name="akbn"></param>
+        /// <returns></returns>
         private bool EqualApplyKbn(ApplyKbns akbn)
         {
             return akbn == GetApplyKbnsForList();
@@ -254,6 +264,10 @@ namespace HardwareLedger
 
             public Color RowColor { get; set; }
 
+            /// <summary>
+            /// ItemState→ItemStateRow変換
+            /// </summary>
+            /// <param name="res"></param>
             public static implicit operator ItemStateRow(ItemState res)
             {
                 var row = new ItemStateRow();
@@ -266,6 +280,10 @@ namespace HardwareLedger
                 return row;
             }
 
+            /// <summary>
+            /// ItemStateRow→ItemState変換
+            /// </summary>
+            /// <param name="row"></param>
             public static implicit operator ItemState(ItemStateRow row)
             {
                 var res = new ItemState();

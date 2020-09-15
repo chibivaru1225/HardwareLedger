@@ -8,8 +8,21 @@ using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public class Malfunction : DBObject.Malfunction, IPgmRow, ITypeCodeColumn
+    public class Malfunction : DBObject.Malfunction, IPgmRow, ITypeCode, IStateCode, IShopCode
     {
+        public int StateCode
+        {
+            get
+            {
+                return this.ItemStateCode;
+            }
+            set
+            {
+                this.ItemStateCode = value;
+            }
+        }
+
+
         public ZaikoType Zaiko
         {
             get
@@ -22,14 +35,21 @@ namespace HardwareLedger
             }
         }
 
+        public int TypeCode
+        {
+            get
+            {
+                return this.ItemTypeCode;
+            }
+            set
+            {
+                this.TypeCode = value;
+            }
+        }
+
         public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
         public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
-
-        public int GetTypeCode()
-        {
-            return this.ItemTypeCode;
-        }
 
         public IPgmRow DownCastToIPgmRow(DBData data)
         {
@@ -54,5 +74,10 @@ namespace HardwareLedger
 
             return dbdata;
         }
+    }
+
+    public interface IMalfunctionCode
+    {
+        int MalfunctionCode { get; set; }
     }
 }

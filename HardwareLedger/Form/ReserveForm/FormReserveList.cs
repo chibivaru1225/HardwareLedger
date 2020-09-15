@@ -138,6 +138,10 @@ namespace HardwareLedger
 
             public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
+            /// <summary>
+            /// Reserve→ReserveListRow変換
+            /// </summary>
+            /// <param name="res"></param>
             public static implicit operator ReserveListRow(Reserve res)
             {
                 var row = new ReserveListRow();
@@ -156,6 +160,10 @@ namespace HardwareLedger
                 return row;
             }
 
+            /// <summary>
+            /// ReserveListRow→Reserve変換
+            /// </summary>
+            /// <param name="row"></param>
             public static implicit operator Reserve(ReserveListRow row)
             {
                 var res = new Reserve();

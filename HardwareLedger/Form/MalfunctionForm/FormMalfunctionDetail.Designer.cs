@@ -47,6 +47,8 @@
             this.txtModelNo = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.cbxZaiko = new System.Windows.Forms.ComboBox();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnReprint = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label5
@@ -63,7 +65,7 @@
             this.txtUpdateTime.Location = new System.Drawing.Point(85, 212);
             this.txtUpdateTime.Name = "txtUpdateTime";
             this.txtUpdateTime.ReadOnly = true;
-            this.txtUpdateTime.Size = new System.Drawing.Size(185, 22);
+            this.txtUpdateTime.Size = new System.Drawing.Size(345, 22);
             this.txtUpdateTime.TabIndex = 7;
             // 
             // label4
@@ -80,15 +82,15 @@
             this.txtInsertTime.Location = new System.Drawing.Point(85, 184);
             this.txtInsertTime.Name = "txtInsertTime";
             this.txtInsertTime.ReadOnly = true;
-            this.txtInsertTime.Size = new System.Drawing.Size(185, 22);
+            this.txtInsertTime.Size = new System.Drawing.Size(345, 22);
             this.txtInsertTime.TabIndex = 6;
             // 
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(144, 240);
+            this.btnCancel.Location = new System.Drawing.Point(118, 240);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(126, 51);
+            this.btnCancel.Size = new System.Drawing.Size(100, 51);
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "キャンセル";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -97,7 +99,7 @@
             // 
             this.btnUpdate.Location = new System.Drawing.Point(12, 240);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(126, 51);
+            this.btnUpdate.Size = new System.Drawing.Size(100, 51);
             this.btnUpdate.TabIndex = 8;
             this.btnUpdate.Text = "更新";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -117,7 +119,7 @@
             this.cbxState.FormattingEnabled = true;
             this.cbxState.Location = new System.Drawing.Point(85, 97);
             this.cbxState.Name = "cbxState";
-            this.cbxState.Size = new System.Drawing.Size(185, 23);
+            this.cbxState.Size = new System.Drawing.Size(345, 23);
             this.cbxState.TabIndex = 3;
             // 
             // label2
@@ -133,7 +135,7 @@
             // 
             this.txtName.Location = new System.Drawing.Point(85, 41);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(185, 22);
+            this.txtName.Size = new System.Drawing.Size(345, 22);
             this.txtName.TabIndex = 1;
             // 
             // label1
@@ -151,7 +153,7 @@
             this.cbxType.FormattingEnabled = true;
             this.cbxType.Location = new System.Drawing.Point(85, 12);
             this.cbxType.Name = "cbxType";
-            this.cbxType.Size = new System.Drawing.Size(185, 23);
+            this.cbxType.Size = new System.Drawing.Size(345, 23);
             this.cbxType.TabIndex = 0;
             // 
             // label8
@@ -169,7 +171,7 @@
             this.cbxShop.FormattingEnabled = true;
             this.cbxShop.Location = new System.Drawing.Point(85, 126);
             this.cbxShop.Name = "cbxShop";
-            this.cbxShop.Size = new System.Drawing.Size(185, 23);
+            this.cbxShop.Size = new System.Drawing.Size(345, 23);
             this.cbxShop.TabIndex = 4;
             // 
             // label6
@@ -185,7 +187,7 @@
             // 
             this.txtModelNo.Location = new System.Drawing.Point(85, 69);
             this.txtModelNo.Name = "txtModelNo";
-            this.txtModelNo.Size = new System.Drawing.Size(185, 22);
+            this.txtModelNo.Size = new System.Drawing.Size(345, 22);
             this.txtModelNo.TabIndex = 2;
             // 
             // label7
@@ -204,14 +206,36 @@
             this.cbxZaiko.FormattingEnabled = true;
             this.cbxZaiko.Location = new System.Drawing.Point(85, 155);
             this.cbxZaiko.Name = "cbxZaiko";
-            this.cbxZaiko.Size = new System.Drawing.Size(185, 23);
+            this.cbxZaiko.Size = new System.Drawing.Size(345, 23);
             this.cbxZaiko.TabIndex = 5;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnDelete.Location = new System.Drawing.Point(224, 240);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(100, 51);
+            this.btnDelete.TabIndex = 18;
+            this.btnDelete.Text = "削除";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            // 
+            // btnReprint
+            // 
+            this.btnReprint.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnReprint.Location = new System.Drawing.Point(330, 239);
+            this.btnReprint.Name = "btnReprint";
+            this.btnReprint.Size = new System.Drawing.Size(100, 52);
+            this.btnReprint.TabIndex = 25;
+            this.btnReprint.Text = "ラベル\r\n再印刷";
+            this.btnReprint.UseVisualStyleBackColor = true;
             // 
             // FormMalfunctionDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(279, 303);
+            this.ClientSize = new System.Drawing.Size(442, 303);
+            this.Controls.Add(this.btnReprint);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.cbxZaiko);
             this.Controls.Add(this.label6);
@@ -235,7 +259,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormMalfunctionDetail";
             this.Text = "故障機明細";
             this.ResumeLayout(false);
@@ -263,5 +286,7 @@
         private System.Windows.Forms.TextBox txtModelNo;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbxZaiko;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnReprint;
     }
 }

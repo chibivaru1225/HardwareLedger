@@ -62,6 +62,11 @@ namespace HardwareLedger
 
         private void dgvShippingList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                FormShippingDetail.Instance.Shipping = bindinglist[e.RowIndex];
+                FormShippingDetail.Instance.Show();
+            }
         }
 
         private void dgvShippingList_RowPrePaint(object sender, DataGridViewRowPrePaintEventArgs e)
@@ -139,6 +144,13 @@ namespace HardwareLedger
             {
                 var res = new ReserveShipping();
 
+                res.ReserveShippingCode = row.ShippingCode;
+                res.ReserveCode = row.ReserveCode;
+                res.State = row.State?.ItemStateCode ?? 0;
+                res.ShopCode = row.Shop?.ShopCode ?? 0;
+                res.ShippingTime = row.ShippingTime;
+                res.InsertTime = row.InsertTime;
+                res.UpdateTime = row.UpdateTime;
                 //res.CollectScheduleCode = row.ScheduleCode;
                 //res.RelationCode = row.RelationCode;
                 //res.ItemTypeCode = row.Type.ItemTypeCode;

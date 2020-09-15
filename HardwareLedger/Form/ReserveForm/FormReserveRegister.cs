@@ -93,8 +93,8 @@ namespace HardwareLedger
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 Clear();
 
-                FormReportTest.Instance.SetData(res);
-                FormReportTest.Instance.Show();
+                var form = new FormReportTest(res);
+                form.Show();
             }
         }
 

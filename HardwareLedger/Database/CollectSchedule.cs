@@ -7,8 +7,32 @@ using System.Threading.Tasks;
 
 namespace HardwareLedger
 {
-    public class CollectSchedule : DBObject.CollectSchedule, IPgmRow
-    {
+    public class CollectSchedule : DBObject.CollectSchedule, IPgmRow, IShopCode, ITypeCode, IStateCode
+    { 
+        public int TypeCode
+        {
+            get
+            {
+                return this.ItemTypeCode;
+            }
+            set
+            {
+                this.ItemTypeCode = value;
+            }
+        }
+
+        public int StateCode
+        {
+            get
+            {
+                return this.StateCode;
+            }
+            set
+            {
+                this.ItemStateCode = value;
+            }
+        }
+
         public IPgmRow DownCastToIPgmRow(DBData data)
         {
             foreach (var column in data.Properties())

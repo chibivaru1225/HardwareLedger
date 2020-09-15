@@ -34,8 +34,8 @@ namespace HardwareLedger
         }
     }
 
-    public interface ITypeCodeColumn
+    public interface ITypeCode
     {
-        int GetTypeCode();
+        int TypeCode { get; set; }
     }
 }

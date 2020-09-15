@@ -51,6 +51,17 @@ namespace HardwareLedger
             this.btnShipping.Click += btnShipping_Click;
             this.btnUpdate.Click += btnUpdate_Click;
             this.btnCancel.Click += btnCancel_Click;
+            this.btnDelete.Click += btnDelete_Click;
+            this.btnReprint.Click += btnReprint_Click;
+        }
+
+        private void btnReprint_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, "ラベルを再印刷しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var form = new FormReportTest(ReserveDetail);
+                form.Show();
+            }
         }
 
         private void btnShipping_Click(object sender, EventArgs e)
@@ -116,6 +127,33 @@ namespace HardwareLedger
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, "削除しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var rel = DBAccessor.Instance.GetRelation(ReserveDetail);
+
+                if (rel != null)
+                {
+                    rel.MalfunctionCode = null;
+                    DBAccessor.Instance.Relations = DBAccessor.Instance.UpsertJson<Relation, DBObject.Relation>(rel);
+                }
+
+                var shi = DBAccessor.Instance.GetShipping(ReserveDetail);
+
+                if (shi != null)
+                {
+                    DBAccessor.Instance.ReserveShippings = DBAccessor.Instance.RemoveJson<ReserveShipping, DBObject.ReserveShipping>(shi);
+                }
+
+                DBAccessor.Instance.Reserves = DBAccessor.Instance.RemoveJson<Reserve, DBObject.Reserve>(ReserveDetail);
+
+                MessageBox.Show(this, "削除しました", "ハードウェア管理");
+
+                this.Visible = false;
+            }
         }
 
         private void btnCollectRegist_Click(object sender, EventArgs e)

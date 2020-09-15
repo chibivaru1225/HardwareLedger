@@ -60,8 +60,8 @@ namespace HardwareLedger
         }
     }
 
-    public interface IStateCodeColumn
+    public interface IStateCode
     {
-        int GetStateCode();
+        int StateCode { get; set; }
     }
 }

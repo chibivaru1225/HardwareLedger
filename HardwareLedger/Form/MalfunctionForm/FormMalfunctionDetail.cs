@@ -52,6 +52,17 @@ namespace HardwareLedger
 
             this.btnUpdate.Click += btnUpdate_Click;
             this.btnCancel.Click += btnCancel_Click;
+            this.btnDelete.Click += btnDelete_Click;
+            this.btnReprint.Click += btnReprint_Click;
+        }
+
+        private void btnReprint_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, "ラベルを再印刷しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var form = new FormReportTest(MalfunctionDetail);
+                form.Show();
+            }
         }
 
         private void FormMalfunctionDetail_VisibleChanged(object sender, EventArgs e)
@@ -112,8 +123,8 @@ namespace HardwareLedger
 
                 if (tcode != MalfunctionDetail.ItemTypeCode ||
                     scode != MalfunctionDetail.ItemStateCode ||
-                    name != MalfunctionDetail.Name || 
-                    hcode != MalfunctionDetail.ShopCode || 
+                    name != MalfunctionDetail.Name ||
+                    hcode != MalfunctionDetail.ShopCode ||
                     modelno != MalfunctionDetail.ModelNo)
                 {
                     if (MessageBox.Show(this, "行が変更されています。保存しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
@@ -136,6 +147,25 @@ namespace HardwareLedger
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Visible = false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(this, "削除しますか？", "ハードウェア管理", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                var rel = DBAccessor.Instance.GetRelation(MalfunctionDetail);
+
+                if (rel != null)
+                {
+                    rel.MalfunctionCode = null;
+                    DBAccessor.Instance.Relations = DBAccessor.Instance.UpsertJson<Relation, DBObject.Relation>(rel);
+                }
+
+                DBAccessor.Instance.Malfunctions = DBAccessor.Instance.RemoveJson<Malfunction, DBObject.Malfunction>(MalfunctionDetail);
+                MessageBox.Show(this, "削除しました", "ハードウェア管理");
+
+                this.Visible = false;
+            }
         }
 
         private void SetComboBoxes()

@@ -9,8 +9,32 @@ using static HardwareLedger.Enum;
 
 namespace HardwareLedger
 {
-    public class Reserve : DBObject.Reserve, IPgmRow, IStateCodeColumn, ITypeCodeColumn
+    public class Reserve : DBObject.Reserve, IPgmRow, IReserveCode, IStateCode, ITypeCode
     {
+        public int StateCode
+        {
+            get
+            {
+                return ItemStateCode;
+            }
+            set
+            {
+                ItemStateCode = value;
+            }
+        }
+
+        public int TypeCode
+        {
+            get
+            {
+                return ItemTypeCode;
+            }
+            set
+            {
+                ItemTypeCode = value;
+            }
+        }
+
         public ZaikoType Zaiko
         {
             get
@@ -26,17 +50,6 @@ namespace HardwareLedger
         public String InsertTimeStr => InsertTime.ToString("yyyy/MM/dd HH:mm:ss");
 
         public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
-
-
-        public int GetStateCode()
-        {
-            return ItemStateCode;
-        }
-
-        public int GetTypeCode()
-        {
-            return ItemTypeCode;
-        }
 
         public IPgmRow DownCastToIPgmRow(DBData data)
         {
@@ -56,10 +69,15 @@ namespace HardwareLedger
         {
             var dbdata = new DBObject.Reserve();
 
-            foreach(var column in dbdata.Properties())
+            foreach (var column in dbdata.Properties())
                 dbdata[column] = this[column];
 
             return dbdata;
         }
+    }
+
+    public interface IReserveCode
+    {
+        int ReserveCode { get; set; }
     }
 }

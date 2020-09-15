@@ -21,22 +21,20 @@ namespace HardwareLedger
             btnCollectScheduleAdd.Click += btnCollectScheduleAdd_Click;
             btnCollectScheduleList.Click += btnCollectScheduleList_Click;
 
+            btnDataPrint.Click += btnDataPrint_Click;
+
             btnTypeMaster.Click += btnTypeMaster_Click;
             btnStateMaster.Click += btnStateMaster_Click;
             btnShopMaster.Click += btnShopMaster_Click;
         }
 
+        private void btnDataPrint_Click(object sender, EventArgs e)
+        {
+            FormOutputExcel.Instance.Show();
+        }
+
         private void btnShippingList_Click(object sender, EventArgs e)
         {
-            //var row = (from a in DBAccessor.Instance.Reserves
-            //            orderby a.UpdateTime descending
-            //            select a).FirstOrDefault();
-
-            //if (row != null)
-            //{
-            //    FormReportTest.Instance.SetData(row);
-            //    FormReportTest.Instance.Show();
-            //}
             FormShippingList.Instance.Show();
         }
 

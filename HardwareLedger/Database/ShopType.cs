@@ -36,8 +36,8 @@ namespace HardwareLedger
         }
     }
 
-    public interface IShopCodeColumn
+    public interface IShopCode
     {
-        int GetShopCode();
+        int ShopCode { get; set; }
     }
 }

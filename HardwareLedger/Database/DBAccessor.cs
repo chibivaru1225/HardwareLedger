@@ -29,7 +29,7 @@ namespace HardwareLedger
             }
         }
 
-        //public LiteDatabase DB { get; private set; }
+        private Dictionary<Type, List<IPgmRow>> data;
 
         public List<Reserve> Reserves { get; set; }
 
@@ -49,7 +49,7 @@ namespace HardwareLedger
 
         private DBAccessor()
         {
-            var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            //var documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
             //SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
             //Directory = documents + @"\HardwareLedger\Database\{0}.json";
@@ -57,6 +57,8 @@ namespace HardwareLedger
 
             //SafeCreateDirectory(documents + @"\HardwareLedger\Database\");
             SafeCreateDirectory(@"Database\");
+
+            data = new Dictionary<Type, List<IPgmRow>>();
 
             Reserves = ReadJson<Reserve, DBObject.Reserve>();
             ShopTypes = ReadJson<ShopType, DBObject.ShopType>();
@@ -66,8 +68,80 @@ namespace HardwareLedger
             Relations = ReadJson<Relation, DBObject.Relation>();
             CollectSchedules = ReadJson<CollectSchedule, DBObject.CollectSchedule>();
             ReserveShippings = ReadJson<ReserveShipping, DBObject.ReserveShipping>();
+
+
+
+
+            data.Add(typeof(Reserve), Reserves.Cast<IPgmRow>().ToList());
+            data.Add(typeof(ShopType), ShopTypes.Cast<IPgmRow>().ToList());
+            data.Add(typeof(ItemType), ItemTypes.Cast<IPgmRow>().ToList());
+            data.Add(typeof(ItemState), ItemStates.Cast<IPgmRow>().ToList());
+            data.Add(typeof(Malfunction), Malfunctions.Cast<IPgmRow>().ToList());
+            data.Add(typeof(Relation), Relations.Cast<IPgmRow>().ToList());
+            data.Add(typeof(CollectSchedule), CollectSchedules.Cast<IPgmRow>().ToList());
+            data.Add(typeof(ReserveShipping), ReserveShippings.Cast<IPgmRow>().ToList());
         }
 
+        public List<T> Get<T>() where T : DBData, IPgmRow, new()
+        {
+            if (data.ContainsKey(typeof(T)))
+            {
+                return data[typeof(T)].Cast<T>().ToList();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        public void Upsert<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            if (data.ContainsKey(typeof(T)))
+            {
+                data[typeof(T)] = UpsertJson<T, D>(rows).Cast<IPgmRow>().ToList();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        public void Remove<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            if (data.ContainsKey(typeof(T)))
+            {
+                data[typeof(T)] = RemoveJson<T, D>(rows).Cast<IPgmRow>().ToList();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        public List<T> Reflesh<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
+        {
+            if (data.ContainsKey(typeof(T)))
+            {
+                var d = ReadJson<T, D>();
+                data[typeof(T)] = d.Cast<IPgmRow>().ToList();
+                return d;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+        }
+
+        #region JSON Operating
+
+        /// <summary>
+        /// 登録･更新を行う
+        /// DはTのスーパークラスでなければならない
+        /// </summary>
+        /// <typeparam name="T">Database直下のクラスを指定する。IPgmRowを実装している必要がある</typeparam>
+        /// <typeparam name="D">Database.DBObject下のクラスを指定する。DBDataを継承している必要がある</typeparam>
+        /// <param name="rows"></param>
+        /// <returns></returns>
         public List<T> UpsertJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
         {
             var filepath = String.Format(Directory, typeof(D).Name);
@@ -105,6 +179,14 @@ namespace HardwareLedger
             return ConvertList<T, D>(basedata);
         }
 
+        /// <summary>
+        /// 削除を行う
+        /// DはTのスーパークラスでなければならない
+        /// </summary>
+        /// <typeparam name="T">Database直下のクラスを指定する。IPgmRowを実装している必要がある</typeparam>
+        /// <typeparam name="D">Database.DBObject下のクラスを指定する。DBDataを継承している必要がある</typeparam>
+        /// <param name="rows"></param>
+        /// <returns></returns>
         public List<T> RemoveJson<T, D>(params T[] rows) where T : DBData, IPgmRow, new() where D : DBData, new()
         {
             var filepath = String.Format(Directory, typeof(D).Name);
@@ -140,79 +222,14 @@ namespace HardwareLedger
             return ConvertList<T, D>(basedata);
         }
 
-        //private void Upsert<T, D>(params T[] rows) where T : IPgmRow where D : DBData, new()
-        //{
-        //    var dd = new D();
-        //    var dbdata = DB.GetCollection<D>(typeof(D).Name);
-        //    var kcn = dd.GetKeyColumnName();
-
-        //    if (DB.BeginTrans())
-        //    {
-        //        foreach (var row in rows)
-        //        {
-        //            if (row is D)
-        //            {
-        //                var drow = row.UpCastToDBData() as D;
-        //                var dkcn = drow[kcn];
-        //                var dbdr = dbdata.Find(x => x[kcn] == dkcn).FirstOrDefault();
-
-        //                if (dbdr == null)
-        //                    dbdata.Insert(drow);
-        //                else
-        //                    dbdr.Copy(drow);
-        //            }
-        //            else
-        //            {
-        //                throw new InvalidOperationException();
-        //            }
-        //        }
-
-        //        if (DB.Commit() == false)
-        //        {
-        //            throw new InvalidOperationException();
-        //        }
-        //    }
-        //}
-
-        //public void Update<T, D>(params T[] rows) where T : PgmRow where D : DBData, new()
-        //{
-        //    var dbd = DB.GetCollection<D>(typeof(D).Name);
-        //    var dd = new D();
-        //    var kcn = dd.GetKeyColumnName();
-
-        //    foreach (var row in rows)
-        //    {
-        //        if (row.Convertible<D>())
-        //        {
-        //            var drow = row.Convert<D>();
-        //            var dkcn = drow[kcn];
-
-        //            var dbdr = dbd.Find(x => x[kcn] == dkcn).FirstOrDefault();
-
-        //            if (dbdr == null)
-        //                dbd.Insert(drow);
-        //            else
-        //                dbdr.Copy(drow);
-        //        }
-        //    }
-        //}
-
-        //public List<T> Get<T, D>() where T : PgmRow, new() where D : DBData, new()
-        //{
-        //    var list = new List<T>();
-        //    var tt = new T();
-
-        //    var dres = DB.GetCollection<D>(typeof(D).Name);
-
-        //    foreach (var row in dres.Query().ToEnumerable())
-        //    {
-        //        if (tt.Convertible<D>())
-        //            list.Add((T)tt.Convert(row));
-        //    }
-
-        //    return list;
-        //}
-
+        /// <summary>
+        /// 読込を行う
+        /// DはTのスーパークラスでなければならない
+        /// </summary>
+        /// <typeparam name="T">Database直下のクラスを指定する。IPgmRowを実装している必要がある</typeparam>
+        /// <typeparam name="D">Database.DBObject下のクラスを指定する。DBDataを継承している必要がある</typeparam>
+        /// <param name="rows"></param>
+        /// <returns></returns>
         public List<T> ReadJson<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
         {
             var filepath = String.Format(Directory, typeof(D).Name);
@@ -246,6 +263,12 @@ namespace HardwareLedger
             return list;
         }
 
+        /// <summary>
+        /// 読込を行う
+        /// </summary>
+        /// <typeparam name="D">Database.DBObject下のクラスを指定する。DBDataを継承している必要がある</typeparam>
+        /// <param name="rows"></param>
+        /// <returns></returns>
         private List<D> ReadJson<D>() where D : DBData, new()
         {
             var filepath = String.Format(Directory, typeof(D).Name);
@@ -261,6 +284,16 @@ namespace HardwareLedger
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// D型のリストをT型のリストに変換する
+        /// D→T変換不可能であれば例外をスローする
+        /// </summary>
+        /// <typeparam name="T">IPgmRow型</typeparam>
+        /// <typeparam name="D">DBData型</typeparam>
+        /// <param name="list">D型のリスト</param>
+        /// <returns>T型のリスト</returns>
         private List<T> ConvertList<T, D>(List<D> list) where T : DBData, IPgmRow, new() where D : DBData, new()
         {
             var lst = new List<T>();
@@ -283,29 +316,7 @@ namespace HardwareLedger
             return lst;
         }
 
-        //private List<T> Get<T, D>() where T : DBData, IPgmRow, new() where D : DBData, new()
-        //{
-        //    var list = new List<T>();
-
-        //    var dres = DB.GetCollection<D>(typeof(D).Name);
-
-        //    foreach (var row in dres.Query().ToEnumerable())
-        //    {
-        //        var drow = new T();
-
-        //        if (drow.PossibleDownCast<D>())
-        //        {
-        //            drow.DownCastToIPgmRow(row);
-        //            list.Add(drow);
-        //        }
-        //        else
-        //        {
-        //            throw new InvalidOperationException();
-        //        }
-        //    }
-
-        //    return list;
-        //}
+        #region spam method
 
         public CollectSchedule GetCollectSchedule(Reserve reserve)
         {
@@ -390,33 +401,87 @@ namespace HardwareLedger
             return r2;
         }
 
-        public ItemState GetItemState(IStateCodeColumn poco)
+        /// <summary>
+        /// IReserveCodeを実装しているインスタンスからReserveを取得する
+        /// </summary>
+        /// <param name="res"></param>
+        /// <returns></returns>
+        public Reserve GetReserve(IReserveCode res)
+        {
+            var r1 = (from a in Reserves
+                      where a.ReserveCode == res.ReserveCode
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
+        public Relation GetRelation(Malfunction mal)
+        {
+            var r1 = (from a in Relations
+                      where a.MalfunctionCode == mal.MalfunctionCode
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
+        public Relation GetRelation(Reserve res)
+        {
+            var r1 = (from a in Relations
+                      where a.ReserveCode == res.ReserveCode
+                      select a).FirstOrDefault();
+
+            return r1;
+        }
+
+        /// <summary>
+        /// IStateCodeを実装しているインスタンスからItemStateを取得する
+        /// </summary>
+        /// <param name="poco"></param>
+        /// <returns></returns>
+        public ItemState GetItemState(IStateCode poco)
         {
             var r1 = (from a in ItemStates
-                      where a.ItemStateCode == poco.GetStateCode()
+                      where a.ItemStateCode == poco.StateCode
                       select a).FirstOrDefault();
 
             return r1;
         }
 
-        public ShopType GetShop(IShopCodeColumn poco)
+        /// <summary>
+        /// IShopCodeを実装しているインスタンスからShopTypeを取得する
+        /// </summary>
+        /// <param name="poco"></param>
+        /// <returns></returns>
+        public ShopType GetShop(IShopCode poco)
         {
             var r1 = (from a in ShopTypes
-                      where a.ShopCode == poco.GetShopCode()
+                      where a.ShopCode == poco.ShopCode
                       select a).FirstOrDefault();
 
             return r1;
         }
 
-        public ItemType GetItemType(ITypeCodeColumn poco)
+        /// <summary>
+        /// ITypeCodeを実装しているインスタンスからItemTypeを取得する
+        /// </summary>
+        /// <param name="poco"></param>
+        /// <returns></returns>
+        public ItemType GetItemType(ITypeCode poco)
         {
             var r1 = (from a in ItemTypes
-                      where a.ItemTypeCode == poco.GetTypeCode()
+                      where a.ItemTypeCode == poco.TypeCode
                       select a).FirstOrDefault();
 
             return r1;
         }
 
+        #endregion
+
+        /// <summary>
+        /// 指定された型のキー項目の最大値を取得する
+        /// </summary>
+        /// <typeparam name="D">DBData型</typeparam>
+        /// <returns>キー項目の最大値 1行もなければ0</returns>
         public int MaxUniqueNumber<D>() where D : DBData, new()
         {
             var d = new D();
@@ -428,133 +493,6 @@ namespace HardwareLedger
             var max = dd.Max(x => x[d.GetKeyColumnName()]);
 
             return (int)max;
-        }
-
-        //public List<D> Get<D>() where D : DBData
-        //{
-        //    //var list = new List<T>();
-
-            //    //var dres = DB.GetCollection<D>(typeof(D).Name);
-
-            //    //foreach (var row in dres.Query().ToEnumerable())
-            //    //{
-            //    //    if (row is T trow)
-            //    //    {
-            //    //        list.Add(trow);
-            //    //    }
-            //    //}
-
-            //    return DB.GetCollection<D>(typeof(D).Name).Query().ToList();
-            //}
-
-        private void SetDummyData()
-        {
-            if (ItemTypes.Count() == 0)
-            {
-                ItemTypes.AddRange(new List<ItemType>
-                {
-                    new ItemType
-                    {
-                        ItemTypeCode = 1,
-                        ItemTypeName = "デスクトップPC"
-                    },
-                    new ItemType
-                    {
-                        ItemTypeCode = 2,
-                        ItemTypeName = "ノートPC"
-                    },
-                    new ItemType
-                    {
-                        ItemTypeCode = 3,
-                        ItemTypeName = "プリンタ"
-                    },
-                });
-
-                UpsertJson<ItemType, DBObject.ItemType>(ItemTypes.ToArray());
-            }
-
-            if (ItemStates.Count() == 0)
-            {
-                ItemStates.AddRange(new List<ItemState>
-                {
-                    new ItemState
-                    {
-                        ItemStateCode = 1,
-                        StateName = "テストA",
-                        ApplyKbnValue = ApplyKbns.Reserve,
-                        StateColorValue = Color.White,
-                    },
-                    new ItemState
-                    {
-                        ItemStateCode = 2,
-                        StateName = "テストB",
-                        ApplyKbnValue = ApplyKbns.Malfunction,
-                        StateColorValue = Color.LightBlue,
-                    },
-                    new ItemState
-                    {
-                        ItemStateCode = 3,
-                        StateName = "テストC",
-                        ApplyKbnValue = ApplyKbns.Reserve | ApplyKbns.Malfunction,
-                        StateColorValue = Color.LightGreen,
-                    },
-                    new ItemState
-                    {
-                        ItemStateCode = 4,
-                        StateName = "テストD",
-                        ApplyKbnValue = ApplyKbns.NONE,
-                        StateColorValue = Color.Red,
-                    },
-                    new ItemState
-                    {
-                        ItemStateCode = 5,
-                        StateName = "テストE",
-                        ApplyKbnValue = ApplyKbns.MalfunctionState,
-                        StateColorValue = Color.Red,
-                    },
-                    new ItemState
-                    {
-                        ItemStateCode = 6,
-                        StateName = "テストF",
-                        ApplyKbnValue = ApplyKbns.CollectionState,
-                        StateColorValue = Color.Red,
-                    },
-                });
-
-                UpsertJson<ItemState, DBObject.ItemState>(ItemStates.ToArray());
-            }
-
-
-            //Reserves.AddRange(new List<Reserve>
-            //{
-            //    new Reserve
-            //    {
-            //        ReserveCode = 1,
-            //        Name = "AAA",
-            //        ItemTypeCode = 1,
-            //        StateCode = 1,
-            //        InsertTime = DateTime.Now,
-            //        UpdateTime = DateTime.Now,
-            //    },
-            //    new Reserve
-            //    {
-            //        ReserveCode = 2,
-            //        Name = "BBB",
-            //        ItemTypeCode = 1,
-            //        StateCode = 1,
-            //        InsertTime = DateTime.Now,
-            //        UpdateTime = DateTime.Now,
-            //    },
-            //    new Reserve
-            //    {
-            //        ReserveCode = 3,
-            //        Name = "CCC",
-            //        ItemTypeCode = 1,
-            //        StateCode = 1,
-            //        InsertTime = DateTime.Now,
-            //        UpdateTime = DateTime.Now,
-            //    },
-            //});
         }
 
         private static DirectoryInfo SafeCreateDirectory(string path)

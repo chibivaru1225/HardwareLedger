@@ -43,7 +43,7 @@
             this.btnTypeMaster = new System.Windows.Forms.Button();
             this.btnStateMaster = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDataPrint = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -185,7 +185,7 @@
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.button2);
+            this.groupBox4.Controls.Add(this.btnDataPrint);
             this.groupBox4.Location = new System.Drawing.Point(9, 179);
             this.groupBox4.Margin = new System.Windows.Forms.Padding(0, 4, 0, 0);
             this.groupBox4.Name = "groupBox4";
@@ -195,15 +195,14 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "印刷";
             // 
-            // button2
+            // btnDataPrint
             // 
-            this.button2.Enabled = false;
-            this.button2.Location = new System.Drawing.Point(7, 22);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(150, 50);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "データ出力";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDataPrint.Location = new System.Drawing.Point(7, 22);
+            this.btnDataPrint.Name = "btnDataPrint";
+            this.btnDataPrint.Size = new System.Drawing.Size(150, 50);
+            this.btnDataPrint.TabIndex = 0;
+            this.btnDataPrint.Text = "データ出力";
+            this.btnDataPrint.UseVisualStyleBackColor = true;
             // 
             // FormMenu
             // 
@@ -219,7 +218,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormMenu";
             this.Text = "ハードウェア管理";
             this.groupBox1.ResumeLayout(false);
@@ -245,7 +243,7 @@
         private System.Windows.Forms.Button btnMalfunctionList;
         private System.Windows.Forms.Button btnMalfunctionRegister;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDataPrint;
         private System.Windows.Forms.Button btnShippingList;
     }
 }

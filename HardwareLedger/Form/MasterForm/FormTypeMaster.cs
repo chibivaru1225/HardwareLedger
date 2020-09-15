@@ -149,6 +149,10 @@ namespace HardwareLedger
 
             public String Name { get; set; }
 
+            /// <summary>
+            /// ItemType→ItemTypeRow変換
+            /// </summary>
+            /// <param name="type"></param>
             public static implicit operator ItemTypeRow(ItemType type)
             {
                 var row = new ItemTypeRow();
@@ -159,6 +163,10 @@ namespace HardwareLedger
                 return row;
             }
 
+            /// <summary>
+            /// ItemTypeRow→ItemType変換
+            /// </summary>
+            /// <param name="row"></param>
             public static implicit operator ItemType(ItemTypeRow row)
             {
                 var type = new ItemType();

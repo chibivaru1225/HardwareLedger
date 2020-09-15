@@ -7,16 +7,18 @@ using System.Threading.Tasks;
 
 namespace HardwareLedger
 {
-    public class ReserveShipping : DBObject.ReserveShipping, IPgmRow, IStateCodeColumn, IShopCodeColumn
+    public class ReserveShipping : DBObject.ReserveShipping, IPgmRow, IReserveCode, IStateCode, IShopCode
     {
-        public int GetStateCode()
+        public int StateCode
         {
-            return this.State;
-        }
-
-        public int GetShopCode()
-        {
-            return this.ShopCode;
+            get
+            {
+                return this.State;
+            }
+            set
+            {
+                this.State = value;
+            }
         }
 
         public IPgmRow DownCastToIPgmRow(DBData data)

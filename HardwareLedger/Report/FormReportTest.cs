@@ -14,29 +14,12 @@ namespace HardwareLedger
     {
         private ReportRow row;
 
-        private static FormReportTest instance;
-
-        public static FormReportTest Instance
-        {
-            get
-            {
-                if (instance == null)
-                    instance = new FormReportTest();
-
-                return instance;
-            }
-        }
-
-        public void SetData(ReportRow row)
-        {
-            this.row = row;
-        }
-
-        private FormReportTest()
+        public FormReportTest(ReportRow row)
         {
             InitializeComponent();
 
             this.FormClosing += FormReportTest_FormClosing;
+            this.row = row;
         }
 
         private void FormReportTest_FormClosing(object sender, FormClosingEventArgs e)
@@ -50,13 +33,16 @@ namespace HardwareLedger
 
         private void FormReportTest_Load(object sender, EventArgs e)
         {
-            this.ReportRowBindingSource.Add(this.row);
-            //this.reportViewer1.RefreshReport();
-            //this.reportViewer1.RefreshReport();
+            this.ReportRowBindingSource.Clear();
             this.reportViewer1.RefreshReport();
-            //this.reportViewer1.Report
+
+            this.ReportRowBindingSource.Add(this.row);
+            this.reportViewer1.RefreshReport();
         }
 
+        /// <summary>
+        /// ラベル印刷用行
+        /// </summary>
         public class ReportRow
         {
             public string Type { get; set; }
@@ -72,6 +58,10 @@ namespace HardwareLedger
             public string Code { get; set; }
 
 
+            /// <summary>
+            /// 予備機→ラベル印刷用行変換
+            /// </summary>
+            /// <param name="res"></param>
             public static implicit operator ReportRow(Reserve res)
             {
                 var row = new ReportRow();
@@ -86,6 +76,10 @@ namespace HardwareLedger
                 return row;
             }
 
+            /// <summary>
+            /// 故障機→ラベル印刷用行変換
+            /// </summary>
+            /// <param name="mal"></param>
             public static implicit operator ReportRow(Malfunction mal)
             {
                 var row = new ReportRow();

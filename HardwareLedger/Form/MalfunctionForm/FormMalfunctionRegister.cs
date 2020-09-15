@@ -104,8 +104,8 @@ namespace HardwareLedger
                 MessageBox.Show(this, "登録しました", "ハードウェア管理");
                 this.Visible = false;
 
-                FormReportTest.Instance.SetData(mar);
-                FormReportTest.Instance.Show();
+                var form = new FormReportTest(mar);
+                form.Show();
             }
         }
 

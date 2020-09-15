@@ -149,9 +149,9 @@ namespace HardwareLedger
                 row.RelationCode = res.RelationCode;
                 row.ReserveCode = DBAccessor.Instance.GetRelation(res).ReserveCode;
                 row.MalfunctionCode = DBAccessor.Instance.GetRelation(res).MalfunctionCode;
-                row.State = DBAccessor.Instance.ItemStates.Where(x => x.ItemStateCode == res.ItemStateCode).FirstOrDefault();
-                row.Type = DBAccessor.Instance.ItemTypes.Where(x => x.ItemTypeCode == res.ItemTypeCode).FirstOrDefault();
-                row.Shop = DBAccessor.Instance.ShopTypes.Where(x => x.ShopCode == res.ShopCode).FirstOrDefault();
+                row.State = DBAccessor.Instance.GetItemState(res);
+                row.Type = DBAccessor.Instance.GetItemType(res);
+                row.Shop = DBAccessor.Instance.GetShop(res);
                 row.CollectScheduleDate = res.CollectScheduleTime;
                 row.CollectDate = res.CollectTime;
                 row.InsertTime = res.InsertTime;

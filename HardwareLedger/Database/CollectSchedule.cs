@@ -25,7 +25,7 @@ namespace HardwareLedger
         {
             get
             {
-                return this.StateCode;
+                return this.ItemStateCode;
             }
             set
             {

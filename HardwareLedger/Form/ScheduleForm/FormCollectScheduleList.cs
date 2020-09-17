@@ -99,7 +99,7 @@ namespace HardwareLedger
             chUpdateTime.DataPropertyName = nameof(ScheduleRow.UpdateTimeStr);
         }
 
-        private class ScheduleRow
+        private class ScheduleRow : DataGridViewRowBase, IListOrder
         {
             public int ScheduleCode { get; set; }
 
@@ -117,13 +117,19 @@ namespace HardwareLedger
 
             public string TypeStr => Type?.ItemTypeName ?? String.Empty;
 
+            public int? TypeCode => Type?.ItemTypeCode;
+
             public ItemState State { get; set; }
 
             public string StateStr => State?.StateName ?? String.Empty;
 
+            public int? StateCode => State?.ItemStateCode;
+
             public ShopType Shop { get; set; }
 
             public string ShopStr => Shop?.ShopNum ?? String.Empty;
+
+            public int? ShopCode => Shop?.ShopCode;
 
             public DateTime CollectScheduleDate { get; set; }
 
@@ -140,6 +146,45 @@ namespace HardwareLedger
             public DateTime UpdateTime { get; set; }
 
             public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
+
+            public IEnumerable<SortOrderProperty> RelatedProperties
+            {
+                get
+                {
+                    yield return new SortOrderProperty() { ComboboxColumnName = "回収予定コード", CellValueName = nameof(ScheduleCode), InnerValueName = nameof(ScheduleCode) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "予備機コード", CellValueName = nameof(ReserveCodeStr), InnerValueName = nameof(ReserveCode) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "故障機コード", CellValueName = nameof(MalfunctionCodeStr), InnerValueName = nameof(MalfunctionCode) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "種別", CellValueName = nameof(TypeStr), InnerValueName = nameof(TypeCode) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "状態", CellValueName = nameof(StateStr), InnerValueName = nameof(StateCode) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "店舗", CellValueName = nameof(ShopStr), InnerValueName = nameof(ShopCode) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "回収予定日時", CellValueName = nameof(CollectScheduleDateStr), InnerValueName = nameof(CollectScheduleDate) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "回収日時", CellValueName = nameof(CollectDateStr), InnerValueName = nameof(CollectDate) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "追加日時", CellValueName = nameof(InsertTimeStr), InnerValueName = nameof(InsertTime) };
+                    yield return new SortOrderProperty() { ComboboxColumnName = "変更日時", CellValueName = nameof(UpdateTimeStr), InnerValueName = nameof(UpdateTime) };
+                }
+            }
+
+            public override IEnumerable<string> Properties()
+            {
+                yield return nameof(ScheduleCode);
+                yield return nameof(RelationCode);
+                yield return nameof(ReserveCode);
+                yield return nameof(ReserveCodeStr);
+                yield return nameof(MalfunctionCode);
+                yield return nameof(MalfunctionCodeStr);
+                yield return nameof(Type);
+                yield return nameof(TypeStr);
+                yield return nameof(State);
+                yield return nameof(StateStr);
+                yield return nameof(CollectScheduleDate);
+                yield return nameof(CollectScheduleDateStr);
+                yield return nameof(CollectDate);
+                yield return nameof(CollectDateStr);
+                yield return nameof(InsertTime);
+                yield return nameof(InsertTimeStr);
+                yield return nameof(UpdateTime);
+                yield return nameof(UpdateTimeStr);
+            }
 
             public static implicit operator ScheduleRow(CollectSchedule res)
             {

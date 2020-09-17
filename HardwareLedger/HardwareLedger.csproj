@@ -283,6 +283,12 @@
     <Compile Include="Form\ReserveForm\FormShippingList.Designer.cs">
       <DependentUpon>FormShippingList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Form\SearchForm\FormSearchCondition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\SearchForm\FormSearchCondition.Designer.cs">
+      <DependentUpon>FormSearchCondition.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Form\SearchForm\FormSearchMalfunction.cs">
@@ -380,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\ReserveForm\FormShippingList.resx">
       <DependentUpon>FormShippingList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\SearchForm\FormSearchCondition.resx">
+      <DependentUpon>FormSearchCondition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

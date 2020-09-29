@@ -18,17 +18,17 @@ namespace HardwareLedger
         }
     }
 
-    public interface ISearchConditionReceiver
+    public interface ISearchConditionReceiver<T> where T : DataGridViewRowBase, IListOrder
     {
-
+        void SetSortedList(IEnumerable<T> list);
     }
 
     public interface IListOrder
     {
-        IEnumerable<SortOrderProperty> RelatedProperties { get; }
+        IEnumerable<SortOrderProperties> RelatedProperties { get; }
     }
 
-    public class SortOrderProperty
+    public class SortOrderProperties
     {
         /// <summary>
         /// セルに表示される値。これが基本

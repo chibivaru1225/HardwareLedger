@@ -39,6 +39,7 @@
             this.chCollectDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chInsertTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.chUpdateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCollectScheduleList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,12 +59,12 @@
             this.chInsertTime,
             this.chUpdateTime});
             this.dgvCollectScheduleList.Location = new System.Drawing.Point(9, 9);
-            this.dgvCollectScheduleList.Margin = new System.Windows.Forms.Padding(0);
+            this.dgvCollectScheduleList.Margin = new System.Windows.Forms.Padding(0, 0, 0, 3);
             this.dgvCollectScheduleList.MultiSelect = false;
             this.dgvCollectScheduleList.Name = "dgvCollectScheduleList";
             this.dgvCollectScheduleList.ReadOnly = true;
             this.dgvCollectScheduleList.RowTemplate.Height = 21;
-            this.dgvCollectScheduleList.Size = new System.Drawing.Size(1136, 486);
+            this.dgvCollectScheduleList.Size = new System.Drawing.Size(1136, 497);
             this.dgvCollectScheduleList.TabIndex = 0;
             // 
             // chReserveCode
@@ -127,11 +128,20 @@
             this.chUpdateTime.ReadOnly = true;
             this.chUpdateTime.Width = 150;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Location = new System.Drawing.Point(0, 509);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1154, 22);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
             // FormCollectScheduleList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1154, 504);
+            this.ClientSize = new System.Drawing.Size(1154, 531);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.dgvCollectScheduleList);
             this.Font = new System.Drawing.Font("MS UI Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -143,6 +153,7 @@
             this.Text = "故障機回収予定一覧";
             ((System.ComponentModel.ISupportInitialize)(this.dgvCollectScheduleList)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -158,5 +169,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn chCollectDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn chInsertTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn chUpdateTime;
+        private System.Windows.Forms.StatusStrip statusStrip1;
     }
 }

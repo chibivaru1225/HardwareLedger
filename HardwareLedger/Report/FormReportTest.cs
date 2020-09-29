@@ -12,6 +12,9 @@ namespace HardwareLedger
 {
     public partial class FormReportTest : Form
     {
+        /// <summary>
+        /// 印刷される行
+        /// </summary>
         private ReportRow row;
 
         public FormReportTest(ReportRow row)

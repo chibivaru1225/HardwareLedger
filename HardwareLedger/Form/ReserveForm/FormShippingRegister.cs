@@ -64,7 +64,6 @@ namespace HardwareLedger
                     {
                         ship = new ReserveShipping();
                         ship.ReserveShippingCode = DBAccessor.Instance.MaxUniqueNumber<DBObject.ReserveShipping>() + 1;
-                        //ship.ReserveShippingCode = ct.Count() == 0 ? 1 : ct.Max(x => x.ReserveShippingCode) + 1;
                         ship.InsertTime = DateTime.Now;
                     }
 

@@ -151,15 +151,6 @@ namespace HardwareLedger
                 res.ShippingTime = row.ShippingTime;
                 res.InsertTime = row.InsertTime;
                 res.UpdateTime = row.UpdateTime;
-                //res.CollectScheduleCode = row.ScheduleCode;
-                //res.RelationCode = row.RelationCode;
-                //res.ItemTypeCode = row.Type.ItemTypeCode;
-                //res.ItemStateCode = row.State.ItemStateCode;
-                //res.ShopCode = row.Shop.ShopCode;
-                //res.CollectScheduleTime = row.CollectScheduleDate;
-                //res.CollectTime = row.CollectDate;
-                //row.InsertTime = row.InsertTime;
-                //row.UpdateTime = row.UpdateTime;
 
                 return res;
             }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace HardwareLedger
 {
-    public partial class FormCollectScheduleList : Form
+    public partial class FormCollectScheduleList : Form, ISearchConditionReceiver<FormCollectScheduleList.ScheduleRow>
     {
         private BindingList<ScheduleRow> bindinglist;
 
@@ -99,7 +99,11 @@ namespace HardwareLedger
             chUpdateTime.DataPropertyName = nameof(ScheduleRow.UpdateTimeStr);
         }
 
-        private class ScheduleRow : DataGridViewRowBase, IListOrder
+        public void SetSortedList(IEnumerable<ScheduleRow> list)
+        {
+        }
+
+        public class ScheduleRow : DataGridViewRowBase, IListOrder
         {
             public int ScheduleCode { get; set; }
 
@@ -147,20 +151,20 @@ namespace HardwareLedger
 
             public String UpdateTimeStr => UpdateTime.ToString("yyyy/MM/dd HH:mm:ss");
 
-            public IEnumerable<SortOrderProperty> RelatedProperties
+            public IEnumerable<SortOrderProperties> RelatedProperties
             {
                 get
                 {
-                    yield return new SortOrderProperty() { ComboboxColumnName = "回収予定コード", CellValueName = nameof(ScheduleCode), InnerValueName = nameof(ScheduleCode) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "予備機コード", CellValueName = nameof(ReserveCodeStr), InnerValueName = nameof(ReserveCode) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "故障機コード", CellValueName = nameof(MalfunctionCodeStr), InnerValueName = nameof(MalfunctionCode) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "種別", CellValueName = nameof(TypeStr), InnerValueName = nameof(TypeCode) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "状態", CellValueName = nameof(StateStr), InnerValueName = nameof(StateCode) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "店舗", CellValueName = nameof(ShopStr), InnerValueName = nameof(ShopCode) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "回収予定日時", CellValueName = nameof(CollectScheduleDateStr), InnerValueName = nameof(CollectScheduleDate) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "回収日時", CellValueName = nameof(CollectDateStr), InnerValueName = nameof(CollectDate) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "追加日時", CellValueName = nameof(InsertTimeStr), InnerValueName = nameof(InsertTime) };
-                    yield return new SortOrderProperty() { ComboboxColumnName = "変更日時", CellValueName = nameof(UpdateTimeStr), InnerValueName = nameof(UpdateTime) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "回収予定コード", CellValueName = nameof(ScheduleCode), InnerValueName = nameof(ScheduleCode) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "予備機コード", CellValueName = nameof(ReserveCodeStr), InnerValueName = nameof(ReserveCode) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "故障機コード", CellValueName = nameof(MalfunctionCodeStr), InnerValueName = nameof(MalfunctionCode) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "種別", CellValueName = nameof(TypeStr), InnerValueName = nameof(TypeCode) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "状態", CellValueName = nameof(StateStr), InnerValueName = nameof(StateCode) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "店舗", CellValueName = nameof(ShopStr), InnerValueName = nameof(ShopCode) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "回収予定日時", CellValueName = nameof(CollectScheduleDateStr), InnerValueName = nameof(CollectScheduleDate) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "回収日時", CellValueName = nameof(CollectDateStr), InnerValueName = nameof(CollectDate) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "追加日時", CellValueName = nameof(InsertTimeStr), InnerValueName = nameof(InsertTime) };
+                    yield return new SortOrderProperties() { ComboboxColumnName = "変更日時", CellValueName = nameof(UpdateTimeStr), InnerValueName = nameof(UpdateTime) };
                 }
             }
 
